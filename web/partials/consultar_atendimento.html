@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <form class="form-horizontal">
+        <fieldset class="container-fluid">
+            <legend>Atendimentos</legend>
+            <form class="form-horizontal">
+                <input type="search" ng-model="buscaAtendimento" class="form-control" id="busca" placeholder="Buscar atendimento"><br>
+            </form>
+            <table class="table table-hover table-striped">
+                <tbody>
+                    <tr>
+                        <th>Atendimento</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                        <th>Opções</th>
+                    </tr>
+                <tbody>
+                    <tr>
+                        <td>123123</td>
+                        <td>10/20/2016</td>
+                        <td>Pendente</td>
+                        <td>
+                            <a href="#" ng-click="" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span>&nbspAbrir</a>
+                            <a href="#" ng-click="" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span>&nbspDeletar</a>
+                        </td>
+                    </tr>
+            </table>
+        </fieldset>
+    </form>
+</div>

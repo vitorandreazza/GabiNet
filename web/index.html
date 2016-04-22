@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html ng-app="gabiNet">
+    <head>
+        <title>Gabinet</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="libs/chart/angular-chart.css">
+        <link rel="stylesheet" href="css/menu-styles.css"> 
+        <link rel="stylesheet" href="css/menu.css"> 
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Gabinet</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1 cssmenu">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--                <div class="collapse navbar-collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                                    </ul>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a>Ajuda</a></li>
+                                    </ul>
+                                </div>-->
+            </div>
+        </nav>
+        <!--        <div id='cssmenu'>
+                    <ul>
+                        <li><a href='#'>Home</a></li>
+                        <li class='active has-sub'><a href='#'>Products</a>
+                            <ul>
+                                <li class='has-sub'><a href='#'>Product 1</a>
+                                    <ul>
+                                        <li><a href='#'>Sub Product</a></li>
+                                        <li><a href='#'>Sub Product</a></li>
+                                    </ul>
+                                </li>
+                                <li class='has-sub'><a href='#'>Product 2</a>
+                                    <ul>
+                                        <li><a href='#'>Sub Product</a></li>
+                                        <li><a href='#'>Sub Product</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href='#'>About</a></li>
+                        <li><a href='#'>Contact</a></li>
+                    </ul>
+                </div>-->
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="col-lg-2">
+                    <nav class="navbar navbar-btn sidebar" role="navigation">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>      
+                            </div>
+                            <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown open">
+                                        <a>Cidadão<span class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#/cidadaos/cadastro">Cadastrar Cidadão</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#/cidadaos">Consultar Cidadão</a></li>
+                                            <li><a href="#">Alterar Cidadão</a></li>
+                                        </ul>
+                                    </li>   
+                                    <li class="dropdown open">
+                                        <a>Atividade<span class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#/atividades/novo">Nova Atividade</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#/atividades">Consultar atividade</a></li>
+                                            <li><a href="#/atividades/graficos">Gráfico</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown open">
+                                        <a>Atendimento<span class="pull-right hidden-xs showopacity glyphicon glyphicon-earphone"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#/atendimentos/novo">Novo Atendimento</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#/atendimentos">Consultar Atendimento</a></li>
+                                            <li><a href="#">Alterar Atendimento</a></li>
+                                        </ul>
+                                    </li> 
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-lg-10" ng-view>
+
+                </div>
+            </div>
+        </div>
+
+        <script src="libs/bootstrap/js/jquery.min.js"></script>
+        <script src="css/script-menu.js"></script>
+        <script src="libs/bootstrap/js/bootstrap.min.js"></script>
+        <script src="libs/angular/angular.min.js"></script>
+        <script src="libs/angular/angular-route.min.js"></script>
+        <script src="libs/angular/ngMask.min.js"></script>
+        <script src="libs/chart/chart.min.js"></script>
+        <script src="libs/chart/angular-chart.min.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/controllers.js"></script>
+    </body>
+</html>

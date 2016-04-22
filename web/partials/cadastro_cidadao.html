@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <form class="form-horizontal">
+        <fieldset class="container-fluid">
+            <legend>Cadastro do Cidadão</legend>
+            <div class="form-group">
+                <h4 class="container-fluid">Dados Pessoais</h4>
+                    <div class="col-lg-12">
+                        <label class="control-label" for="nome">Nome</label>
+                        <input type="text" class="form-control" id="nome">
+                    </div>
+                    <div class="col-lg-5">
+                        <label class="control-label" for="dataNascimento">Data de Nascimento</label>
+                        <input type="date" class="form-control" id="dataNascimento">
+                    </div>
+                    <div class="col-lg-7">
+                        <label class="control-label" for="cpf">CPF</label>
+                        <input type="text" class="form-control" id="cpf" mask="999.999.999-99" ng-model="cidadao.cpf">
+                    </div>
+            </div>
+            <div class="form-group">
+                <h4 class="container-fluid">Dados Residenciais</h4>
+                <div class="col-lg-8">
+                    <label class="control-label" for="endereco">Endereço</label>
+                    <input type="text" class="form-control" id="endereco">
+                </div>
+                <div class="col-lg-4">
+                    <label class="control-label" for="complemento">Complemento</label>
+                    <input type="text" class="form-control" id="complemento">
+                </div>
+                <div class="col-lg-7">
+                    <label class="control-label" for="bairro">Bairro</label>
+                    <input type="text" class="form-control" id="bairro">
+                </div>
+                <div class="col-lg-5">
+                    <label class="control-label" for="cep">CEP</label>
+                    <input type="text" class="form-control" id="cep" mask="99999-999" ng-model="cidadao.cep">
+                </div>
+            </div>
+            <div class="form-group">
+                <h4 class="container-fluid">Contato</h4>
+                <div class="col-lg-12">
+                    <label class="control-label" for="email">Email</label>
+                    <input type="text" class="form-control" id="email">
+                </div>
+                <div class="col-lg-6">
+                    <label class="control-label" for="fone">Telefone</label>
+                    <input type="text" class="form-control" id="fone" mask="(99)9999-9999" ng-model="cidadao.fone">
+                </div>
+                <div class="col-lg-6">
+                    <label class="control-label" for="celular">Celular</label>
+                    <input type="text" class="form-control" id="celular" mask="(99)99999-9999" ng-model="cidadao.celular">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-11">
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
