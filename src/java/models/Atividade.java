@@ -1,46 +1,51 @@
-package model;
+package models;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
+@Entity
+@Table(name = "Atividades")
 public class Atividade implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
-    private long nrAtividade;
-    @Temporal(TemporalType.DATE)
-    private Date dataAtividade;
+    private long id;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date data;
     @Column(nullable = true, length = 200)
     private String ementa;
-    @Column(nullable = false, length = 15)
+    @Column(nullable = true, length = 15)
     private String tipo;
     @Column(nullable = true, length = 10)
     private String tipoMocao;
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCriacao;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataAlteracao;    
+    
     @PrePersist
     protected void onCreate() {
-        dataAtividade = new Date();
+        data = new Date();
+        dataCriacao = new Date();
     }
+    
+    @PreUpdate
+    protected void onUpdate() {
+        dataAlteracao = new Date();
+    }
+    
+    private Atividade() {}
 
-    public Atividade(long nrAtividade, String ementa, String tipo, String tipoMocao, Usuario usuario) {
-        this.nrAtividade = nrAtividade;
+    public Atividade(String ementa, String tipo, String tipoMocao, Usuario usuario) {
         this.ementa = ementa;
         this.tipo = tipo;
         this.tipoMocao = tipoMocao;
         this.usuario = usuario;
-    }
-
-    public long getNrAtividade() {
-        return nrAtividade;
-    }
-
-    public void setNrAtividade(long nrAtividade) {
-        this.nrAtividade = nrAtividade;
     }
 
     public String getEmenta() {
@@ -67,15 +72,23 @@ public class Atividade implements Serializable {
         this.tipoMocao = tipoMocao;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public Date getDataCriacao() {
+        return dataCriacao;
     }
 
-    public Date getDataAtividade() {
-        return dataAtividade;
+    public Date getDataAlteracao() {
+        return dataAlteracao;
     }
 }

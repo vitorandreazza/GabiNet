@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0"
-	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+             xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 
-	<persistence-unit name="default">
-		<properties>
-		    <!-- Informe a url, usuario e senha -->
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/gabinet" />
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="" />
-			<!--  Se nao existir a tabela, cria automaticamente -->
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<!-- Imprime na console os comandos gerados -->
-			<property name="hibernate.show_sql" value="true" />
-			<!--  Formata os comandos SQL gerados -->
-			<property name="hibernate.format_sql" value="true" />
-			<property name="hibernate.use_sql_comments" value="true" />                        
+    <persistence-unit name="default">
+        <properties>
+            <!-- Informe a url, usuario e senha -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/gabinet" />
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="" />
+            <!--  Se nao existir a tabela, cria automaticamente -->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <!-- Imprime na console os comandos gerados -->
+            <property name="hibernate.show_sql" value="true" />
+            <!--  Formata os comandos SQL gerados -->
+            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.use_sql_comments" value="true" />                        
                 
-			<!--  Dialeto do MySQL. Consulte outros SGBD em: http://docs.jboss.org/hibernate/orm/4.1/javadocs/org/hibernate/dialect/package-summary.html -->
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
-       </properties>
-	</persistence-unit>	
+            <!--  Dialeto do MySQL. Consulte outros SGBD em: http://docs.jboss.org/hibernate/orm/4.1/javadocs/org/hibernate/dialect/package-summary.html -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+        </properties>
+    </persistence-unit>	
 </persistence>

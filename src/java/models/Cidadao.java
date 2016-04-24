@@ -1,20 +1,21 @@
-package model;
+package models;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Cidadaos")
 public class Cidadao implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(length = 11)
+    @Column(nullable = false, length = 11, unique = true)
     private String cpf;
-    @Column(nullable = true, length = 50, unique = true)
+    @Column(nullable = false, length = 50, unique = true)
     private String email;
-    @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Column(nullable = true)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dataNascimento;
     @Column(nullable = true, length = 50)
     private String endereco;
@@ -27,22 +28,29 @@ public class Cidadao implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false, name = "idUsuario")
     private Usuario usuario;
-
-    public Cidadao() {
-
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCriacao;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataAlteracao;
+    
+    @PrePersist
+    protected void onCreate() {
+        dataCriacao = new Date();
     }
+    
+    @PreUpdate
+    protected void onUpdate() {
+        dataAlteracao = new Date();
+    }
+    
+    private Cidadao() {}
 
     public Cidadao(String cpf, String email, Date dataNascimento, String endereco, String bairro, String complemento, String cep, Usuario usuario) {
         this.cpf = cpf;
         this.email = email;
-        this.dataNascimento = dataNascimento;
-        this.endereco = endereco;
-        this.bairro = bairro;
-        this.complemento = complemento;
-        this.cep = cep;
         this.usuario = usuario;
     }
-    
+
     public String getCpf() {
         return cpf;
     }
@@ -103,7 +111,11 @@ public class Cidadao implements Serializable {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public Date getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public Date getDataAlteracao() {
+        return dataAlteracao;
     }
 }

@@ -3,7 +3,7 @@ angular.module("gabiNet", ['ngRoute', 'ngMask', 'chart.js']).config(['$routeProv
         templateUrl: 'partials/consultar_cidadao.html',
         controller: 'cidadaoController'
     });
-    $routeProvider.when("/cidadaos/cadastro", {
+    $routeProvider.when("/cidadaos/novo", {
         templateUrl: 'partials/cadastro_cidadao.html',
         controller: 'cidadaoController'
     });
@@ -23,7 +23,7 @@ angular.module("gabiNet", ['ngRoute', 'ngMask', 'chart.js']).config(['$routeProv
         templateUrl: 'partials/consultar_atividade.html',
         controller: 'cidadaoController'
     });
-    $routeProvider.when("/atividades/graficos", {
+    $routeProvider.when("/atividades/grafico", {
         templateUrl: 'partials/graficos.html',
         controller: 'graficosController'
     });

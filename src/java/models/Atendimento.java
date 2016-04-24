@@ -1,17 +1,19 @@
-package model;
+package models;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
+@Entity
+@Table(name = "Atendimentos")
 public class Atendimento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
-    private long nrAtendimento;
-    @Temporal(TemporalType.DATE)
-    private Date dataAtendimento;
+    private long id;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date data;
     @Column(nullable = true, length = 200)
     private String solicitacao;
     @Column(nullable = true, length = 200)
@@ -24,33 +26,31 @@ public class Atendimento implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false, name = "cpfCidadao")
     private Cidadao cidadao;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCriacao;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataAlteracao;
+    
+    private Atendimento() {}
 
-    @PrePersist
-    protected void onCreate() {
-        dataAtendimento = new Date();
-    }
-
-    public Atendimento() {
-
-    }
-
-    public Atendimento(long nrAtendimento, String solicitacao, String providencia, String retorno, Usuario usuario, Cidadao cidadao) {
-        this.nrAtendimento = nrAtendimento;
+    public Atendimento(String solicitacao, String providencia, Usuario usuario, Cidadao cidadao) {
         this.solicitacao = solicitacao;
         this.providencia = providencia;
-        this.retorno = retorno;
         this.usuario = usuario;
         this.cidadao = cidadao;
     }
-
-    public long getNrAtendimento() {
-        return nrAtendimento;
+    
+    @PrePersist
+    protected void onCreate() {
+        data = new Date();
+        dataCriacao = new Date();
     }
-
-    public void setNrAtendimento(int nrAtendimento) {
-        this.nrAtendimento = nrAtendimento;
+    
+    @PreUpdate
+    protected void onUpdate() {
+        dataAlteracao = new Date();
     }
-
+    
     public String getSolicitacao() {
         return solicitacao;
     }
@@ -75,23 +75,27 @@ public class Atendimento implements Serializable {
         this.retorno = retorno;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     public Cidadao getCidadao() {
         return cidadao;
     }
 
-    public void setCidadao(Cidadao cidadao) {
-        this.cidadao = cidadao;
+    public long getId() {
+        return id;
     }
 
-    public Date getDataAtendimento() {
-        return dataAtendimento;
+    public Date getData() {
+        return data;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public Date getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public Date getDataAlteracao() {
+        return dataAlteracao;
     }
 }

@@ -1,4 +1,4 @@
-package model;
+package models;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -7,6 +7,7 @@ import javax.persistence.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
+@Table(name = "Usuarios")
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     
@@ -18,21 +19,15 @@ public class Usuario implements Serializable {
     @JsonIgnore // nao gerar essa coluna no json
     private String senha;
 
-    public Usuario(long id, String login, String senha) {
-        this.id = id;
+    private Usuario() {}
+    
+    public Usuario(String login, String senha) {
         this.login = login;
         this.senha = senha;
-    }
-
-    public Usuario() {
     }
     
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getLogin() {
@@ -48,7 +43,7 @@ public class Usuario implements Serializable {
     }
 
     public void setSenha(String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        String senhaCriptografada = new util.Util().criptografa(senha);
+        String senhaCriptografada = new utils.Util().criptografa(senha);
         this.senha = senhaCriptografada;
     }
 }
