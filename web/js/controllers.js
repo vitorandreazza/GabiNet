@@ -1,20 +1,25 @@
 var app = angular.module("gabiNet");
+var urlBase = 'http://localhost:8084/GabiNet';
 
-app.controller("cidadaoController", function ($scope) {
-    $scope.cid = {
-        cpf: '444.444.444-44',
-        nasc: '01/04/1995',
-        endereco: 'rua jao jao jao',
-        complemento: 'nao sei oq é isso',
-        bairro: 'Jao ja',
-        cep: '13300-000',
-        email: 'jao@jao.jao.br',
-        tel: '(11)4002-8922',
-        cel: '(99)99999-9999'
+app.controller("cidadaoController", function ($scope, $http) {
+    $scope.novoCidadao = function (cidadao) {
+        $http.post(urlBase + "api/cidadaos", cidadao).success(function (data) {
+            console.info(JSON.stringify("Cidadao salvo com sucesso!: " + data));
+            alert("cidadao cadastrado com sucesso");
+        }).error(function (error) {
+            console.error(JSON.stringify("Erro ao incluir o cidadao: " + error));
+            alert(JSON.stringify("Erro ao incluir o cidadao: " + error));
+        });
     };
-
-    $scope.buscarCidadao = function (cidadao) {
-        $scope.cidadao = cidadao;
+    $scope.buscaCidadao = function (cpf) {
+        $http.get(urlBase + "/api/cidadaos/"+cpf).success(function (data) {
+                    $scope.cidadao = data;
+                })
+                .error(function () {
+                    console.log('Erro ao obter os dados do cidadao');
+                    $scope.cidadao = "ERRO ao efetuar o SELECT!";
+                });
+        //$scope.cidadao = [];
     };
 });
 

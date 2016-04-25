@@ -1,16 +1,16 @@
 <div class="container-fluid">
-    <form class="form-horizontal">
+    <form method="post" class="form-horizontal" ng-submit="novoCidadao(cidadao)">
         <fieldset class="container-fluid">
             <legend>Cadastro do Cidadão</legend>
             <div class="form-group">
                 <h4 class="container-fluid">Dados Pessoais</h4>
                     <div class="col-lg-12">
                         <label class="control-label" for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome">
+                        <input type="text" class="form-control" id="nome" ng-model="cidadao.nome">
                     </div>
                     <div class="col-lg-5">
                         <label class="control-label" for="dataNascimento">Data de Nascimento</label>
-                        <input type="date" class="form-control" id="dataNascimento">
+                        <input type="date" class="form-control" id="dataNascimento" ng-model="cidadao.dataNascimento">
                     </div>
                     <div class="col-lg-7">
                         <label class="control-label" for="cpf">CPF</label>
@@ -21,15 +21,15 @@
                 <h4 class="container-fluid">Dados Residenciais</h4>
                 <div class="col-lg-8">
                     <label class="control-label" for="endereco">Endereço</label>
-                    <input type="text" class="form-control" id="endereco">
+                    <input type="text" class="form-control" id="endereco" ng-model="cidadao.endereco">
                 </div>
                 <div class="col-lg-4">
                     <label class="control-label" for="complemento">Complemento</label>
-                    <input type="text" class="form-control" id="complemento">
+                    <input type="text" class="form-control" id="complemento" ng-model="cidadao.complemento">
                 </div>
                 <div class="col-lg-7">
                     <label class="control-label" for="bairro">Bairro</label>
-                    <input type="text" class="form-control" id="bairro">
+                    <input type="text" class="form-control" id="bairro" ng-model="cidadao.bairro">
                 </div>
                 <div class="col-lg-5">
                     <label class="control-label" for="cep">CEP</label>
@@ -40,7 +40,7 @@
                 <h4 class="container-fluid">Contato</h4>
                 <div class="col-lg-12">
                     <label class="control-label" for="email">Email</label>
-                    <input type="text" class="form-control" id="email">
+                    <input type="text" class="form-control" id="email" ng-model="cidadao.email">
                 </div>
                 <div class="col-lg-6">
                     <label class="control-label" for="fone">Telefone</label>

@@ -15,7 +15,7 @@ public class Cidadao implements Serializable {
     @Column(nullable = false, length = 50, unique = true)
     private String email;
     @Column(nullable = true)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataNascimento;
     @Column(nullable = true, length = 50)
     private String endereco;
@@ -48,6 +48,11 @@ public class Cidadao implements Serializable {
     public Cidadao(String cpf, String email, Date dataNascimento, String endereco, String bairro, String complemento, String cep, Usuario usuario) {
         this.cpf = cpf;
         this.email = email;
+        this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+        this.bairro = bairro;
+        this.complemento = complemento;
+        this.cep = cep;
         this.usuario = usuario;
     }
 
