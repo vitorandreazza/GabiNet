@@ -15,7 +15,7 @@
                         </div>
                     </div>
             </form>
-            <table class="table table-hover table-striped">
+            <table class="table table-hover table-striped" ng-show="cidadao">
                 <tbody>
                     <tr>
                         <th>Nome do Cidadão</th>
@@ -24,11 +24,11 @@
                 </tbody>
                 <tr>
                     <td>CPF</td>
-                    <td>{{cidadao.cpf}}</td>
+                    <td ng-model="cidadao.cpf" mask="999.999.999-99">{{cidadao.cpf}}</td>
                 </tr>
                 <tr>
                     <td>Data de Nascimento</td>
-                    <td>{{cidadao.dataNascimento}}</td>
+                    <td>{{cidadao.nascimento}}</td>
                 </tr>
                 <tr>
                     <td>Enredeço</td>
@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                     <td>CEP</td>
-                    <td>{{cidadao.cep}}</td>
+                    <td ng-model="cidadao.cep" mask="99999-999">{{cidadao.cep}}</td>
                 </tr>
                 <tr>
                     <td>Email</td>
@@ -52,11 +52,11 @@
                 </tr>
                 <tr>
                     <td>Telefone</td>
-                    <td>{{cidadao.telefone}}</td>
+                    <td ng-model="cidadao.telefone" mask="(99)9999-9999">{{cidadao.telefone}}</td>
                 </tr>
                 <tr>
                     <td>Celular</td>
-                    <td>{{cidadao.celular}}</td>
+                    <td ng-model="cidadao.celular" mask="(99)99999-9999">{{cidadao.celular}}</td>
                 </tr>
             </table>
         </fieldset>

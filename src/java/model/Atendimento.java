@@ -1,4 +1,4 @@
-package models;
+package model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,7 +13,7 @@ public class Atendimento implements Serializable {
     @GeneratedValue
     private long id;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date data;
+    private Date dataAtendimento;
     @Column(nullable = true, length = 200)
     private String solicitacao;
     @Column(nullable = true, length = 200)
@@ -26,8 +26,8 @@ public class Atendimento implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false, name = "cpfCidadao")
     private Cidadao cidadao;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataCriacao;
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date dataCriacao;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAlteracao;
     
@@ -42,8 +42,8 @@ public class Atendimento implements Serializable {
     
     @PrePersist
     protected void onCreate() {
-        data = new Date();
-        dataCriacao = new Date();
+        dataAtendimento = new Date();
+        //dataCriacao = new Date();
     }
     
     @PreUpdate
@@ -84,16 +84,16 @@ public class Atendimento implements Serializable {
     }
 
     public Date getData() {
-        return data;
+        return dataAtendimento;
     }
 
     public Usuario getUsuario() {
         return usuario;
     }
 
-    public Date getDataCriacao() {
-        return dataCriacao;
-    }
+//    public Date getDataCriacao() {
+//        return dataCriacao;
+//    }
 
     public Date getDataAlteracao() {
         return dataAlteracao;

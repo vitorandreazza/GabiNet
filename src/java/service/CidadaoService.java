@@ -5,15 +5,17 @@ import javax.persistence.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import models.Cidadao;
+import model.Cidadao;
+import model.Usuario;
 
 @Path("/{parameter: cidadaos}")
 public class CidadaoService {
-    /* Lista todas as Atividades */
+
+    /* Lista todas os cidadaos */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Cidadao> listaTodos() {
-        EntityManager bd = utils.JpaUtil.getEntityManager();
+        EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Cidadao> cidadaos;
         String sql = "SELECT g FROM Cidadao g";
         Query q = bd.createQuery(sql);
@@ -27,7 +29,7 @@ public class CidadaoService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Cidadao listaPeloId(@PathParam("cpf") String cpf) {
-        EntityManager bd = utils.JpaUtil.getEntityManager();
+        EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Cidadao> cidadaos;
         Cidadao cidadao = null;
         String sql = "SELECT g FROM Cidadao g WHERE g.cpf = :cpf";
@@ -35,7 +37,7 @@ public class CidadaoService {
         query.setParameter("cpf", cpf);
         cidadaos = (ArrayList<Cidadao>) query.getResultList();
         for (Cidadao linha : cidadaos) {
-            cidadao = new Cidadao(linha.getCpf(), linha.getEmail(), linha.getDataNascimento(), linha.getEndereco(), linha.getBairro(), linha.getComplemento(), linha.getCep(), linha.getUsuario());
+            cidadao = new Cidadao(linha.getCpf(), linha.getNome(), linha.getEmail(), linha.getNascimento(), linha.getEndereco(), linha.getBairro(), linha.getComplemento(), linha.getCep(), linha.getTelefone(), linha.getCelular(), linha.getUsuario());
         }
         bd.close();
         return cidadao;
@@ -46,7 +48,7 @@ public class CidadaoService {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     public Response excluir(@PathParam("cpf") String cpf) {
-        EntityManager bd = utils.JpaUtil.getEntityManager();
+        EntityManager bd = util.JpaUtil.getEntityManager();
         try {
             //localizando o registro a ser removido
             Cidadao atividade = bd.find(Cidadao.class, cpf);
@@ -63,13 +65,38 @@ public class CidadaoService {
         }
     }
 
-    /* Insere novo Cidadao */
+//    /* Insere novo Cidadao */
+//    @POST
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response incluir(Cidadao cidadao) {
+//        EntityManager bd = util.JpaUtil.getEntityManager();
+//        try {
+//            bd.getTransaction().begin();
+//            bd.persist(cidadao); //Hibernate gera o insert
+//            bd.getTransaction().commit();
+//            return Response.status(Response.Status.OK).
+//                    entity("true").build();
+//        } catch (Exception e) {
+//            return Response.serverError().
+//                    entity(e.getMessage()).build();
+//        } finally {
+//            bd.close();
+//        }
+//    }
+    
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Cidadao cidadao) {
-        EntityManager bd = utils.JpaUtil.getEntityManager();
+        EntityManager bd = util.JpaUtil.getEntityManager();
+                Usuario u = new Usuario("abc", "hue");
+        cidadao.setUsuario(u);
         try {
+            bd.getTransaction().begin();
+            bd.persist(u);
+            bd.getTransaction().commit();
+
             bd.getTransaction().begin();
             bd.persist(cidadao); //Hibernate gera o insert
             bd.getTransaction().commit();
@@ -82,14 +109,14 @@ public class CidadaoService {
             bd.close();
         }
     }
-
+    
     /* Altera Cidadao */
     @Path("{id}")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response alterar(Cidadao cidadao) {
-        EntityManager bd = utils.JpaUtil.getEntityManager();
+        EntityManager bd = util.JpaUtil.getEntityManager();
         try {
             bd.getTransaction().begin();
             cidadao = bd.merge(cidadao); //Hibernate gera o update

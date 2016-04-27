@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <form method="post" class="form-horizontal" ng-submit="novoCidadao(cidadao)">
+    <form method="post" class="form-horizontal" role="form" name="formCidadao" ng-submit="inserirCidadao(cidadao)">
         <fieldset class="container-fluid">
             <legend>Cadastro do Cidadão</legend>
             <div class="form-group">
@@ -10,7 +10,7 @@
                     </div>
                     <div class="col-lg-5">
                         <label class="control-label" for="dataNascimento">Data de Nascimento</label>
-                        <input type="date" class="form-control" id="dataNascimento" ng-model="cidadao.dataNascimento">
+                        <input type="text" class="form-control" id="dataNascimento" mask="99/99/9999" ng-model="cidadao.nascimento">
                     </div>
                     <div class="col-lg-7">
                         <label class="control-label" for="cpf">CPF</label>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-lg-6">
                     <label class="control-label" for="fone">Telefone</label>
-                    <input type="text" class="form-control" id="fone" mask="(99)9999-9999" ng-model="cidadao.fone">
+                    <input type="text" class="form-control" id="fone" mask="(99)9999-9999" ng-model="cidadao.telefone">
                 </div>
                 <div class="col-lg-6">
                     <label class="control-label" for="celular">Celular</label>

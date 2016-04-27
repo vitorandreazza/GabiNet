@@ -1,25 +1,42 @@
 var app = angular.module("gabiNet");
-var urlBase = 'http://localhost:8084/GabiNet';
+var urlBase = "http://localhost:8084/gabinet/api";
 
 app.controller("cidadaoController", function ($scope, $http) {
-    $scope.novoCidadao = function (cidadao) {
-        $http.post(urlBase + "api/cidadaos", cidadao).success(function (data) {
-            console.info(JSON.stringify("Cidadao salvo com sucesso!: " + data));
-            alert("cidadao cadastrado com sucesso");
+    $scope.inserirCidadao = function (cidadao) {
+        var cpf = cidadao.cpf.replace(".", "").replace(".", "").replace("-", "");
+        cidadao.cpf = cpf;
+        
+        if(cidadao.cep !== undefined){
+            var cep = cidadao.cep.replace("-", "");
+            cidadao.cep = cep;
+        }
+        if(cidadao.telefone !== undefined){
+            var telefone = cidadao.telefone.replace("(","").replace(")","").replace("-","");
+            cidadao.telefone = telefone;
+        }
+        if(cidadao.celular !== undefined){
+            var celular = cidadao.celular.replace("(","").replace(")","").replace("-","");
+            cidadao.celular = celular;
+        }
+        if(cidadao.nascimento !== undefined){
+            cidadao.nascimento = new Date(cidadao.nascimento.replace( /(\d{2})[-/](\d{2})[-/](\d+)/, "$2/$1/$3"));
+        }
+        $http.post(urlBase + "/cidadaos", cidadao).success(function (data) {
+            console.info(JSON.stringify("Cidadão salvo com sucesso!: " + data));
         }).error(function (error) {
-            console.error(JSON.stringify("Erro ao incluir o cidadao: " + error));
-            alert(JSON.stringify("Erro ao incluir o cidadao: " + error));
+            console.error(JSON.stringify("Erro ao incluir o cidadão: " + error));
+            alert(JSON.stringify("Erro ao incluir o cidadão: " + error));
         });
     };
     $scope.buscaCidadao = function (cpf) {
-        $http.get(urlBase + "/api/cidadaos/"+cpf).success(function (data) {
-                    $scope.cidadao = data;
-                })
-                .error(function () {
-                    console.log('Erro ao obter os dados do cidadao');
-                    $scope.cidadao = "ERRO ao efetuar o SELECT!";
-                });
-        //$scope.cidadao = [];
+        var cpfr = cpf.replace(".", "").replace(".", "").replace("-", "");
+        cpf = cpfr;
+        $http.get(urlBase + "/cidadaos/" + cpf).success(function (data) {
+            $scope.cidadao = data;
+        }).error(function () {
+            console.log('Erro ao obter os dados do cidadao');
+            $scope.cidadao = "ERRO ao efetuar o SELECT!";
+        });
     };
 });
 
