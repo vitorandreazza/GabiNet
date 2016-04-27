@@ -9,11 +9,11 @@ angular.module("gabiNet", ['ngRoute', 'ngMask', 'chart.js']).config(['$routeProv
     });
     $routeProvider.when("/atendimentos/novo", {
         templateUrl: 'partials/novo_atendimento.html',
-        controller: 'cidadaoController'
+        controller: 'atendimentoController'
     });
     $routeProvider.when("/atendimentos", {
         templateUrl: 'partials/consultar_atendimento.html',
-        controller: 'cidadaoController'
+        controller: 'atendimentoController'
     });
     $routeProvider.when("/atividades/novo", {
         templateUrl: 'partials/nova_atividade.html',

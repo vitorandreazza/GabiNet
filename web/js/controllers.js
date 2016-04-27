@@ -5,21 +5,21 @@ app.controller("cidadaoController", function ($scope, $http) {
     $scope.inserirCidadao = function (cidadao) {
         var cpf = cidadao.cpf.replace(".", "").replace(".", "").replace("-", "");
         cidadao.cpf = cpf;
-        
-        if(cidadao.cep !== undefined){
+
+        if (cidadao.cep !== undefined) {
             var cep = cidadao.cep.replace("-", "");
             cidadao.cep = cep;
         }
-        if(cidadao.telefone !== undefined){
-            var telefone = cidadao.telefone.replace("(","").replace(")","").replace("-","");
+        if (cidadao.telefone !== undefined) {
+            var telefone = cidadao.telefone.replace("(", "").replace(")", "").replace("-", "");
             cidadao.telefone = telefone;
         }
-        if(cidadao.celular !== undefined){
-            var celular = cidadao.celular.replace("(","").replace(")","").replace("-","");
+        if (cidadao.celular !== undefined) {
+            var celular = cidadao.celular.replace("(", "").replace(")", "").replace("-", "");
             cidadao.celular = celular;
         }
-        if(cidadao.nascimento !== undefined){
-            cidadao.nascimento = new Date(cidadao.nascimento.replace( /(\d{2})[-/](\d{2})[-/](\d+)/, "$2/$1/$3"));
+        if (cidadao.nascimento !== undefined) {
+            cidadao.nascimento = new Date(cidadao.nascimento.replace(/(\d{2})[-/](\d{2})[-/](\d+)/, "$2/$1/$3"));
         }
         $http.post(urlBase + "/cidadaos", cidadao).success(function (data) {
             console.info(JSON.stringify("Cidadão salvo com sucesso!: " + data));
@@ -48,4 +48,25 @@ app.controller("graficosController", function ($scope) {
         [5, 9, 8, 8, 10, 4, 5, 8, 7, 5, 9, 4],
         [2, 3, 4, 4, 2, 1, 5, 6, 6, 4, 2, 6]
     ];
+});
+
+app.controller("atendimentoController", function ($scope, $http) {
+    $scope.novoAtendimento = function (atendimento) {
+        $http.post(urlBase + "/atendimentos", atendimento).success(function (data) {
+            console.info(JSON.stringify("Atendimento salvo com sucesso!: " + data));
+        }).error(function (error) {
+            console.error(JSON.stringify("Erro ao incluir o atendimento: " + error));
+            alert(JSON.stringify("Erro ao incluir o atendimento: " + error));
+        });
+    };
+    $scope.listarAtendimentos = function () {
+        $http.get(urlBase + "/atendimentos")
+                .success(function (data) {
+                    $scope.atendimentos = data;
+                })
+                .error(function () {
+                    console.log('Erro ao obter os dados do grupo');
+                    $scope.atendimentos = "ERRO ao efetuar o SELECT!";
+                });
+    };
 });
