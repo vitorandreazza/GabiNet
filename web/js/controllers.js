@@ -33,6 +33,7 @@ app.controller("cidadaoController", function ($scope, $http) {
         cpf = cpfr;
         $http.get(urlBase + "/cidadaos/" + cpf).success(function (data) {
             $scope.cidadao = data;
+            console.log($scope.cidadao);
         }).error(function () {
             console.log('Erro ao obter os dados do cidadao');
             $scope.cidadao = "ERRO ao efetuar o SELECT!";
@@ -68,5 +69,20 @@ app.controller("atendimentoController", function ($scope, $http) {
                     console.log('Erro ao obter os dados do grupo');
                     $scope.atendimentos = "ERRO ao efetuar o SELECT!";
                 });
+    };
+    $scope.buscaCidadao = function (cpf) {
+        var cpfr = cpf.replace(".", "").replace(".", "").replace("-", "");
+        cpf = cpfr;
+        $http.get(urlBase + "/cidadaos/" + cpf).success(function (data) {
+            $scope.atendimento.cidadao = {};
+            $scope.atendimento.cidadao = data;
+            console.log($scope.atendimento);
+        }).error(function () {
+            console.log('Erro ao obter os dados do cidadao');
+            //$scope.cidadao = "ERRO ao efetuar o SELECT!";
+        });
+    };
+    $scope.teste = function (atendimento) {
+        console.log(atendimento);
     };
 });

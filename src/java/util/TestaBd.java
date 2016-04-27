@@ -17,10 +17,10 @@ public class TestaBd {
         EntityManager bd = JpaUtil.getEntityManager();
         
         try {
-            Usuario user = new Usuario("ddddd", "1231");
+            Usuario user = new Usuario("dddp", "1231");
             Atividade atividade = new Atividade("das", "dsa", "odassai", user);
-            Cidadao cidadao = new Cidadao("33333333333", null, "aaaaaa", null, null, null, null, null, null, null, user);
-            Atendimento atendimetno = new Atendimento("aaa", "aaaaaaa", user, cidadao);
+            Cidadao cidadao = new Cidadao("33333333334", "jonas", "ppaaaa", null, null, null, null, null, null, null, user);
+            Atendimento atendimetno = new Atendimento("bbb", "aaaaaaa", user, cidadao);
             
             bd.getTransaction().begin();
             bd.persist(user);

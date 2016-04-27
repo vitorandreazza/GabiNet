@@ -21,18 +21,17 @@ public class AtendimentoService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Atendimento atendimento) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        Usuario u = new Usuario("teste", "hue");
+        Usuario u = new Usuario("test2d", "hue");
         atendimento.setUsuario(u);
-        Cidadao c = new Cidadao();
-        c.setCpf("41278912387");
-        c.setEmail("dasda");
-        c.setUsuario(u);
-        atendimento.setUsuario(u);
-        atendimento.setCidadao(c);
+//        Cidadao c = new Cidadao();
+//        c.setCpf("41278912387");
+//        c.setEmail("dasda");
+        //c.setUsuario(u);
+        //atendimento.setCidadao(c);
         try {
             bd.getTransaction().begin();
             bd.persist(u);
-            bd.persist(c);
+            //bd.persist(c);
             bd.getTransaction().commit();
 
             bd.getTransaction().begin();

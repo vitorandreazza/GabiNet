@@ -1,57 +1,70 @@
 <div class="container-fluid">
-    <form method="post" class="form-horizontal" ng-submit="novoAtendimento(atendimento)">
-        <fieldset class="container-fluid">
-            <legend>Novo Atendimento</legend>
-            <form class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-md-12">
+    <div class="row">
+        <form method="get" class="form-horizontal">
+            <fieldset class="container-fluid">
+                <legend>Novo Atendimento</legend>
+                <div class="form-group">
+                    <div class="col-md-12">
                         <label class="control-label">CPF do Cidadão</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" mask="999.999.999-99" ng-model="cpf">
+                            <input type="text" class="form-control" mask="999.999.999-99" ng-model="atendimento.cidadao.cpf">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button" ng-click="buscaCidadao(cpf)">Buscar</button>
+                                <button class="btn btn-primary" type="button" ng-click="buscaCidadao(atendimento.cidadao.cpf)">Buscar</button>
                             </span>
                         </div>
-                        </div>
                     </div>
-            </form>
-            <div class="form-group">
-                <label for="solicitacao" class="control-label col-lg-1">Solicitação&nbsp;&nbsp;&nbsp;</label>
-                <div class="col-lg-12">
-                    <textarea class="form-control" rows="5" id="solicitacao" ng-model="atendimento.solicitacao"></textarea>
-                    <span class="help-block"></span>
                 </div>
+            </fieldset>
+        </form>
+        <div class="form-group" ng-show="atendimento.cidadao.nome">
+            <label for="nome" class="col-lg-1">Nome</label>
+            <div class="col-lg-12">
+                <input class="form-control" id="nome" ng-model="atendimento.cidadao.nome" disabled>
             </div>
-            <div class="form-group">
-                <label for="providencias" class="control-label col-lg-1">Providências</label>
-                <div class="col-lg-12">
-                    <textarea class="form-control" rows="5" id="providencias" ng-model="atendimento.providencia"></textarea>
-                    <span class="help-block"></span>
+        </div>
+    </div>
+    <div class="row">
+        <form method="post" class="form-horizontal" ng-submit="novoAtendimento(atendimento)">
+            <fieldset class="container-fluid">
+                <div class="form-group">
+                    <label for="solicitacao" class="col-lg-1">Solicitação</label>
+                    <div class="col-lg-12">
+                        <textarea class="form-control" rows="5" id="solicitacao" ng-model="atendimento.solicitacao"></textarea>
+                        <span class="help-block"></span>
+                    </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="providencias" class="col-lg-1">Providências</label>
+                    <div class="col-lg-12">
+                        <textarea class="form-control" rows="5" id="providencias" ng-model="atendimento.providencia"></textarea>
+                        <span class="help-block"></span>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label for="retorno" class="control-label col-lg-1">Retorno&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                <div class="col-lg-12">
-                    <textarea class="form-control" rows="5" id="retorno" ng-model="atendimento.retorno"></textarea>
-                    <span class="help-block"></span>
+                <div class="form-group">
+                    <label for="retorno" class="col-lg-1">Retorno</label>
+                    <div class="col-lg-12">
+                        <textarea class="form-control" rows="5" id="retorno" ng-model="atendimento.retorno"></textarea>
+                        <span class="help-block"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="select" class="control-label col-lg-1">Situação&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                <div class="col-lg-12">
-                    <select class="form-control" id="select">
-                        <option>Pendente</option>
-                        <option>Em andamento</option>
-                        <option>Resolvido</option>
-                    </select>
+                <div class="form-group">
+                    <label for="select" class="col-lg-1">Situação</label>
+                    <div class="col-lg-12">
+                        <select class="form-control" id="select">
+                            <option>Pendente</option>
+                            <option>Em andamento</option>
+                            <option>Resolvido</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-lg-offset-11">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
+                <div class="form-group">
+                    <div class="col-lg-offset-11">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
                 </div>
-            </div>
-        </fieldset>
-    </form>
+            </fieldset>
+        </form>
+    </div>
+    <button class="btn" ng-click="teste(atendimento)">teste</button>
 </div>
