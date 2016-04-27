@@ -98,4 +98,13 @@ public class Atendimento implements Serializable {
     public Date getDataAlteracao() {
         return dataAlteracao;
     }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setCidadao(Cidadao cidadao) {
+        this.cidadao = cidadao;
+    }
+    
 }

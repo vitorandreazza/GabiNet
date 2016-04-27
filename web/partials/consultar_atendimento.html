@@ -1,63 +1,32 @@
 <div class="container-fluid">
-    <form class="form-horizontal">
+    <form method="get" class="form-horizontal" ng-submit="listarAtendimentos()">
         <fieldset class="container-fluid">
-            <legend>Consultar Cidadão</legend>
+            <legend>Atendimentos</legend>
             <form class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-md-12">
-                        <label class="control-label">CPF</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" mask="999.999.999-99" ng-model="cpf">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button" ng-click="buscaCidadao(cpf)">Consultar</button>
-                            </span>
-                        </div>
-                        </div>
-                    </div>
+                <input type="search" ng-model="buscaAtendimento" class="form-control" id="busca" placeholder="Buscar Atendimento"><br>
             </form>
-            <table class="table table-hover table-striped" ng-show="cidadao">
+            <table class="table table-hover table-striped" ng-repeat="atendimento : atendimentos">
                 <tbody>
                     <tr>
+                        <th>Nº Atendimento</th>
                         <th>Nome do Cidadão</th>
-                        <th>{{cidadao.nome}}</th>
+                        <th>Solicitação</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                        <th>Opções</th>
                     </tr>
-                </tbody>
-                <tr>
-                    <td>CPF</td>
-                    <td ng-model="cidadao.cpf" mask="999.999.999-99">{{cidadao.cpf}}</td>
-                </tr>
-                <tr>
-                    <td>Data de Nascimento</td>
-                    <td>{{cidadao.nascimento}}</td>
-                </tr>
-                <tr>
-                    <td>Enredeço</td>
-                    <td>{{cidadao.endereco}}</td>
-                </tr>   
-                <tr>
-                    <td>Complemento</td>
-                    <td>{{cidadao.complemento}}</td>
-                </tr>
-                <tr>
-                    <td>Bairro</td>
-                    <td>{{cidadao.bairro}}</td>
-                </tr>
-                <tr>
-                    <td>CEP</td>
-                    <td ng-model="cidadao.cep" mask="99999-999">{{cidadao.cep}}</td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td>{{cidadao.email}}</td>
-                </tr>
-                <tr>
-                    <td>Telefone</td>
-                    <td ng-model="cidadao.telefone" mask="(99)9999-9999">{{cidadao.telefone}}</td>
-                </tr>
-                <tr>
-                    <td>Celular</td>
-                    <td ng-model="cidadao.celular" mask="(99)99999-9999">{{cidadao.celular}}</td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td>{{atendimento.id}}</td>
+                        <td>João da Silva</td>
+                        <td>{{atendimento.solicitacao}}</td>
+                        <td></td>
+                        <td>Pendente</td>
+                        <td>
+                            <a href="#" ng-click="" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span>&nbspAbrir</a>
+                            <a href="#" ng-click="" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span>&nbspDeletar</a>
+                        </td>
+                    </tr>
             </table>
         </fieldset>
     </form>

@@ -84,13 +84,12 @@ public class CidadaoService {
 //            bd.close();
 //        }
 //    }
-    
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Cidadao cidadao) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-                Usuario u = new Usuario("abc", "hue");
+        Usuario u = new Usuario("abc", "hue");
         cidadao.setUsuario(u);
         try {
             bd.getTransaction().begin();
@@ -109,7 +108,7 @@ public class CidadaoService {
             bd.close();
         }
     }
-    
+
     /* Altera Cidadao */
     @Path("{id}")
     @PUT
