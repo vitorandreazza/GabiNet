@@ -39,7 +39,7 @@ public class Atividade implements Serializable {
         dataAlteracao = new Date();
     }
     
-    private Atividade() {}
+    public Atividade() {}
 
     public Atividade(String ementa, String tipo, String tipoMocao, Usuario usuario) {
         this.ementa = ementa;

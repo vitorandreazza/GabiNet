@@ -19,7 +19,7 @@ public class Usuario implements Serializable {
     @JsonIgnore // nao gerar essa coluna no json
     private String senha;
 
-    private Usuario() {}
+    public Usuario() {}
     
     public Usuario(String login, String senha) {
         this.login = login;

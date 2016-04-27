@@ -31,7 +31,7 @@ public class Atendimento implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAlteracao;
     
-    private Atendimento() {}
+    public Atendimento() {}
 
     public Atendimento(String solicitacao, String providencia, Usuario usuario, Cidadao cidadao) {
         this.solicitacao = solicitacao;
@@ -83,7 +83,7 @@ public class Atendimento implements Serializable {
         return id;
     }
 
-    public Date getData() {
+    public Date getDataAtendimento() {
         return dataAtendimento;
     }
 

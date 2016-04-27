@@ -17,7 +17,7 @@ public class CidadaoService {
     public List<Cidadao> listaTodos() {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Cidadao> cidadaos;
-        String sql = "SELECT g FROM Cidadao g";
+        String sql = "SELECT c FROM Cidadao c";
         Query q = bd.createQuery(sql);
         cidadaos = (ArrayList<Cidadao>) q.getResultList();
         bd.close();
@@ -32,7 +32,7 @@ public class CidadaoService {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Cidadao> cidadaos;
         Cidadao cidadao = null;
-        String sql = "SELECT g FROM Cidadao g WHERE g.cpf = :cpf";
+        String sql = "SELECT c FROM Cidadao c WHERE c.cpf = :cpf";
         Query query = bd.createQuery(sql, Cidadao.class);
         query.setParameter("cpf", cpf);
         cidadaos = (ArrayList<Cidadao>) query.getResultList();

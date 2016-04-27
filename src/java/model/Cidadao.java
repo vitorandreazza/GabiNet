@@ -53,7 +53,7 @@ public class Cidadao implements Serializable {
         dataAlteracao = new Date();
     }
     
-    private Cidadao() {}
+    public Cidadao() {}
 
     public Cidadao(String cpf, String nome, String email, Date nascimento, String endereco, String bairro, String complemento, String cep, String telefone, String celular, Usuario usuario) {
         this.cpf = cpf;
