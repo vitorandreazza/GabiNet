@@ -43,6 +43,35 @@ app.controller("cidadaoController", function ($scope, $http) {
                     $scope.cidadao = "ERRO ao efetuar o SELECT!";
                 });
     };
+    $scope.alterarCidadao = function (cidadao) {
+        var cpfr = cidadao.cpf.replace(".", "").replace(".", "").replace("-", "");
+        cidadao.cpf = cpfr;
+        
+        if (cidadao.cep !== undefined) {
+            var cep = cidadao.cep.replace("-", "");
+            cidadao.cep = cep;
+        }
+        if (cidadao.telefone !== undefined) {
+            var telefone = cidadao.telefone.replace("(", "").replace(")", "").replace("-", "");
+            cidadao.telefone = telefone;
+        }
+        if (cidadao.celular !== undefined) {
+            var celular = cidadao.celular.replace("(", "").replace(")", "").replace("-", "");
+            cidadao.celular = celular;
+        }
+        if (cidadao.nascimento !== undefined) {
+            cidadao.nascimento = new Date(cidadao.nascimento.replace(/(\d{2})[-/](\d{2})[-/](\d+)/, "$2/$1/$3"));
+        }
+        $http.put(urlBase + "/cidadaos/" + cidadao.cpf, cidadao)
+                .success(function (data) {
+                    //altera mas atribui nulo ao data criação e cai no erro
+                    if (data !== 'true') {
+                        console.error("Erro ao alterar o cidadao: " + data); 
+                    } else {
+                        console.info("Cidadao " + cidadao.nome + " alterado com sucesso!");
+                    };
+                });
+            };
 });
 
 app.controller("graficosController", function ($scope) {
@@ -73,7 +102,7 @@ app.controller("atendimentoController", function ($scope, $http) {
                     console.log(data);
                 })
                 .error(function () {
-                    console.log('Erro ao obter os dados do grupo');
+                    console.log('Erro ao obter os dados dos atendimentos');
                     $scope.atendimentos = "ERRO ao efetuar o SELECT!";
                 });
     };
@@ -91,7 +120,27 @@ app.controller("atendimentoController", function ($scope, $http) {
                     //$scope.cidadao = "ERRO ao efetuar o SELECT!";
                 });
     };
-    $scope.teste = function (atendimento) {
-        console.log(atendimento);
+});
+
+app.controller("atividadeController", function ($scope, $http) {
+    $scope.novaAtividade = function (atividade) {
+        $http.post(urlBase + "/atividades", atividade)
+                .success(function (data) {
+                    console.info(JSON.stringify("Atividade salva com sucesso!: " + data));
+                })
+                .error(function (error) {
+                    console.error(JSON.stringify("Erro ao incluir a atividade: " + error));
+                    alert(JSON.stringify("Erro ao incluir a atividade: " + error));
+                });
+    };
+     $scope.listarAtividades = function () {
+        $http.get(urlBase + "/atividades")
+                .success(function (data) {
+                    $scope.atividades = data;
+                    console.log(data);
+                })
+                .error(function () {
+                    console.log('Erro ao obter os dados das atividades');
+                });
     };
 });

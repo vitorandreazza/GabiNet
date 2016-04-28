@@ -1,31 +1,30 @@
-<div class="container-fluid">
-    <form class="form-horizontal">
-        <fieldset class="container-fluid">
-            <legend>Atividades</legend>
+<div class="container-fluid" ng-init="listarAtividades()">
+    <div class="row">
+        <div class="col-md-12">
+            <h5 class="text-capitalize" style="">Atividades</h5>
+            <hr>
             <form class="form-horizontal">
-                <input type="search" ng-model="buscaAtividade" class="form-control" id="busca" placeholder="Buscar Atividade"><br>
+                <div class="col-md-9 nopadding">
+                    <input type="search" ng-model="buscaAtividade" class="form-control" id="busca" placeholder="Buscar Atividade"><br>
+                </div>
+                <div class="col-md-3 nopadding">
+                    <select class="form-control">
+                        <option>Nº Atividade</option>
+                        <option>Tipo</option>
+                        <option>Tipo de Moção</option>
+                        <option>Data</option>
+                    </select>
+                </div>
             </form>
-            <table class="table table-hover table-striped">
-                <tbody>
-                    <tr>
-                        <th>Nº Atividade</th>
-                        <th>Tipo</th>
-                        <th>Data</th>
-                        <th>Status</th>
-                        <th>Opções</th>
-                    </tr>
-                <tbody>
-                    <tr>
-                        <td>123123</td>
-                        <td>Moção</td>
-                        <td>10/20/2016</td>
-                        <td>Pendente</td>
-                        <td>
-                            <a href="#" ng-click="" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span>&nbspAbrir</a>
-                            <a href="#" ng-click="" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span>&nbspDeletar</a>
-                        </td>
-                    </tr>
-            </table>
-        </fieldset>
-    </form>
+        </div>
+        <div class="col-md-12">
+            <div class="list-group" ng-repeat="atividade in atividades | filter:buscaAtividade">
+                <a href="#" class="list-group-item">
+                    <h5 class="list-group-item-heading">Atividade {{atividade.id}} <small>({{atividade.dataAtividade | date: "dd/MM/yyyy"}})</small></h5>
+                    <h6 class="list-group-item-heading">{{atividade.tipo}} - {{atividade.tipoMocao}}</h6>
+                    <p class="list-group-item-text"><span class="list-group-item-heading"><strong>Ementa - </strong></span>{{atividade.ementa}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

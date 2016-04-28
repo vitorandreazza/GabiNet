@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import model.Atividade;
+import model.Usuario;
 
 @Path("/{parameter: atividades}")
 public class AtividadeService {
@@ -15,7 +16,7 @@ public class AtividadeService {
     public List<Atividade> listaTodos() {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atividade> atividades;
-        String sql = "SELECT a FROM Atividades a";
+        String sql = "SELECT a FROM Atividade a";
         Query q = bd.createQuery(sql);
         atividades = (ArrayList<Atividade>) q.getResultList();
         bd.close();
@@ -30,7 +31,7 @@ public class AtividadeService {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atividade> listagem;
         Atividade atividade = null;
-        String sql = "SELECT g FROM Atividades g WHERE g.id = :id";
+        String sql = "SELECT a FROM Atividade a WHERE a.id = :id";
         Query query = bd.createQuery(sql, Atividade.class);
         query.setParameter("id", id);
         listagem = (ArrayList<Atividade>) query.getResultList();
@@ -146,9 +147,15 @@ public class AtividadeService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Atividade atividade) {
         EntityManager bd = util.JpaUtil.getEntityManager();
+        Usuario u = new Usuario("xtt", "hue");
+        atividade.setUsuario(u);
         try {
             bd.getTransaction().begin();
-            bd.persist(atividade); //Hibernate gera o insert
+            bd.persist(u);
+            bd.getTransaction().commit();
+            
+            bd.getTransaction().begin();
+            bd.persist(atividade); 
             bd.getTransaction().commit();
             return Response.status(Response.Status.OK).
                     entity("true").build();

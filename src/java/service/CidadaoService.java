@@ -118,7 +118,7 @@ public class CidadaoService {
         EntityManager bd = util.JpaUtil.getEntityManager();
         try {
             bd.getTransaction().begin();
-            cidadao = bd.merge(cidadao); //Hibernate gera o update
+            cidadao = bd.merge(cidadao);
             bd.getTransaction().commit();
             return Response.status(Response.Status.OK)
                     .entity("true").build();

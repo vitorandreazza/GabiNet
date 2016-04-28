@@ -1,7 +1,19 @@
 <div class="container-fluid">
-    <form method="post" class="form-horizontal" role="form" name="formCidadao" ng-submit="inserirCidadao(cidadao)">
+    <form method="put" class="form-horizontal" role="form" name="formCidadao" ng-submit="alterarCidadao(cidadao)">
         <fieldset>
-            <legend>Cadastro do Cidadão</legend>
+            <legend>Alterar dados do Cidadão</legend>
+            <div class="form-group" ng-show="!cidadao">
+                        <div class="col-md-12">
+                        <label class="control-label">CPF</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" mask="999.999.999-99" ng-model="cpf" >
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button" ng-click="buscaCidadao(cpf)">Consultar</button>
+                            </span>
+                        </div>
+                        </div>
+            </div>
+            <div ng-show="cidadao">
             <div class="form-group">
                 <h4 class="container-fluid">Dados Pessoais</h4>
                     <div class="col-lg-12">
@@ -14,7 +26,7 @@
                     </div>
                     <div class="col-lg-7">
                         <label class="control-label" for="cpf">CPF</label>
-                        <input type="text" class="form-control" id="cpf" mask="999.999.999-99" ng-model="cidadao.cpf">
+                        <input type="text" class="form-control" id="cpf" mask="999.999.999-99" ng-model="cidadao.cpf" readonly>
                     </div>
             </div>
             <div class="form-group">
@@ -53,8 +65,9 @@
             </div>
             <div class="form-group">
                 <div class="col-lg-offset-11">
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <button type="submit" class="btn btn-primary">Alterar</button>
                 </div>
+            </div>
             </div>
         </fieldset>
     </form>

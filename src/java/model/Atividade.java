@@ -13,7 +13,7 @@ public class Atividade implements Serializable {
     @GeneratedValue
     private long id;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date data;
+    private Date dataAtividade;
     @Column(nullable = true, length = 200)
     private String ementa;
     @Column(nullable = true, length = 15)
@@ -24,14 +24,11 @@ public class Atividade implements Serializable {
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataCriacao;
-    @Temporal(TemporalType.TIMESTAMP)
     private Date dataAlteracao;    
     
     @PrePersist
     protected void onCreate() {
-        data = new Date();
-        dataCriacao = new Date();
+        dataAtividade = new Date();
     }
     
     @PreUpdate
@@ -77,18 +74,22 @@ public class Atividade implements Serializable {
     }
 
     public Date getData() {
-        return data;
+        return dataAtividade;
     }
 
     public Usuario getUsuario() {
         return usuario;
     }
 
-    public Date getDataCriacao() {
-        return dataCriacao;
+    public Date getDataAtividade() {
+        return dataAtividade;
     }
 
     public Date getDataAlteracao() {
         return dataAlteracao;
+    }
+    
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

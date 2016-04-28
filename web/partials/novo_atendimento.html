@@ -19,7 +19,7 @@
         <div class="form-group" ng-show="atendimento.cidadao.nome">
             <label for="nome" class="col-lg-1">Nome</label>
             <div class="col-lg-12">
-                <input class="form-control" id="nome" ng-model="atendimento.cidadao.nome" disabled>
+                <input class="form-control" id="nome" ng-model="atendimento.cidadao.nome" disabled><br>
             </div>
         </div>
     </div>
@@ -53,7 +53,6 @@
                     <div class="col-lg-12">
                         <select class="form-control" id="select">
                             <option>Pendente</option>
-                            <option>Em andamento</option>
                             <option>Resolvido</option>
                         </select>
                     </div>
@@ -66,5 +65,4 @@
             </fieldset>
         </form>
     </div>
-    <button class="btn" ng-click="teste(atendimento)">teste</button>
 </div>
