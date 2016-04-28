@@ -1,42 +1,53 @@
 <div class="container-fluid" ng-init="listarAtendimentos()">
-    <div class="row col-md-12">
-        <h5 class="text-capitalize" style="">Atendimentos</h5>
-        <hr>
-        <form class="form-horizontal">
-            <div class="col-md-9 nopadding">
-                <input type="search" ng-model="buscaAtendimento" class="form-control" id="busca" placeholder="Buscar Atendimento"><br>
+    <div class="row">
+        <div class="col-md-12">
+            <h5 class="text-capitalize" style="">Atendimentos</h5>
+            <hr>
+            <form class="form-horizontal">
+                <div class="col-md-9 nopadding">
+                    <input type="search" ng-model="buscaAtendimento" class="form-control" id="busca" placeholder="Buscar Atendimento"><br>
+                </div>
+                <div class="col-md-3 nopadding">
+                    <select class="form-control">
+                        <option>Nº Atendimento</option>
+                        <option>Nome do Cidadão</option>
+                        <option>Solicitação</option>
+                        <option>Data</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <!--        <table class="table table-hover table-striped">
+                    <tbody>
+                        <tr>
+                            <th>Nº Atendimento</th>
+                            <th>Nome do Cidadão</th>
+                            <th>Solicitação</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Opções</th>
+                        </tr>
+                    <tbody>
+                        <tr ng-repeat="atendimento in atendimentos | filter:buscaAtendimento">
+                            <td>{{atendimento.id}}</td>
+                            <td>{{atendimento.cidadao.nome}}</td>
+                            <td>{{atendimento.solicitacao}}</td>
+                            <td>{{atendimento.dataAtendimento | date: "dd/MM/yyyy"}}</td>
+                            <td>{{atendimento.status}}</td>
+                            <td>
+                                <a href="#" ng-click="" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span>&nbspAbrir</a>
+                                <a href="#" ng-click="" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span>&nbspDeletar</a>
+                            </td>
+                        </tr>
+                </table>-->
+        <div class="col-md-12">
+            <div class="list-group" ng-repeat="atendimento in atendimentos">
+                <a href="#" class="list-group-item">
+                    <h5 class="list-group-item-heading">Atendimento {{atendimento.id}} <small>({{atendimento.dataAtendimento | date: "dd/MM/yyyy"}})</small></h5>
+                    <h6 class="list-group-item-heading">{{atendimento.cidadao.nome}}</h6>
+                    <p class="list-group-item-text"><span class="list-group-item-heading"><strong>Solicitação - </strong></span>{{atendimento.solicitacao}}</p>
+                </a>
             </div>
-            <div class="col-md-3 nopadding">
-                <select class="form-control">
-                    <option>Nº Atendimento</option>
-                    <option>Nome do Cidadão</option>
-                    <option>Solicitação</option>
-                    <option>Data</option>
-                </select>
-            </div>
-        </form>
-        <table class="table table-hover table-striped">
-            <tbody>
-                <tr>
-                    <th>Nº Atendimento</th>
-                    <th>Nome do Cidadão</th>
-                    <th>Solicitação</th>
-                    <th>Data</th>
-                    <!--<th>Status</th>-->
-                    <th>Opções</th>
-                </tr>
-            <tbody>
-                <tr ng-repeat="atendimento in atendimentos | filter:buscaAtendimento">
-                    <td>{{atendimento.id}}</td>
-                    <td>{{atendimento.cidadao.nome}}</td>
-                    <td>{{atendimento.solicitacao}}</td>
-                    <td>{{atendimento.dataAtendimento | date: "dd/MM/yyyy"}}</td>
-                    <!--<td>{{atendimento.status}}</td>-->
-                    <td>
-                        <a href="#" ng-click="" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span>&nbspAbrir</a>
-                        <a href="#" ng-click="" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span>&nbspDeletar</a>
-                    </td>
-                </tr>
-        </table>
+        </div>
     </div>
 </div>
