@@ -21,23 +21,27 @@ app.controller("cidadaoController", function ($scope, $http) {
         if (cidadao.nascimento !== undefined) {
             cidadao.nascimento = new Date(cidadao.nascimento.replace(/(\d{2})[-/](\d{2})[-/](\d+)/, "$2/$1/$3"));
         }
-        $http.post(urlBase + "/cidadaos", cidadao).success(function (data) {
-            console.info(JSON.stringify("Cidadão salvo com sucesso!: " + data));
-        }).error(function (error) {
-            console.error(JSON.stringify("Erro ao incluir o cidadão: " + error));
-            alert(JSON.stringify("Erro ao incluir o cidadão: " + error));
-        });
+        $http.post(urlBase + "/cidadaos", cidadao)
+                .success(function (data) {
+                    console.info(JSON.stringify("Cidadão salvo com sucesso!: " + data));
+                })
+                .error(function (error) {
+                    console.error(JSON.stringify("Erro ao incluir o cidadão: " + error));
+                    alert(JSON.stringify("Erro ao incluir o cidadão: " + error));
+                });
     };
     $scope.buscaCidadao = function (cpf) {
         var cpfr = cpf.replace(".", "").replace(".", "").replace("-", "");
         cpf = cpfr;
-        $http.get(urlBase + "/cidadaos/" + cpf).success(function (data) {
-            $scope.cidadao = data;
-            console.log($scope.cidadao);
-        }).error(function () {
-            console.log('Erro ao obter os dados do cidadao');
-            $scope.cidadao = "ERRO ao efetuar o SELECT!";
-        });
+        $http.get(urlBase + "/cidadaos/" + cpf)
+                .success(function (data) {
+                    $scope.cidadao = data;
+                    console.log($scope.cidadao);
+                })
+                .error(function () {
+                    console.log('Erro ao obter os dados do cidadao');
+                    $scope.cidadao = "ERRO ao efetuar o SELECT!";
+                });
     };
 });
 
@@ -53,17 +57,20 @@ app.controller("graficosController", function ($scope) {
 
 app.controller("atendimentoController", function ($scope, $http) {
     $scope.novoAtendimento = function (atendimento) {
-        $http.post(urlBase + "/atendimentos", atendimento).success(function (data) {
-            console.info(JSON.stringify("Atendimento salvo com sucesso!: " + data));
-        }).error(function (error) {
-            console.error(JSON.stringify("Erro ao incluir o atendimento: " + error));
-            alert(JSON.stringify("Erro ao incluir o atendimento: " + error));
-        });
+        $http.post(urlBase + "/atendimentos", atendimento)
+                .success(function (data) {
+                    console.info(JSON.stringify("Atendimento salvo com sucesso!: " + data));
+                })
+                .error(function (error) {
+                    console.error(JSON.stringify("Erro ao incluir o atendimento: " + error));
+                    alert(JSON.stringify("Erro ao incluir o atendimento: " + error));
+                });
     };
     $scope.listarAtendimentos = function () {
         $http.get(urlBase + "/atendimentos")
                 .success(function (data) {
                     $scope.atendimentos = data;
+                    console.log(data);
                 })
                 .error(function () {
                     console.log('Erro ao obter os dados do grupo');
@@ -73,14 +80,16 @@ app.controller("atendimentoController", function ($scope, $http) {
     $scope.buscaCidadao = function (cpf) {
         var cpfr = cpf.replace(".", "").replace(".", "").replace("-", "");
         cpf = cpfr;
-        $http.get(urlBase + "/cidadaos/" + cpf).success(function (data) {
-            $scope.atendimento.cidadao = {};
-            $scope.atendimento.cidadao = data;
-            console.log($scope.atendimento);
-        }).error(function () {
-            console.log('Erro ao obter os dados do cidadao');
-            //$scope.cidadao = "ERRO ao efetuar o SELECT!";
-        });
+        $http.get(urlBase + "/cidadaos/" + cpf)
+                .success(function (data) {
+                    $scope.atendimento.cidadao = {};
+                    $scope.atendimento.cidadao = data;
+                    console.log($scope.atendimento);
+                })
+                .error(function () {
+                    console.log('Erro ao obter os dados do cidadao');
+                    //$scope.cidadao = "ERRO ao efetuar o SELECT!";
+                });
     };
     $scope.teste = function (atendimento) {
         console.log(atendimento);
