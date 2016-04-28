@@ -1,11 +1,11 @@
 <div class="container-fluid">
-    <form class="form-horizontal">
-        <fieldset class="container-fluid">
+    <form method="post" class="form-horizontal" ng-submit="novaAtividade(atividade)">
+        <fieldset>
                 <legend>Nova Atividade</legend>
                 <div class="form-group">
-                    <div class="col-lg-8">
-                        <label for="select" class="control-label">Tipo</label>
-                        <select class="form-control" id="select">
+                    <div class="col-lg-12">
+                        <label for="select">Tipo</label>
+                        <select class="form-control" id="select" ng-model="atividade.tipo" value="{{atividade.tipo}}">
                             <option>Projeto de Lei</option>
                             <option>Indicações</option>
                             <option>Requerimento</option>
@@ -13,9 +13,11 @@
                             <option>Moções</option>
                         </select>
                     </div>
-                    <div class="col-lg-4">
-                        <label for="select" class="control-label">Tipo de moções</label>
-                        <select class="form-control" id="mocoes" disabled>
+                </div>
+                <div class="form-group" ng-if="atividade.tipo==='Moções'">
+                    <div class="col-lg-12">
+                        <label for="select">Tipo de moções</label>
+                        <select class="form-control" id="mocoes" ng-model="atividade.tipoMocao">
                             <option>Protesto</option>
                             <option>Repúdio</option>
                             <option>Apoio</option>
@@ -23,22 +25,18 @@
                             <option>Congratulação</option>
                         </select>
                     </div>
-                    <div class="col-lg-12">
-                        <label class="control-label" for="dataAtividade">Data</label>
-                        <input type="date" class="form-control" id="dataAtividade">
-                    </div>
                 </div>
-
                 <div class="form-group">
-                    <label for="ementa" class="control-label col-lg-1">Ementa&nbsp;&nbsp;&nbsp;</label>
+                    <label for="ementa" class="col-lg-1">Ementa</label>
                     <div class="col-lg-12">
-                        <textarea class="form-control" rows="10" id="ementa"></textarea>
+                        <textarea class="form-control" rows="10" id="ementa" ng-model="atividade.ementa"></textarea>
                         <span class="help-block"></span>
                     </div>
                 </div>
+                {{atividade}}
                 <div class="form-group">
                     <div class="col-lg-offset-11">
-                        <button type="submit" class="btn btn-primary glyphicon glyphicon-save-file">Salvar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
                     </div>
                 </div>
         </fieldset>

@@ -41,7 +41,7 @@
                         </tr>
                 </table>-->
         <div class="col-md-12">
-            <div class="list-group" ng-repeat="atendimento in atendimentos">
+            <div class="list-group" ng-repeat="atendimento in atendimentos | filter:buscaAtendimento">
                 <a href="#" class="list-group-item">
                     <h5 class="list-group-item-heading">Atendimento {{atendimento.id}} <small>({{atendimento.dataAtendimento | date: "dd/MM/yyyy"}})</small></h5>
                     <h6 class="list-group-item-heading">{{atendimento.cidadao.nome}}</h6>

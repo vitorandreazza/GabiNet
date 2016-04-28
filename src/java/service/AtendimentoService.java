@@ -6,7 +6,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.Atendimento;
-import model.Cidadao;
 import model.Usuario;
 
 /**
@@ -21,7 +20,7 @@ public class AtendimentoService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Atendimento atendimento) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        Usuario u = new Usuario("test2d", "hue");
+        Usuario u = new Usuario("testd", "hue");
         atendimento.setUsuario(u);
 //        Cidadao c = new Cidadao();
 //        c.setCpf("41278912387");
