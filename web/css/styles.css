@@ -1,3 +1,11 @@
+::-moz-selection {
+  background-color: #2196F3;
+  color: #fff;
+}
+::selection {
+  background-color: #2196F3;
+  color: #fff;
+}
 h5 {
     color: #212121;
 }
@@ -7,4 +15,36 @@ hr {
 .nopadding {
    padding: 0 !important;
    margin: 0 !important;
+}
+.list-group {
+    border-radius: 3px;
+    transition: all 200ms ease-out;
+}
+.list-group:hover {
+    box-shadow: 0 0 6px rgba(33, 150, 243, 1);
+}
+a.list-group-item:hover,
+button.list-group-item:hover,
+a.list-group-item:focus,
+button.list-group-item:focus {
+  text-decoration: none;
+  color: #555555;
+  background-color: white;
+}
+.overlay {
+    z-index: 12;
+    position: relative;
+    padding: 10px 10px;
+}
+.glyphicon-trash {
+    color: #333333;
+}
+.glyphicon-trash:hover {
+    color: #2196F3;
+}
+.glyphicon-pencil {
+    color: #333333;
+}
+.glyphicon-pencil:hover {
+    color: #2196F3;
 }

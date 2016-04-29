@@ -46,7 +46,7 @@ app.controller("cidadaoController", function ($scope, $http) {
     $scope.alterarCidadao = function (cidadao) {
         var cpfr = cidadao.cpf.replace(".", "").replace(".", "").replace("-", "");
         cidadao.cpf = cpfr;
-        
+
         if (cidadao.cep !== undefined) {
             var cep = cidadao.cep.replace("-", "");
             cidadao.cep = cep;
@@ -66,12 +66,13 @@ app.controller("cidadaoController", function ($scope, $http) {
                 .success(function (data) {
                     //altera mas atribui nulo ao data criação e cai no erro
                     if (data !== 'true') {
-                        console.error("Erro ao alterar o cidadao: " + data); 
+                        console.error("Erro ao alterar o cidadao: " + data);
                     } else {
                         console.info("Cidadao " + cidadao.nome + " alterado com sucesso!");
-                    };
+                    }
+                    ;
                 });
-            };
+    };
 });
 
 app.controller("graficosController", function ($scope) {
@@ -85,6 +86,19 @@ app.controller("graficosController", function ($scope) {
 });
 
 app.controller("atendimentoController", function ($scope, $http) {
+    $scope.combo = {
+        //opcoes para o select| procura e a chave e o valor que sera procurado no filtro
+        opcoes: [
+            {name: 'Tudo', procura: {$: ''}},
+            {name: 'Nº Atendimento', procura: {id: ''}},
+            {name: 'Nome cidadao', procura: {cidadao: {nome: ''}}},
+            {name: 'Solicitacao', procura: {solicitacao: ''}},
+            {name: 'Data', procura: {dataAtendimento: ''}}
+        ],
+        //opção default do select e option selecionado do select
+        opcaoSelecionada: {name: 'Tudo', procura: {$: ''}}
+    };
+
     $scope.novoAtendimento = function (atendimento) {
         $http.post(urlBase + "/atendimentos", atendimento)
                 .success(function (data) {
@@ -120,6 +134,49 @@ app.controller("atendimentoController", function ($scope, $http) {
                     //$scope.cidadao = "ERRO ao efetuar o SELECT!";
                 });
     };
+    $scope.selecionaKey = function () {
+        if($scope.combo.opcaoSelecionada.name === "Data") {
+            var splitted = $scope.textoBusca.split("/");
+            var date = "";
+            if (splitted.length < 2) {
+                //busca apenas o dia
+                date = $scope.textoBusca;
+            }else if (splitted.length < 3) {
+                //busca o dia com o mes
+                date = splitted[1] + "-" + splitted[0];
+            } else {
+                //busca a data toda
+                date = splitted[2] + "-" + splitted[1] + "-" + splitted[0];
+            }
+            $scope.combo.opcaoSelecionada.procura[Object.keys($scope.combo.opcaoSelecionada.procura)[0]] = date;
+            return;
+        }
+        $scope.combo.opcaoSelecionada.procura[Object.keys($scope.combo.opcaoSelecionada.procura)[0]] = $scope.textoBusca;
+    };
+    $scope.mudou = function() {
+        console.log($scope.combo.opcaoSelecionada.name);
+        if ($scope.combo.opcaoSelecionada.name === "Data") {
+            //adiciona mascara quando a procura e por data
+            $scope.html = '<input type="date" mask="99/99/9999" ng-model="textoBusca" class="form-control" ng-keyup="selecionaKey()" placeholder="Buscar Atendimento"><br>';
+            $scope.textoBusca = "";
+        } else {
+            //tira a mascara
+            $scope.html = '<input type="text" ng-model="textoBusca" class="form-control" ng-keyup="selecionaKey()" placeholder="Buscar Atendimento"><br>';
+        }
+    };
+});
+//diretiva que adiciona uma html dinamicamente
+app.directive('dynamic', function ($compile) {
+  return {
+    restrict: 'A',
+    replace: true,
+    link: function (scope, ele, attrs) {
+      scope.$watch(attrs.dynamic, function(html) {
+        ele.html(html);
+        $compile(ele.contents())(scope);
+      });
+    }
+  };
 });
 
 app.controller("atividadeController", function ($scope, $http) {
@@ -133,7 +190,7 @@ app.controller("atividadeController", function ($scope, $http) {
                     alert(JSON.stringify("Erro ao incluir a atividade: " + error));
                 });
     };
-     $scope.listarAtividades = function () {
+    $scope.listarAtividades = function () {
         $http.get(urlBase + "/atividades")
                 .success(function (data) {
                     $scope.atividades = data;

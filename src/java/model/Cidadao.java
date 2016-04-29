@@ -17,7 +17,7 @@ public class Cidadao implements Serializable {
     @Column(nullable = false, length = 50, unique = true)
     private String email;
     @Column(nullable = true)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date nascimento;
     @Column(nullable = true, length = 50)
     private String endereco;
@@ -34,9 +34,9 @@ public class Cidadao implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false, name = "idUsuario")
     private Usuario usuario;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataCriacao;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataAlteracao;
 
     public void setUsuario(Usuario usuario) {

@@ -12,7 +12,7 @@ public class Atendimento implements Serializable {
     @Id
     @GeneratedValue
     private long id;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataAtendimento;
     @Column(nullable = true, length = 200)
     private String solicitacao;
@@ -28,7 +28,7 @@ public class Atendimento implements Serializable {
     private Cidadao cidadao;
 //    @Temporal(TemporalType.TIMESTAMP)
 //    private Date dataCriacao;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataAlteracao;
     
     public Atendimento() {}

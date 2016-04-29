@@ -1,18 +1,20 @@
 <div class="container-fluid" ng-init="listarAtendimentos()">
     <div class="row">
         <div class="col-md-12">
-            <h5 class="text-capitalize" style="">Atendimentos</h5>
+            <h5 class="text-capitalize" ng-init="selecionado = id">Atendimentos</h5>
             <hr>
             <form class="form-horizontal">
-                <div class="col-md-9 nopadding">
-                    <input type="search" ng-model="buscaAtendimento" class="form-control" id="busca" placeholder="Buscar Atendimento"><br>
+                <div class="col-md-9 nopadding" dynamic="html">
+                    <input id="busca" ng-model="textoBusca" class="form-control" ng-keyup="selecionaKey()" placeholder="Buscar Atendimento"><br>
+                    <!--<ng-busca></ng-busca><br>-->
                 </div>
-                <div class="col-md-3 nopadding">
-                    <select class="form-control">
-                        <option>Nº Atendimento</option>
-                        <option>Nome do Cidadão</option>
-                        <option>Solicitação</option>
-                        <option>Data</option>
+                <div class="col-md-3 nopadding" ng-model="oi">
+                    <select class="form-control" ng-options="opcao.name for opcao in combo.opcoes track by opcao.name" ng-model="combo.opcaoSelecionada" ng-click="mudou()">
+<!--                        <option value="$">Tudo</option>
+                        <option value="id">Nº Atendimento</option>
+                        <option value="cidadao.nome" selected>Nome do Cidadão</option>
+                        <option value="solicitacao">Solicitação</option>
+                        <option value="dataAtendimento">Data</option>-->
                     </select>
                 </div>
             </form>
@@ -41,9 +43,11 @@
                         </tr>
                 </table>-->
         <div class="col-md-12">
-            <div class="list-group" ng-repeat="atendimento in atendimentos | filter:buscaAtendimento">
+            <div class="list-group" ng-repeat="atendimento in atendimentos | filter: combo.opcaoSelecionada.procura">
+                <a href="#" class="pull-right overlay"><span class="glyphicon glyphicon-trash"></span></a>
+                <a href="#" class="pull-right overlay"><span class="glyphicon glyphicon-pencil"></span></a>
                 <a href="#" class="list-group-item">
-                    <h5 class="list-group-item-heading">Atendimento {{atendimento.id}} <small>({{atendimento.dataAtendimento | date: "dd/MM/yyyy"}})</small></h5>
+                    <h5 class="list-group-item-heading" style="display: inline;">Atendimento {{atendimento.id}} - <small>{{atendimento.dataAtendimento | date: "dd/MM/yyyy"}}</small></h5>
                     <h6 class="list-group-item-heading">{{atendimento.cidadao.nome}}</h6>
                     <p class="list-group-item-text"><span class="list-group-item-heading"><strong>Solicitação - </strong></span>{{atendimento.solicitacao}}</p>
                 </a>

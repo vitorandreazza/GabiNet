@@ -12,7 +12,7 @@ public class Atividade implements Serializable {
     @Id
     @GeneratedValue
     private long id;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataAtividade;
     @Column(nullable = true, length = 200)
     private String ementa;
@@ -23,7 +23,7 @@ public class Atividade implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataAlteracao;    
     
     @PrePersist
