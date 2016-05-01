@@ -1,3 +1,4 @@
+/*seleção de text azul*/
 ::-moz-selection {
   background-color: #2196F3;
   color: #fff;
@@ -16,6 +17,7 @@ hr {
    padding: 0 !important;
    margin: 0 !important;
 }
+/*borda azul durante o hover*/
 .list-group {
     border-radius: 3px;
     transition: all 200ms ease-out;
@@ -31,10 +33,11 @@ button.list-group-item:focus {
   color: #555555;
   background-color: white;
 }
-.overlay {
+/*faz a sobreposição do botão*/
+.overlay-button {
     z-index: 12;
     position: relative;
-    padding: 10px 10px;
+    padding: 15px 15px;
 }
 .glyphicon-trash {
     color: #333333;
@@ -46,5 +49,8 @@ button.list-group-item:focus {
     color: #333333;
 }
 .glyphicon-pencil:hover {
+    color: #2196F3;
+}
+.navbar-default .navbar-brand:hover {
     color: #2196F3;
 }

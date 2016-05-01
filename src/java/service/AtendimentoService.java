@@ -14,7 +14,19 @@ import model.Usuario;
  */
 @Path("/{parameter: atendimentos}")
 public class AtendimentoService {
-
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Atendimento> listaTodos() {
+        EntityManager bd = util.JpaUtil.getEntityManager();
+        ArrayList<Atendimento> atendimentos;
+        String sql = "SELECT at FROM Atendimento at";
+        Query q = bd.createQuery(sql);
+        atendimentos = (ArrayList<Atendimento>) q.getResultList();
+        bd.close();
+        return atendimentos;
+    }
+    
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -64,18 +76,6 @@ public class AtendimentoService {
         } finally {
             bd.close();
         }
-    }
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Atendimento> listaTodos() {
-        EntityManager bd = util.JpaUtil.getEntityManager();
-        ArrayList<Atendimento> atendimentos;
-        String sql = "SELECT at FROM Atendimento at";
-        Query q = bd.createQuery(sql);
-        atendimentos = (ArrayList<Atendimento>) q.getResultList();
-        bd.close();
-        return atendimentos;
     }
 
     @Path("{id}")
