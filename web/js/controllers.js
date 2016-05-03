@@ -75,6 +75,15 @@ app.controller("cidadaoController", function ($scope, $http) {
                     ;
                 });
     };
+       $scope.listarCidadaos = function () {
+        $http.get(urlBase + "/cidadaos")
+                .success(function (data) {
+                    $scope.cidadaos = data;
+                })
+                .error(function () {
+                    console.log('Erro ao obter os dados dos cidadaos');
+                });
+    };
 });
 
 app.controller("graficosController", function ($scope) {

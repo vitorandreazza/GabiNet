@@ -147,7 +147,7 @@ public class AtividadeService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Atividade atividade) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        Usuario u = new Usuario("xtt", "hue");
+        Usuario u = new Usuario("xot", "hue");
         atividade.setUsuario(u);
         try {
             bd.getTransaction().begin();
