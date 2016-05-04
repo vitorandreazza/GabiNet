@@ -14,7 +14,7 @@ public class Cidadao implements Serializable {
     private String cpf;
     @Column(nullable = true, length = 50)
     private String nome;
-    @Column(nullable = false, length = 50, unique = true)
+    @Column(nullable = true, length = 50, unique = true)
     private String email;
     @Column(nullable = true)
     @Temporal(TemporalType.DATE)
