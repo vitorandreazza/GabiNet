@@ -41,12 +41,14 @@ button.list-group-item:focus {
 }
 .glyphicon-trash {
     color: #333333;
+    font-size: 1.3em;
 }
 .glyphicon-trash:hover {
     color: #2196F3;
 }
 .glyphicon-pencil {
     color: #333333;
+    font-size: 1.3em;
 }
 .glyphicon-pencil:hover {
     color: #2196F3;

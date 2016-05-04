@@ -12,7 +12,7 @@ angular.module("gabiNet", ['ngRoute', 'ngMask', 'chart.js']).config(['$routeProv
         controller: 'cidadaoController'
     });
     $routeProvider.when("/atendimentos", {
-        templateUrl: 'partials/consultar_atendimento.html',
+        templateUrl: 'partials/listar_atendimentos.html',
         controller: 'atendimentoController'
     });
     $routeProvider.when("/atendimentos/novo", {
@@ -20,7 +20,7 @@ angular.module("gabiNet", ['ngRoute', 'ngMask', 'chart.js']).config(['$routeProv
         controller: 'atendimentoController'
     });
     $routeProvider.when("/atendimentos/:id", {
-        templateUrl: 'partials/novo_atendimento.html',
+        templateUrl: 'partials/consultar_atendimento.html',
         controller: 'atendimentoController'
     });
     $routeProvider.when("/atividades/novo", {
@@ -28,6 +28,10 @@ angular.module("gabiNet", ['ngRoute', 'ngMask', 'chart.js']).config(['$routeProv
         controller: 'atividadeController'
     });
     $routeProvider.when("/atividades", {
+        templateUrl: 'partials/listar_atividades.html',
+        controller: 'atividadeController'
+    });
+    $routeProvider.when("/atividades/:id", {
         templateUrl: 'partials/consultar_atividade.html',
         controller: 'atividadeController'
     });

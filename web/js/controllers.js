@@ -254,17 +254,30 @@ app.controller("atividadeController", function ($scope, $http) {
                     console.log('Erro ao obter os dados das atividades');
                 });
     };
-    $scope.excluiAtividade = function (id) {
-        if (confirm("Confirma a exclusão da Atividade?")) {
-            $http.delete(urlBase + "/atividades/" + id)
-                .success(function () {
-                    console.info("Atividade nº " + id + " removida com sucesso!");
-                    $scope.listarAtividades();
+    
+    $scope.getAtividade = function (atividade) {
+        $http.get(urlBase + "/atividades/" + atividade.id)
+                .success(function (data) {
+                    $scope.atividade = data;
+                    console.log($scope);
+                    console.log(data);
                 })
-                .error(function (data)
-                {
-                    console.error("Erro ao apagar a atividade: " + data);
+                .error(function () {
+                    console.log('Erro ao obter os dados das atividades');
                 });
+    };
+    
+    $scope.excluiAtividade = function (atividade) {
+        if (confirm("Confirma a exclusão da Atividade?")) {
+            $http.delete(urlBase + "/atividades/" + atividade.id)
+                    .success(function () {
+                        console.info("Atividade nº " + atividade.id + " removida com sucesso!");
+                        $scope.listarAtividades();
+                    })
+                    .error(function (data)
+                    {
+                        console.error("Erro ao apagar a atividade: " + data);
+                    });
         }
     };
 });
