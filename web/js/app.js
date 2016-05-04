@@ -7,6 +7,10 @@ angular.module("gabiNet", ['ngRoute', 'ngMask', 'chart.js']).config(['$routeProv
         templateUrl: 'partials/cadastro_cidadao.html',
         controller: 'cidadaoController'
     });
+    $routeProvider.when("/cidadaos/alterar", {
+        templateUrl: 'partials/alterar_cidadao.html',
+        controller: 'cidadaoController'
+    });
     $routeProvider.when("/atendimentos", {
         templateUrl: 'partials/consultar_atendimento.html',
         controller: 'atendimentoController'

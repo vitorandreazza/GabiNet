@@ -51,9 +51,9 @@ public class CidadaoService {
         EntityManager bd = util.JpaUtil.getEntityManager();
         try {
             //localizando o registro a ser removido
-            Cidadao atividade = bd.find(Cidadao.class, cpf);
+            Cidadao cidadao = bd.find(Cidadao.class, cpf);
             bd.getTransaction().begin();
-            bd.remove(atividade); //Hibernate efetua o delete
+            bd.remove(cidadao); //Hibernate efetua o delete
             bd.getTransaction().commit();
             return Response.status(Response.Status.OK).
                     entity("true").build();
@@ -89,7 +89,7 @@ public class CidadaoService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Cidadao cidadao) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        Usuario u = new Usuario("abc", "hue");
+        Usuario u = new Usuario("juca1", "hue");
         cidadao.setUsuario(u);
         try {
             bd.getTransaction().begin();

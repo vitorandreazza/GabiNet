@@ -75,6 +75,33 @@ app.controller("cidadaoController", function ($scope, $http) {
                     ;
                 });
     };
+    
+    $scope.listarCidadaos = function () {
+        $http.get(urlBase + "/cidadaos")
+                .success(function (data) {
+                    $scope.cidadaos = data;
+                })
+                .error(function () {
+                    console.log('Erro ao obter os dados dos cidadaos');
+                });
+    };
+    
+    $scope.excluiCidadao = function (cpf) {
+        var cpfr = cpf.replace(".", "").replace(".", "").replace("-", "");
+        cpf = cpfr;
+        if (confirm("Confirma a exclusão do cidadão?")) {
+            $http.delete(urlBase + "/cidadaos/" + cpf)
+                .success(function () {
+                    console.info("Cidadao CPF " + cpf + " removido com sucesso!");
+                    $scope.listarCidadaos();
+                })
+                .error(function (data)
+                {
+                    console.error("Erro ao apagar o cidadao: " + data);
+                    alert("Vinculado com algum Atendimento!");
+                });
+        }
+    };
 });
 
 app.controller("graficosController", function ($scope) {
@@ -122,6 +149,20 @@ app.controller("atendimentoController", function ($scope, $http) {
                     console.log('Erro ao obter os dados dos atendimentos');
                     $scope.atendimentos = "ERRO ao efetuar o SELECT!";
                 });
+    };
+    
+    $scope.excluiAtendimento = function (id) {
+        if (confirm("Confirma a exclusão do Atendimento?")) {
+            $http.delete(urlBase + "/atendimentos/" + id)
+                .success(function () {
+                    console.info("Atendimento nº " + id + " removido com sucesso!");
+                    $scope.listarAtendimentos();
+                })
+                .error(function (data)
+                {
+                    console.error("Erro ao apagar o atendimento: " + data);
+                });
+        }
     };
     
     $scope.buscaCidadao = function (cpf) {
@@ -212,5 +253,18 @@ app.controller("atividadeController", function ($scope, $http) {
                 .error(function () {
                     console.log('Erro ao obter os dados das atividades');
                 });
+    };
+    $scope.excluiAtividade = function (id) {
+        if (confirm("Confirma a exclusão da Atividade?")) {
+            $http.delete(urlBase + "/atividades/" + id)
+                .success(function () {
+                    console.info("Atividade nº " + id + " removida com sucesso!");
+                    $scope.listarAtividades();
+                })
+                .error(function (data)
+                {
+                    console.error("Erro ao apagar a atividade: " + data);
+                });
+        }
     };
 });
