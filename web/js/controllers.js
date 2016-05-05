@@ -1,7 +1,18 @@
 var app = angular.module("gabiNet");
 var urlBase = "http://localhost:8084/gabinet/api";
 
-app.controller("cidadaoController", function ($scope, $http) {
+app.controller("cidadaoController", function ($scope, $http, $routeParams) {
+    var id = $routeParams.id;
+    
+    $scope.consulta = function (n){
+        switch(n){
+            case 1: $scope.buscaCidadao(id);
+            break;
+            case 2:
+            break;
+        }
+    };
+
     $scope.inserirCidadao = function (cidadao) {
         var cpf = cidadao.cpf.replace(".", "").replace(".", "").replace("-", "");
         cidadao.cpf = cpf;
@@ -67,7 +78,7 @@ app.controller("cidadaoController", function ($scope, $http) {
         $http.put(urlBase + "/cidadaos/" + cidadao.cpf, cidadao)
                 .success(function (data) {
                     //altera mas atribui nulo ao data criação e cai no erro
-                    if (data !== 'true') {
+                    if (data !== true) {
                         console.error("Erro ao alterar o cidadao: " + data);
                     } else {
                         console.info("Cidadao " + cidadao.nome + " alterado com sucesso!");

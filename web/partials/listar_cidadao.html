@@ -1,0 +1,29 @@
+<div class="container-fluid" ng-init="(listarCidadaos())">
+    <div class="row">
+        <div class="col-md-12">
+            <h5 class="text-capitalize" ng-init="selecionado = id">Cidadãos</h5>
+            <hr>
+            <form class="form-horizontal">
+                <div class="col-md-9 nopadding" dynamic="html">
+                    <input id="busca" ng-model="textoBusca" class="form-control" ng-keyup="selecionaKey()" placeholder="Buscar Cidadão"><br>
+                    <!--<ng-busca></ng-busca><br>-->
+                </div>
+                <div class="col-md-3 nopadding" ng-model="oi">
+                    <select class="form-control" ng-options="opcao.name for opcao in combo.opcoes track by opcao.name" ng-model="combo.opcaoSelecionada" ng-click="mudou()">
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-12">
+            <div class="list-group" ng-repeat="cidadao in cidadaos | filter: combo.opcaoSelecionada.procura">
+                <a ng-click="excluiCidadao(cidadao.cpf)" class="pull-right overlay-button"><span class="glyphicon glyphicon-trash"></span></a>
+                <a href="#/cidadaos/alterar/{{cidadao.cpf}}" class="pull-right overlay-button"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a href="#/cidadaos/{{cidadao.cpf}}" class="list-group-item">
+                    <h5 class="list-group-item-heading" style="display: inline;">{{cidadao.nome}} - <small>{{cidadao.cpf}}</small></h5>
+                    <h6 class="list-group-item-heading">{{cidadao.endereco}}</h6>
+                    <p class="list-group-item-text"><span class="list-group-item-heading"><strong>Contato - </strong></span>{{cidadao.telefone}} / {{cidadao.celular}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
