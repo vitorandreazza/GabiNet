@@ -1,29 +1,58 @@
-<div class="container-fluid" ng-init="(listarCidadaos())">
-    <div class="row">
-        <div class="col-md-12">
-            <h5 class="text-capitalize" ng-init="selecionado = id">Cidadãos</h5>
-            <hr>
-            <form class="form-horizontal">
-                <div class="col-md-9 nopadding" dynamic="html">
-                    <input id="busca" ng-model="textoBusca" class="form-control" ng-keyup="selecionaKey()" placeholder="Buscar Cidadão"><br>
-                    <!--<ng-busca></ng-busca><br>-->
+<div class="container-fluid" ng-init="consulta(1)">
+    <form method="get" class="form-horizontal" role="form" name="formCidadao">
+        <fieldset>
+            <legend>Cidadão</legend>
+            <div>
+                <div class="form-group">
+                    <h4 class="container-fluid">Dados Pessoais</h4>
+                    <div class="col-lg-12">
+                        <label class="control-label" for="nome">Nome</label>
+                        <input type="text" class="form-control" id="nome" ng-model="cidadao.nome" readonly>
+                    </div>
+                    <div class="col-lg-5">
+                        <label class="control-label" for="dataNascimento">Data de Nascimento</label>
+                        <input type="text" class="form-control" id="dataNascimento" ng-model="cidadao.nascimento" mask="99/99/9999" ng-value="dataNascimento | date: 'dd/MM/yyyy'" readonly>
+                    </div>
+                    <div class="col-lg-7">
+                        <label class="control-label" for="cpf">CPF</label>
+                        <input type="text" class="form-control" id="cpf" mask="999.999.999-99" ng-model="cidadao.cpf" readonly>
+                    </div>
                 </div>
-                <div class="col-md-3 nopadding" ng-model="oi">
-                    <select class="form-control" ng-options="opcao.name for opcao in combo.opcoes track by opcao.name" ng-model="combo.opcaoSelecionada" ng-click="mudou()">
-                    </select>
+                <div class="form-group">
+                    <h4 class="container-fluid">Dados Residenciais</h4>
+                    <div class="col-lg-8">
+                        <label class="control-label" for="endereco">Endereço</label>
+                        <input type="text" class="form-control" id="endereco" ng-model="cidadao.endereco" readonly>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="control-label" for="complemento">Complemento</label>
+                        <input type="text" class="form-control" id="complemento" ng-model="cidadao.complemento" readonly>
+                    </div>
+                    <div class="col-lg-7">
+                        <label class="control-label" for="bairro">Bairro</label>
+                        <input type="text" class="form-control" id="bairro" ng-model="cidadao.bairro" readonly>
+                    </div>
+                    <div class="col-lg-5">
+                        <label class="control-label" for="cep">CEP</label>
+                        <input type="text" class="form-control" id="cep" mask="99999-999" ng-model="cidadao.cep" readonly>
+                    </div>
                 </div>
-            </form>
-        </div>
-        <div class="col-md-12">
-            <div class="list-group" ng-repeat="cidadao in cidadaos | filter: combo.opcaoSelecionada.procura">
-                <a ng-click="excluiCidadao(cidadao.cpf)" class="pull-right overlay-button"><span class="glyphicon glyphicon-trash"></span></a>
-                <a href="#/cidadaos/alterar/{{cidadao.cpf}}" class="pull-right overlay-button"><span class="glyphicon glyphicon-pencil"></span></a>
-                <a href="#/cidadaos/{{cidadao.cpf}}" class="list-group-item">
-                    <h5 class="list-group-item-heading" style="display: inline;">{{cidadao.nome}} - <small ng-model="cidadao.cpf" mask="999.999.999-99">{{cidadao.cpf}}</small></h5>
-                    <h6 class="list-group-item-heading">{{cidadao.endereco}}</h6>
-                    <p class="list-group-item-text"><span class="list-group-item-heading"><strong>Contato - </strong></span>{{cidadao.telefone}} / {{cidadao.celular}}</p>
-                </a>
+                <div class="form-group">
+                    <h4 class="container-fluid">Contato</h4>
+                    <div class="col-lg-12">
+                        <label class="control-label" for="email">Email</label>
+                        <input type="text" class="form-control" id="email" ng-model="cidadao.email" readonly>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="control-label" for="fone">Telefone</label>
+                        <input type="text" class="form-control" id="fone" mask="(99)9999-9999" ng-model="cidadao.telefone" readonly>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="control-label" for="celular">Celular</label>
+                        <input type="text" class="form-control" id="celular" mask="(99)99999-9999" ng-model="cidadao.celular" readonly>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        </fieldset>
+    </form>
 </div>

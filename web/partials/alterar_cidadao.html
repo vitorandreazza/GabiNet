@@ -1,8 +1,8 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-init="consulta(1)">
     <form method="put" class="form-horizontal" role="form" name="formCidadao" ng-submit="alterarCidadao(cidadao)">
         <fieldset>
             <legend>Alterar dados do Cidadão</legend>
-            <div ng-show="cidadao">
+            <div>
                 <div class="form-group">
                     <h4 class="container-fluid">Dados Pessoais</h4>
                     <div class="col-lg-12">
@@ -11,7 +11,7 @@
                     </div>
                     <div class="col-lg-5">
                         <label class="control-label" for="dataNascimento">Data de Nascimento</label>
-                        <input type="text" class="form-control" id="dataNascimento" mask="99/99/9999" ng-model="cidadao.nascimento">
+                        <input type="text" class="form-control" id="dataNascimento" ng-model="cidadao.nascimento" mask="99/99/9999" ng-value="dataNascimento | date: 'dd/MM/yyyy'">
                     </div>
                     <div class="col-lg-7">
                         <label class="control-label" for="cpf">CPF</label>

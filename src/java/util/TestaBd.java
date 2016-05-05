@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package util;
 
+import java.util.Date;
 import javax.persistence.EntityManager;
 import model.*;
 
@@ -22,21 +18,24 @@ public class TestaBd {
             Usuario user3 = new Usuario("user3", "1231");
             Usuario user4 = new Usuario("user4", "1231");
             Usuario user5 = new Usuario("user5", "1231");
-            Atividade atividade1 = new Atividade("at1", "dsa", "odassai", user1);
-            Atividade atividade2 = new Atividade("st2", "dsa", "odassai", user2);
-            Atividade atividade3 = new Atividade("qt3", "dsa", "odassai", user3);
-            Atividade atividade4 = new Atividade("a4", "dsa", "odassai", user4);
-            Atividade atividade5 = new Atividade("bt5", "dsa", "odassai", user5);
-            Cidadao cidadao1 = new Cidadao("11111111116", "joao", "ojpaa", null, null, null, null, null, null, null, user1);
-            Cidadao cidadao2 = new Cidadao("11111111112", "marcos", "ojpaaa", null, null, null, null, null, null, null, user2);
-            Cidadao cidadao3 = new Cidadao("11111111113", "gabire", "ojpaasaaa", null, null, null, null, null, null, null, user3);
-            Cidadao cidadao4 = new Cidadao("11111111114", "lan", "ojpaaafa", null, null, null, null, null, null, null, user4);
-            Cidadao cidadao5 = new Cidadao("11111111115", "wis", "ojpaaava", null, null, null, null, null, null, null, user5);
-            Atendimento atendimento1 = new Atendimento("aten1", "lala", user1, cidadao1);
-            Atendimento atendimento2 = new Atendimento("zten1", "lala", user2, cidadao2);
-            Atendimento atendimento3 = new Atendimento("den1", "lala", user3, cidadao3);
-            Atendimento atendimento4 = new Atendimento("dxen1", "lala", user4, cidadao4);
-            Atendimento atendimento5 = new Atendimento("syen1", "lala", user5, cidadao5);
+            Atividade atividade1 = new Atividade("Whey gratuito", "Projeto de lei", null, user1);
+            Atividade atividade2 = new Atividade("Trânsporte público gratuito para estudantes", "Projeto de Lei", null, user2);
+            Atividade atividade3 = new Atividade("Cidadania Ituana para Joaquim Barbosa", "Moção", "Congrat", user3);
+            Atividade atividade4 = new Atividade("Estudante paga meia no cinema", "Projeto de Lei", null, user4);
+            Atividade atividade5 = new Atividade("Estudantes isentos de taxas", "Projeto de Lei", null, user5);
+            Date d = new Date("10/10/1992");
+            Cidadao cidadao1 = new Cidadao("11111111112", "João Ruy Barbosa", "joao@hotmail.com", d, "Rua das flores, nº20", "Vila Verde", "Casa", "13309010", "1140244222", "11999015898", user1);
+            Cidadao cidadao2 = new Cidadao("11111111113", "Janaina da Silva", "jana@hotmail.com", d, "Rua das folhas, nº10", "Centro", "Casa", "13309012", "1140259322", "11999015897", user2);
+            Cidadao cidadao3 = new Cidadao("11111111114", "Gustavo Oliveira", "gu.oliveira@gmail.com", d, "Rua Benedito, nº14", "Jardim das Rosas", "Casa", "13309013", "1140259323", "11999015898", user3);
+            Cidadao cidadao4 = new Cidadao("11111111115", "Mariana Gonçalves da Silva", "mari@hotmail.com", d, "Rua 31 de Abril, nº100", "Centro", "Casa", "13309015", "1140259324", "11999015899", user4);
+            Cidadao cidadao5 = new Cidadao("11111111116", "Gilberto Gomes da Costa", "gil.gomes@hotmail.com", d, "Avenida Galileu, nº105", "Centro", "Casa", "13309012", "1140259322", "11999015892", user5);
+
+
+            Atendimento atendimento1 = new Atendimento("Trocar lâmpadas da rua das flores", "Acionar cpfl", user1, cidadao1);
+            Atendimento atendimento2 = new Atendimento("Arrumar encanamento da rua das folhas", "Acionar Águas de Itu", user2, cidadao2);
+            Atendimento atendimento3 = new Atendimento("Falta de remedios nos postos de saúde", "Verificar com àrea da saúde", user3, cidadao3);
+            Atendimento atendimento4 = new Atendimento("Asfaltar pedaço rua 31 de abril", "Verificar", user4, cidadao4);
+            Atendimento atendimento5 = new Atendimento("Retirar lixo da Avenida Galileu", "Acionar Cidade Limpa", user5, cidadao5);
             
             bd.getTransaction().begin();
             bd.persist(user1);
