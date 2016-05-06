@@ -1,11 +1,11 @@
-<div class="container-fluid" ng-init="consulta()">
+<div class="container-fluid" ng-init="consultar()">
     <form method="get" class="form-horizontal">
         <fieldset>
                 <legend>Atividade</legend>
                 <div class="form-group">
                     <div class="col-lg-12">
                         <label for="select">Tipo</label>
-                        <select class="form-control" id="select" ng-model="atividade.tipo" value="{{atividade.tipo}}">
+                        <select class="form-control" id="select" ng-model="atividade.tipo" value="{{atividade.tipo}}" readonly>
                             <option>Projeto de Lei</option>
                             <option>Indicações</option>
                             <option>Requerimento</option>
@@ -17,7 +17,7 @@
                 <div class="form-group" ng-if="atividade.tipo==='Moções'">
                     <div class="col-lg-12">
                         <label for="select">Tipo de moções</label>
-                        <select class="form-control" id="mocoes" ng-model="atividade.tipoMocao">
+                        <select class="form-control" id="mocoes" ng-model="atividade.tipoMocao" readonly>
                             <option>Protesto</option>
                             <option>Repúdio</option>
                             <option>Apoio</option>
@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <label for="ementa" class="col-lg-1">Ementa</label>
                     <div class="col-lg-12">
-                        <textarea class="form-control" rows="10" id="ementa" ng-model="atividade.ementa"></textarea>
+                        <textarea class="form-control" rows="10" id="ementa" ng-model="atividade.ementa" readonly></textarea>
                         <span class="help-block"></span>
                     </div>
                 </div>

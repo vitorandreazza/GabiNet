@@ -29,17 +29,17 @@ public class AtividadeService {
     @Produces(MediaType.APPLICATION_JSON)
     public Atividade listaPeloId(@PathParam("id") long id) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        ArrayList<Atividade> listagem;
+        ArrayList<Atividade> atividades;
         Atividade atividade = null;
         String sql = "SELECT a FROM Atividade a WHERE a.id = :id";
         Query query = bd.createQuery(sql, Atividade.class);
         query.setParameter("id", id);
-        listagem = (ArrayList<Atividade>) query.getResultList();
-        for (Atividade linha : listagem) {
-            atividade = new Atividade(linha.getEmenta(), linha.getTipo(), linha.getTipoMocao(), linha.getUsuario());
-        }
+        atividades = (ArrayList<Atividade>) query.getResultList();
+        //for (Atividade linha : atividades) {
+            //atividade = new Atividade(linha.getEmenta(), linha.getTipo(), linha.getTipoMocao(), linha.getUsuario());
+        //}
         bd.close();
-        return atividade;
+        return atividades.get(0);
     }
 
 //    /* Lista Atividade por usuário */

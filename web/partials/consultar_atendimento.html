@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="row">
-        <form method="put" class="form-horizontal" ng-submit="alterarAtendimento(atendimento)">
+        <form method="post" class="form-horizontal" ng-submit="novoAtendimento(atendimento)">
             <fieldset class="container-fluid">
                 <div class="form-group">
                     <label for="solicitacao" class="col-lg-1">Solicitação</label>
@@ -39,11 +39,6 @@
                             <option>Pendente</option>
                             <option>Resolvido</option>
                         </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-offset-11">
-                        <button type="submit" class="btn btn-primary">Salvar</button>
                     </div>
                 </div>
             </fieldset>

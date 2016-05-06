@@ -1,13 +1,19 @@
 var app = angular.module("gabiNet");
 var urlBase = "http://localhost:8084/gabinet/api";
 
+
 app.controller("cidadaoController", function ($scope, $http, $routeParams) {
     var id = $routeParams.id;
     
     $scope.consulta = function (){
          $scope.buscaCidadao(id);
     };
-
+    
+    $scope.mudar = function (){
+        setTimeout("window.location = 'http://localhost:8084/gabinet/'",3000);
+        
+    };
+    
     $scope.inserirCidadao = function (cidadao) {
         var cpf = cidadao.cpf.replace(".", "").replace(".", "").replace("-", "");
         cidadao.cpf = cpf;
@@ -30,6 +36,7 @@ app.controller("cidadaoController", function ($scope, $http, $routeParams) {
         $http.post(urlBase + "/cidadaos", cidadao)
                 .success(function (data) {
                     console.info(JSON.stringify("Cidadão salvo com sucesso!: " + data));
+                    window.location.href = "http://localhost:8084/gabinet/#/sucesso";
                 })
                 .error(function (error) {
                     console.error(JSON.stringify("Erro ao incluir o cidadão: " + error));
@@ -77,8 +84,7 @@ app.controller("cidadaoController", function ($scope, $http, $routeParams) {
                         console.error("Erro ao alterar o cidadao: " + data);
                     } else {
                         console.info("Cidadao " + cidadao.nome + " alterado com sucesso!");
-                    }
-                    ;
+                    };
                 });
     };
     
@@ -120,7 +126,34 @@ app.controller("graficosController", function ($scope) {
     ];
 });
 
-app.controller("atendimentoController", function ($scope, $http) {
+app.controller("atendimentoController", function ($scope, $http, $routeParams) {
+    var id = $routeParams.id;
+    $scope.consultar = function (){
+         $scope.buscarAtendimento(id);
+         console.log(id);
+    };
+    
+     $scope.buscarAtendimento = function (id) {
+        $http.get(urlBase + "/atendimentos/" + id)
+                .success(function (data) {
+                    $scope.atendimento = data;
+                })
+                .error(function () {
+                    console.log('Erro ao obter os dados dos Atendimentos');
+                });
+    };
+    
+    $scope.alterarAtendimento = function (atendimento) {
+        console.log(atendimento);
+        $http.put(urlBase + "/atendimentos/" + atendimento.id, atendimento)
+            .success(function () {
+                console.info("Atendimento " + atendimento.id + " alterado com sucesso!");
+            
+            }).error(function(data){
+                console.log(data);
+            });
+    };
+    
     $scope.combo = {
         //opcoes para o select| procura e a chave e o valor que sera procurado no filtro
         opcoes: [
@@ -240,8 +273,9 @@ app.directive('dynamic', function ($compile) {
 
 app.controller("atividadeController", function ($scope, $http, $routeParams) {
     var id = $routeParams.id;
-    $scope.consulta = function (){
-         $scope.getAtividade(id);
+    $scope.consultar = function (){
+         $scope.buscarAtividade(id);
+         console.log(id);
     };
     
     $scope.novaAtividade = function (atividade) {
@@ -266,7 +300,7 @@ app.controller("atividadeController", function ($scope, $http, $routeParams) {
                 });
     };
     
-    $scope.getAtividade = function (id) {
+    $scope.buscarAtividade = function (id) {
         $http.get(urlBase + "/atividades/" + id)
                 .success(function (data) {
                     $scope.atividade = data;
@@ -274,6 +308,17 @@ app.controller("atividadeController", function ($scope, $http, $routeParams) {
                 .error(function () {
                     console.log('Erro ao obter os dados das atividades');
                 });
+    };
+    
+    $scope.alterarAtividade = function (atividade) {
+        console.log(atividade);
+        $http.put(urlBase + "/atividades/" + atividade.id, atividade)
+            .success(function () {
+                console.info("Atividade " + atividade.id + " alterada com sucesso!");
+            
+            }).error(function(data){
+                console.log(data);
+            });
     };
     
     $scope.excluiAtividade = function (atividade) {

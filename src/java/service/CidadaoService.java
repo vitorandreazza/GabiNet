@@ -89,7 +89,7 @@ public class CidadaoService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Cidadao cidadao) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        Usuario u = new Usuario("juca1", "hue");
+        Usuario u = new Usuario("jca1", "hue");
         cidadao.setUsuario(u);
         try {
             bd.getTransaction().begin();

@@ -17,7 +17,7 @@
         <div class="col-md-12">
             <div class="list-group" ng-repeat="atividade in atividades | filter: combo.opcaoSelecionada.procura">
                 <a href="" ng-click="excluiAtividade(atividade)" class="pull-right overlay-button"><span class="glyphicon glyphicon-trash"></span></a>
-                <a href="#/atividades/{{atividade.id}}" class="pull-right overlay-button"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a href="#/atividades/alterar/{{atividade.id}}" class="pull-right overlay-button"><span class="glyphicon glyphicon-pencil"></span></a>
                 <a href="#/atividades/{{atividade.id}}" class="list-group-item" ng-click="getAtividade(atividade)">
                     <h5 class="list-group-item-heading" style="display: inline;">Atividade {{atividade.id}} - <small>{{atividade.dataAtividade | date: "dd/MM/yyyy"}}</small></h5>
                     <h6 class="list-group-item-heading">{{atividade.tipo}} - {{atividade.tipoMocao}}</h6>
