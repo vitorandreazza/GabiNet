@@ -18,9 +18,9 @@ public class TestaBd {
             Usuario user3 = new Usuario("user3", "1231");
             Usuario user4 = new Usuario("user4", "1231");
             Usuario user5 = new Usuario("user5", "1231");
-            Atividade atividade1 = new Atividade("Whey gratuito", "Projeto de lei", null, user1);
+            Atividade atividade1 = new Atividade("Whey gratuito", "Projeto de Lei", null, user1);
             Atividade atividade2 = new Atividade("Trânsporte público gratuito para estudantes", "Projeto de Lei", null, user2);
-            Atividade atividade3 = new Atividade("Cidadania Ituana para Joaquim Barbosa", "Moção", "Congrat", user3);
+            Atividade atividade3 = new Atividade("Cidadania Ituana para Joaquim Barbosa", "Moções", "Congrat", user3);
             Atividade atividade4 = new Atividade("Estudante paga meia no cinema", "Projeto de Lei", null, user4);
             Atividade atividade5 = new Atividade("Estudantes isentos de taxas", "Projeto de Lei", null, user5);
             Date d = new Date("10/10/1992");

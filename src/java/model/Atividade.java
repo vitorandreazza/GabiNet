@@ -18,7 +18,7 @@ public class Atividade implements Serializable {
     private String ementa;
     @Column(nullable = true, length = 15)
     private String tipo;
-    @Column(nullable = true, length = 10)
+    @Column(nullable = true, length = 15)
     private String tipoMocao;
     @ManyToOne
     @JoinColumn(name = "idUsuario")

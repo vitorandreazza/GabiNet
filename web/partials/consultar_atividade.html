@@ -1,7 +1,7 @@
-<div class="container-fluid">
-    <form method="get" class="form-horizontal" ng-submit="novaAtividade(atividade)">
+<div class="container-fluid" ng-init="consulta()">
+    <form method="get" class="form-horizontal">
         <fieldset>
-                <legend>Nova Atividade</legend>
+                <legend>Atividade</legend>
                 <div class="form-group">
                     <div class="col-lg-12">
                         <label for="select">Tipo</label>
@@ -31,11 +31,6 @@
                     <div class="col-lg-12">
                         <textarea class="form-control" rows="10" id="ementa" ng-model="atividade.ementa"></textarea>
                         <span class="help-block"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-offset-11">
-                        <button type="submit" class="btn btn-primary">Salvar</button>
                     </div>
                 </div>
         </fieldset>

@@ -35,12 +35,12 @@ angular.module("gabiNet", ['ngRoute', 'ngMask', 'chart.js']).config(['$routeProv
         templateUrl: 'partials/listar_atividades.html',
         controller: 'atividadeController'
     });
-    $routeProvider.when("/atividades/:id", {
-        templateUrl: 'partials/consultar_atividade.html',
-        controller: 'atividadeController'
-    });
     $routeProvider.when("/atividades/grafico", {
         templateUrl: 'partials/graficos.html',
         controller: 'graficosController'
+    });
+    $routeProvider.when("/atividades/:id", {
+        templateUrl: 'partials/consultar_atividade.html',
+        controller: 'atividadeController'
     });
 }]);
