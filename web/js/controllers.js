@@ -4,13 +4,8 @@ var urlBase = "http://localhost:8084/gabinet/api";
 app.controller("cidadaoController", function ($scope, $http, $routeParams) {
     var id = $routeParams.id;
     
-    $scope.consulta = function (n){
-        switch(n){
-            case 1: $scope.buscaCidadao(id);
-            break;
-            case 2:
-            break;
-        }
+    $scope.consulta = function (){
+         $scope.buscaCidadao(id);
     };
 
     $scope.inserirCidadao = function (cidadao) {
@@ -243,7 +238,12 @@ app.directive('dynamic', function ($compile) {
   };
 });
 
-app.controller("atividadeController", function ($scope, $http) {
+app.controller("atividadeController", function ($scope, $http, $routeParams) {
+    var id = $routeParams.id;
+    $scope.consulta = function (){
+         $scope.getAtividade(id);
+    };
+    
     $scope.novaAtividade = function (atividade) {
         $http.post(urlBase + "/atividades", atividade)
                 .success(function (data) {
@@ -266,12 +266,10 @@ app.controller("atividadeController", function ($scope, $http) {
                 });
     };
     
-    $scope.getAtividade = function (atividade) {
-        $http.get(urlBase + "/atividades/" + atividade.id)
+    $scope.getAtividade = function (id) {
+        $http.get(urlBase + "/atividades/" + id)
                 .success(function (data) {
                     $scope.atividade = data;
-                    console.log($scope);
-                    console.log(data);
                 })
                 .error(function () {
                     console.log('Erro ao obter os dados das atividades');
