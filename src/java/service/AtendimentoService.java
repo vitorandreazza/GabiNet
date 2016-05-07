@@ -50,7 +50,7 @@ public class AtendimentoService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Atendimento atendimento) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        Usuario u = new Usuario("testd", "hue");
+        Usuario u = new Usuario("fgd", "hue");
         atendimento.setUsuario(u);
 //        Cidadao c = new Cidadao();
 //        c.setCpf("41278912387");

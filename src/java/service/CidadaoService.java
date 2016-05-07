@@ -36,11 +36,11 @@ public class CidadaoService {
         Query query = bd.createQuery(sql, Cidadao.class);
         query.setParameter("cpf", cpf);
         cidadaos = (ArrayList<Cidadao>) query.getResultList();
-        for (Cidadao linha : cidadaos) {
-            cidadao = new Cidadao(linha.getCpf(), linha.getNome(), linha.getEmail(), linha.getNascimento(), linha.getEndereco(), linha.getBairro(), linha.getComplemento(), linha.getCep(), linha.getTelefone(), linha.getCelular(), linha.getUsuario());
-        }
+//        for (Cidadao linha : cidadaos) {
+//            cidadao = new Cidadao(linha.getCpf(), linha.getNome(), linha.getEmail(), linha.getNascimento(), linha.getEndereco(), linha.getBairro(), linha.getComplemento(), linha.getCep(), linha.getTelefone(), linha.getCelular(), linha.getUsuario());
+//        }
         bd.close();
-        return cidadao;
+        return cidadaos.get(0);
     }
 
     /* Deleta cidadao */
@@ -50,10 +50,9 @@ public class CidadaoService {
     public Response excluir(@PathParam("cpf") String cpf) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         try {
-            //localizando o registro a ser removido
             Cidadao cidadao = bd.find(Cidadao.class, cpf);
             bd.getTransaction().begin();
-            bd.remove(cidadao); //Hibernate efetua o delete
+            bd.remove(cidadao);
             bd.getTransaction().commit();
             return Response.status(Response.Status.OK).
                     entity("true").build();
@@ -65,31 +64,12 @@ public class CidadaoService {
         }
     }
 
-//    /* Insere novo Cidadao */
-//    @POST
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response incluir(Cidadao cidadao) {
-//        EntityManager bd = util.JpaUtil.getEntityManager();
-//        try {
-//            bd.getTransaction().begin();
-//            bd.persist(cidadao); //Hibernate gera o insert
-//            bd.getTransaction().commit();
-//            return Response.status(Response.Status.OK).
-//                    entity("true").build();
-//        } catch (Exception e) {
-//            return Response.serverError().
-//                    entity(e.getMessage()).build();
-//        } finally {
-//            bd.close();
-//        }
-//    }
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Cidadao cidadao) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        Usuario u = new Usuario("jca1", "hue");
+        Usuario u = new Usuario("mmss", "hue");
         cidadao.setUsuario(u);
         try {
             bd.getTransaction().begin();
@@ -97,7 +77,7 @@ public class CidadaoService {
             bd.getTransaction().commit();
 
             bd.getTransaction().begin();
-            bd.persist(cidadao); //Hibernate gera o insert
+            bd.persist(cidadao);
             bd.getTransaction().commit();
             return Response.status(Response.Status.OK).
                     entity("true").build();
