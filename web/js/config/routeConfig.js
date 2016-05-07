@@ -100,5 +100,14 @@ angular.module("gabiNet").config(function ($routeProvider){
             }
         }
     });
-    $routeProvider.otherwise({redirectTo: ""});
+    $routeProvider.when("/index", {
+        templateUrl: 'partials/principal.html',
+        controller: 'principalCtrl',
+        resolve: {
+                atividades: function (atividadeAPI, $route) {return atividadeAPI.getAtividades();},
+                atendimentos: function (atendimentoAPI) {return atendimentoAPI.getAtendimentos();},
+                cidadaos: function (cidadaoAPI) {return cidadaoAPI.getCidadaos();}
+            }
+    });
+    //$routeProvider.otherwise({redirectTo: "index"});
 });
