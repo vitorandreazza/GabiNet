@@ -29,97 +29,20 @@ public class AtividadeService {
     @Produces(MediaType.APPLICATION_JSON)
     public Atividade listaPeloId(@PathParam("id") long id) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        ArrayList<Atividade> listagem;
+        ArrayList<Atividade> atividades;
         Atividade atividade = null;
         String sql = "SELECT a FROM Atividade a WHERE a.id = :id";
         Query query = bd.createQuery(sql, Atividade.class);
         query.setParameter("id", id);
-        listagem = (ArrayList<Atividade>) query.getResultList();
-        for (Atividade linha : listagem) {
-            atividade = new Atividade(linha.getEmenta(), linha.getTipo(), linha.getTipoMocao(), linha.getUsuario());
-        }
+        atividades = (ArrayList<Atividade>) query.getResultList();
+        //for (Atividade linha : atividades) {
+            //atividade = new Atividade(linha.getEmenta(), linha.getTipo(), linha.getTipoMocao(), linha.getUsuario());
+        //}
         bd.close();
-        return atividade;
+        return atividades.get(0);
     }
 
-//    /* Lista Atividade por usuário */
-//    @Path("{idUsuario}")
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Atividade listaPeloUsuario(@PathParam("idUsuario") long idUsuario) {
-//        EntityManager bd = util.JpaUtil.getEntityManager();
-//        ArrayList<Atividade> listagem;
-//        Atividade atividade = null;
-//        String sql = "SELECT g FROM Atividades g WHERE g.idUsuario = :idUsuario";
-//        Query query = bd.createQuery(sql, Atividade.class);
-//        query.setParameter("idUsuario", idUsuario);
-//        listagem = (ArrayList<Atividade>) query.getResultList();
-//        for (Atividade linha : listagem) {
-//            atividade = new Atividade(linha.getEmenta(), linha.getTipo(), linha.getTipoMocao(), linha.getUsuario());
-//        }
-//        bd.close();
-//        return atividade;
-//    }
-//
-//    /* Lista Atividade por data */
-//    @Path("{data}")
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Atividade listaPorData(@PathParam("data") Date data) {
-//        EntityManager bd = util.JpaUtil.getEntityManager();
-//        ArrayList<Atividade> listagem;
-//        Atividade atividade = null;
-//        String sql = "SELECT g FROM Atividades g WHERE g.data = :data";
-//        Query query = bd.createQuery(sql, Atividade.class);
-//        query.setParameter("data", data, TemporalType.DATE);
-//        listagem = (ArrayList<Atividade>) query.getResultList();
-//        for (Atividade linha : listagem) {
-//            atividade = new Atividade(linha.getEmenta(), linha.getTipo(), linha.getTipoMocao(), linha.getUsuario());
-//        }
-//        bd.close();
-//        return atividade;
-//    }
-//
-//    /* Lista Atividade por data de alteracao */
-//    @Path("{dataAlteracao}")
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Atividade listaPorDataAlt(@PathParam("dataAlteracao") Date dataAlteracao) {
-//        EntityManager bd = util.JpaUtil.getEntityManager();
-//        ArrayList<Atividade> listagem;
-//        Atividade atividade = null;
-//        String sql = "SELECT g FROM Atividades g WHERE g.dataAlteracao = :dataAlteracao";
-//        Query query = bd.createQuery(sql, Atividade.class);
-//        query.setParameter("dataAlteracao", dataAlteracao, TemporalType.DATE);
-//        listagem = (ArrayList<Atividade>) query.getResultList();
-//        for (Atividade linha : listagem) {
-//            atividade = new Atividade(linha.getEmenta(), linha.getTipo(), linha.getTipoMocao(), linha.getUsuario());
-//        }
-//        bd.close();
-//        return atividade;
-//    }
-//
-//    /* Lista Atividade por intervalo de data */
-//    @Path("{inicio/fim}")
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Atividade listaPorDataInt(@PathParam("datas") Date dataInicio, Date dataFim) {
-//        EntityManager bd = util.JpaUtil.getEntityManager();
-//        ArrayList<Atividade> listagem;
-//        Atividade atividade = null;
-//        String sql = "SELECT g FROM Atividade g WHERE g.data BETWEEN :dataInicio AND :dataFim";
-//        Query query = bd.createQuery(sql, Atividade.class);
-//        query.setParameter("dataInicio", dataInicio, TemporalType.DATE);
-//        query.setParameter("dataFim", dataFim, TemporalType.DATE);
-//        listagem = (ArrayList<Atividade>) query.getResultList();
-//        for (Atividade linha : listagem) {
-//            atividade = new Atividade(linha.getEmenta(), linha.getTipo(), linha.getTipoMocao(), linha.getUsuario());
-//        }
-//        bd.close();
-//        return atividade;
-//    }
-//
-//    /* Deleta Atividade */
+    /* Deleta Atividade */
     @Path("{id}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
@@ -147,7 +70,7 @@ public class AtividadeService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Atividade atividade) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        Usuario u = new Usuario("xot", "hue");
+        Usuario u = new Usuario("atv", "hue");
         atividade.setUsuario(u);
         try {
             bd.getTransaction().begin();

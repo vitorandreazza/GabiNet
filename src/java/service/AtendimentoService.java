@@ -27,12 +27,30 @@ public class AtendimentoService {
         return atendimentos;
     }
     
+    @Path("{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Atendimento listaPeloId(@PathParam("id") long id) {
+        EntityManager bd = util.JpaUtil.getEntityManager();
+        ArrayList<Atendimento> atendimentos;
+        Atendimento atendimento = null;
+        String sql = "SELECT a FROM Atendimento a WHERE a.id = :id";
+        Query query = bd.createQuery(sql, Atendimento.class);
+        query.setParameter("id", id);
+        atendimentos = (ArrayList<Atendimento>) query.getResultList();
+//        for (Atendimento linha : atendimentos) {
+//            atendimento = new Atendimento(linha.getSolicitacao(), linha.getProvidencia(), linha.getUsuario(), linha.getCidadao());
+//        }
+        bd.close();
+        return atendimentos.get(0);
+    }
+    
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Atendimento atendimento) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        Usuario u = new Usuario("testd", "hue");
+        Usuario u = new Usuario("fgd", "hue");
         atendimento.setUsuario(u);
 //        Cidadao c = new Cidadao();
 //        c.setCpf("41278912387");

@@ -31,7 +31,7 @@ public class Atividade implements Serializable {
         dataAtividade = new Date();
     }
     
-    @PreUpdate
+   @PreUpdate
     protected void onUpdate() {
         dataAlteracao = new Date();
     }
@@ -71,10 +71,6 @@ public class Atividade implements Serializable {
 
     public long getId() {
         return id;
-    }
-
-    public Date getData() {
-        return dataAtividade;
     }
 
     public Usuario getUsuario() {
