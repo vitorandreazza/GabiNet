@@ -8,4 +8,3 @@ app.controller("graficosController", function ($scope) {
         [2, 3, 4, 4, 2, 1, 5, 6, 6, 4, 2, 6]
     ];
 });
-

@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <h5 class="text-capitalize">Últimos Atendimentos</h5>
+            <hr>
+            <ul class="list-group">
+                <a href="#/atendimentos/{{atendimento.id}}" class="list-group-item" ng-repeat="atendimento in atendimentos">
+                   <h5 class="list-group-item-heading" style="display: inline;">Atendimento {{atendimento.id}} - <small>{{atendimento.dataAtendimento | date: "dd/MM/yyyy"}}</small></h5>
+                 <h6 class="list-group-item-heading">{{atendimento.cidadao.nome}}</h6>
+                    <p class="list-group-item-text"><span class="list-group-item-heading"><strong>Solicitação - </strong></span>{{atendimento.solicitacao}}</p>
+                </a>
+            </ul>
+            <a href="#/atendimentos" class="pull-right">Ver Mais</a>
+        </div>
+        <div class="col-md-8">    
+            <h5 class="text-capitalize">últimas Atividades</h5>
+            <hr>
+        <div class="col-md-6">
+            <ul class="list-group">
+                <a href="#/atividades/{{atividade.id}}" class="list-group-item" ng-repeat="atividade in atividades">
+                    <h5 class="list-group-item-heading" style="display: inline;">Atividade {{atividade.id}} - <small>{{atividade.dataAtividade| date: "dd/MM/yyyy"}}</small></h5>
+                    <h6 class="list-group-item-heading">{{atividade.tipo}} - {{atividade.tipoMocao}}</h6>
+                    <p class="list-group-item-text"><span class="list-group-item-heading"><strong>Ementa - </strong></span>{{atividade.ementa}}</p>
+                </a>
+            </ul>
+            <a href="#/atividades" class="pull-right">Ver Mais</a>
+        </div>
+        <div class="col-md-6"> 
+            <h5>Atividades mais frequentes</h5><br>
+            <canvas class="chart chart-bar" chart-data="data" chart-labels="labels" style="width: 100%"></canvas>
+        </div>
+        </div>
+    </div>
+</div>
