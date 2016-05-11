@@ -12,6 +12,7 @@ public class Atendimento implements Serializable {
     @Id
     @GeneratedValue
     private long id;
+    @Column(updatable = false)
     @Temporal(TemporalType.DATE)
     private Date dataAtendimento;
     @Column(nullable = true, length = 200)
@@ -26,8 +27,6 @@ public class Atendimento implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false, name = "cpfCidadao")
     private Cidadao cidadao;
-//    @Temporal(TemporalType.TIMESTAMP)
-//    private Date dataCriacao;
     @Temporal(TemporalType.DATE)
     private Date dataAlteracao;
     
@@ -90,10 +89,6 @@ public class Atendimento implements Serializable {
     public Usuario getUsuario() {
         return usuario;
     }
-
-//    public Date getDataCriacao() {
-//        return dataCriacao;
-//    }
 
     public Date getDataAlteracao() {
         return dataAlteracao;

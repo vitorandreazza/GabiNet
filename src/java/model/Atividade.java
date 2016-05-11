@@ -12,6 +12,7 @@ public class Atividade implements Serializable {
     @Id
     @GeneratedValue
     private long id;
+    @Column(updatable = false)
     @Temporal(TemporalType.DATE)
     private Date dataAtividade;
     @Column(nullable = true, length = 200)

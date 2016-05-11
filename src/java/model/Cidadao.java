@@ -34,6 +34,7 @@ public class Cidadao implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false, name = "idUsuario")
     private Usuario usuario;
+    @Column(updatable = false)
     @Temporal(TemporalType.DATE)
     private Date dataCriacao;
     @Temporal(TemporalType.DATE)

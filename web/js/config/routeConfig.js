@@ -80,7 +80,12 @@ angular.module("gabiNet").config(function ($routeProvider){
     });
     $routeProvider.when("/atividades/grafico", {
         templateUrl: 'partials/graficos.html',
-        controller: 'graficosController'
+        controller: 'graficosCtrl',
+        resolve: {
+            grafico: function (atividadeAPI) {
+                return atividadeAPI.getGrafico();
+            }
+        }
     });
     $routeProvider.when("/atividades/alterar/:id", {
         templateUrl: 'partials/alterar_atividade.html',
