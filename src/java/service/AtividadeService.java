@@ -22,6 +22,19 @@ public class AtividadeService {
         bd.close();
         return atividades;
     }
+  
+    @Path("/{parameter: graficos}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Atividade> grafico() {
+        EntityManager bd = util.JpaUtil.getEntityManager();
+        ArrayList<Atividade> atividades;
+        String sql = "SELECT a.tipo, count(a.tipo) FROM Atividade a WHERE MONTH(a.dataAtividade) = MONTH(NOW()) AND YEAR(a.dataAtividade) = YEAR(NOW()) GROUP BY a.tipo";
+        Query q = bd.createQuery(sql);
+        atividades = (ArrayList<Atividade>) q.getResultList();
+        bd.close();
+        return atividades;
+    }
 
     /* Lista Atividade por id */
     @Path("{id}")

@@ -18,12 +18,17 @@ angular.module("gabiNet").factory("atividadeAPI", function ($http, config) {
     var _deleteAtividade = function (id) {
         return $http.delete(config.baseUrl + "/atividades/" + id);
     };
+    
+    var _getGrafico = function () {
+        return $http.get(config.baseUrl + "/atividades/graficos");
+    };
 
     return {
         getAtividades: _getAtividades,
         getAtividade: _getAtividade,
         novaAtividade: _novaAtividade,
         setAtividade: _setAtividade,
-        deleteAtividade: _deleteAtividade
+        deleteAtividade: _deleteAtividade,
+        getGrafico: _getGrafico
     };
 });
