@@ -19,8 +19,8 @@ angular.module("gabiNet").factory("atividadeAPI", function ($http, config) {
         return $http.delete(config.baseUrl + "/atividades/" + id);
     };
     
-    var _getGrafico = function () {
-        return $http.get(config.baseUrl + "/atividades/graficos");
+    var _getGrafico = function (de, ate) {
+        return $http.get(config.baseUrl + "/atividades/grafico",{params:{"de": de, "ate":ate}});
     };
 
     return {

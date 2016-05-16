@@ -1,13 +1,15 @@
 package service;
 
-import java.util.*;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import model.Atividade;
 import model.Usuario;
 
-@Path("/{parameter: atividades}")
+@Path("/{parameter : atividades}")
 public class AtividadeService {
 
     /* Lista todas as Atividades */
@@ -23,16 +25,19 @@ public class AtividadeService {
         return atividades;
     }
   
-    @Path("/{parameter: graficos}")
+    @Path("/grafico")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Atividade> grafico() {
+    public List<Atividade> grafico(@QueryParam("de") Date de, @QueryParam("ate") Date ate) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atividade> atividades;
-        String sql = "SELECT a.tipo, count(a.tipo) FROM Atividade a WHERE MONTH(a.dataAtividade) = MONTH(NOW()) AND YEAR(a.dataAtividade) = YEAR(NOW()) GROUP BY a.tipo";
+        String sql = "SELECT a.tipo, count(a.tipo) FROM Atividade a WHERE a.dataAtividade BETWEEN :de AND :ate GROUP BY a.tipo";
         Query q = bd.createQuery(sql);
+        q.setParameter("de", de);
+        q.setParameter("ate", ate);
         atividades = (ArrayList<Atividade>) q.getResultList();
         bd.close();
+        System.out.println(de);
         return atividades;
     }
 
