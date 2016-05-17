@@ -4,7 +4,7 @@ app.controller("graficosCtrl", function ($scope, atividadeAPI) {
 
     $scope.setData = function (datas) {
         dataString(datas);
-        console.log(datas);
+        //console.log(datas);        
         atividadeAPI.getGrafico(datas)
                 .success(function (dados) {
                     $scope.labels = [];
@@ -16,6 +16,8 @@ app.controller("graficosCtrl", function ($scope, atividadeAPI) {
                 }).error(function (data) {
             console.log(data);
         });
+        $scope.datas.de = "";
+        $scope.datas.ate = "";
     };
 
     dataString = function (datas) {
@@ -28,5 +30,4 @@ app.controller("graficosCtrl", function ($scope, atividadeAPI) {
         dataString = datas.ate.getFullYear() + "-" + (datas.ate.getMonth() + 1) + "-" + datas.ate.getDate();
         datas.ate = dataString;
     };
-
 });

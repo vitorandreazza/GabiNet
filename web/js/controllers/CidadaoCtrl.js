@@ -2,7 +2,34 @@ var app = angular.module("gabiNet");
 
 app.controller("cidadaosCtrl", function ($scope, cidadaoAPI, cidadaos, $route, $location, cidadaoSelecionado) {
     $scope.cidadaos = cidadaos.data;
+    
+    $scope.combo = {
+        //opcoes para o select| procura e a chave e o valor que sera procurado no filtro
+        opcoes: [
+            {name: 'Tudo', procura: {$: ''}},
+            {name: 'Nome', procura: {nome: ''}},
+            {name: 'Cpf', procura: {cpf: ''}}
+        ],
+        //opção default do select e option selecionado do select
+        opcaoSelecionada: {name: 'Nome', procura: {id: ''}}
+    };
 
+    $scope.selecionaKey = function () {
+        $scope.combo.opcaoSelecionada.procura[Object.keys($scope.combo.opcaoSelecionada.procura)[0]] = $scope.textoBusca;
+    };
+    
+    $scope.mudou = function () {
+        console.log($scope.combo.opcaoSelecionada.name);
+        if ($scope.combo.opcaoSelecionada.name === "Cpf") {
+            //adiciona mascara quando a procura e por data
+            $scope.html = '<input type="text" mask="999.999.999-99" ng-model="textoBusca" class="form-control" ng-keyup="selecionaKey()" placeholder="Buscar Atendimento"><br>';
+            $scope.textoBusca = "";
+        } else {
+            //tira a mascara
+            $scope.html = '<input type="text" ng-model="textoBusca" class="form-control" ng-keyup="selecionaKey()" placeholder="Buscar Atendimento"><br>';
+        }
+    };
+    
     $scope.excluiCidadao = function (cpf) {
         cpf = cpf.replace(".", "").replace(".", "").replace("-", "");
         if (confirm("Confirma a exclusão do cidadão?")) {

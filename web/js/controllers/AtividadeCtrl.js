@@ -11,7 +11,57 @@ app.controller("atividadesCtrl", function ($scope, atividadeAPI, atividades, $ro
                     });
         }
     };
+    
+    $scope.combo = {
+        //opcoes para o select| procura e a chave e o valor que sera procurado no filtro
+        opcoes: [
+            {name: 'Tudo', procura: {$: ''}},
+            {name: 'Nº Atividade', procura: {id: ''}},
+            {name: 'Tipo Atividade', procura: {tipo: ''}},
+            {name: 'Ementa', procura: {ementa: ''}},
+            {name: 'Data', procura: {dataAtividade: ''}}
+        ],
+        //opção default do select e option selecionado do select
+        opcaoSelecionada: {name: 'Nº Atividade', procura: {id: ''}}
+    };
 
+    $scope.selecionaKey = function () {
+//        if ($scope.combo.opcaoSelecionada.name === "Nome cidadão") {
+//            $scope.combo.opcaoSelecionada.procura.cidadao.nome = $scope.textoBusca;
+//            return;
+//        }
+
+        if ($scope.combo.opcaoSelecionada.name === "Data") {
+            var splitted = $scope.textoBusca.split("/");
+            var date = "";
+            if (splitted.length < 2) {
+                //busca apenas o dia
+                date = $scope.textoBusca;
+            } else if (splitted.length < 3) {
+                //busca o dia com o mes
+                date = splitted[1] + "-" + splitted[0];
+            } else {
+                //busca a data toda
+                date = splitted[2] + "-" + splitted[1] + "-" + splitted[0];
+            }
+            //$scope.combo.opcaoSelecionada.procura[Object.keys($scope.combo.opcaoSelecionada.procura)[0]] = date;
+            $scope.combo.opcaoSelecionada.procura.dataAtividade = date;
+            return;
+        }
+        $scope.combo.opcaoSelecionada.procura[Object.keys($scope.combo.opcaoSelecionada.procura)[0]] = $scope.textoBusca;
+    };
+
+    $scope.mudou = function () {
+        console.log($scope.combo.opcaoSelecionada.name);
+        if ($scope.combo.opcaoSelecionada.name === "Data") {
+            //adiciona mascara quando a procura e por data
+            $scope.html = '<input type="text" mask="99/99/9999" ng-model="textoBusca" class="form-control" ng-keyup="selecionaKey()" placeholder="Buscar Atendimento"><br>';
+            $scope.textoBusca = "";
+        } else {
+            //tira a mascara
+            $scope.html = '<input type="text" ng-model="textoBusca" class="form-control" ng-keyup="selecionaKey()" placeholder="Buscar Atendimento"><br>';
+        }
+    };
 });
 
 app.controller("novaAtividadeCtrl", function ($scope, atividadeAPI, $location) {
