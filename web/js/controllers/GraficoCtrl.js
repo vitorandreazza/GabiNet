@@ -12,9 +12,11 @@ app.controller("graficosCtrl", function ($scope, atividadeAPI) {
                 $scope.series = ['Aprovado', 'Reprovado'];
                 delete $scope.datas;
                 $scope.graficoForm.$setPristine();
+                console.log($scope.grafico);
                 for (var i = 0; i < $scope.grafico.length; i++) {
                     $scope.labels[i] = [$scope.grafico[i]['0']];
-                    $scope.data[i] = [[$scope.grafico[i]['1']],[0]];
+                    $scope.data[0][i] = [$scope.grafico[i]['1']];
+                    $scope.data[1][i] = [$scope.grafico[i]['1']];
                 }
             }).error(function (data) {
                 console.log(data);
