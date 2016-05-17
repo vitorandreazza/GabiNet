@@ -106,7 +106,7 @@ angular.module("gabiNet").config(function ($routeProvider){
         resolve: {
                 atividades: function (atividadeAPI, $route) {return atividadeAPI.getAtividades();},
                 atendimentos: function (atendimentoAPI) {return atendimentoAPI.getAtendimentos();},
-                cidadaos: function (cidadaoAPI) {return cidadaoAPI.getCidadaos();}
+                //cidadaos: function (cidadaoAPI) {return cidadaoAPI.getCidadaos();}
             }
     });
     //$routeProvider.otherwise({redirectTo: "index"});

@@ -1,4 +1,5 @@
 var app = angular.module("gabiNet");
+
 app.controller("graficosCtrl", function ($scope, atividadeAPI) {
 
     $scope.setData = function (datas) {

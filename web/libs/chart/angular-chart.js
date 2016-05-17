@@ -19,13 +19,13 @@
   Chart.defaults.global.multiTooltipTemplate = '<%if (datasetLabel){%><%=datasetLabel%>: <%}%><%= value %>';
 
   Chart.defaults.global.colours = [
-    '#97BBCD', // blue
-    '#DCDCDC', // light grey
-    '#F7464A', // red
-    '#46BFBD', // green
-    '#FDB45C', // yellow
-    '#949FB1', // grey
-    '#4D5360'  // dark grey
+    '#F7464A', // red |blue #97BBCD
+    '#949FB1', // grey |yellow FDB45C
+    '#46BFBD', // green 46BFBD
+    '#FDB45C', // yellow |light grey DCDCDC
+    '#97BBCD', // blue |red F7464A
+    '#4D5360', // dark grey |grey 949FB1
+    '#DCDCDC'  // light grey |dark grey 4D5360
   ];
 
   var usingExcanvas = typeof window.G_vmlCanvasManager === 'object' &&
