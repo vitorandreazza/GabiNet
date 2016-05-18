@@ -1,1 +1,20 @@
-<canvas class="chart chart-bar" chart-data="data" chart-labels="labels" style="width: 100%"></canvas>
+<div class="container-fluid">
+    <form method="get" class="form-horizontal" role="form" name="graficoForm" ng-submit="setData(datas)">
+        <div class="form-control">
+            <div class="col-lg-5">
+                <label class="control-label" for="de">De</label>
+                <input type="text" class="form-control" id="de" ng-model="datas.de" mask="99/99/9999">
+            </div>
+            <div class="col-lg-5">
+                <label class="control-label" for="ate">Ate</label>
+                <input type="text" class="form-control" id="ate" ng-model="datas.ate" mask="99/99/9999">
+            </div>
+            <div class="col-lg-2">
+                <br><button class="btn btn-primary" type="submit">Exibir</button>
+            </div>
+        </div>
+    <form>
+            <div>
+                <canvas class="chart chart-bar" chart-data="data" chart-labels="labels" style="width: 100%"></canvas>-
+            </div>
+</div>
