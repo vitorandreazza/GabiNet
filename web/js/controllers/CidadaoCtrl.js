@@ -1,6 +1,6 @@
 var app = angular.module("gabiNet");
 
-app.controller("cidadaosCtrl", function ($scope, cidadaoAPI, cidadaos, $route) {
+app.controller("cidadaosCtrl", function ($scope, cidadaoAPI, cidadaos, $route, $location, cidadaoSelecionado) {
     $scope.cidadaos = cidadaos.data;
 
     $scope.excluiCidadao = function (cpf) {
@@ -14,6 +14,12 @@ app.controller("cidadaosCtrl", function ($scope, cidadaoAPI, cidadaos, $route) {
                 alert("Vinculado com algum Atendimento!");
             });
         }
+    };
+    
+    $scope.redirecionaCidadao = function (cidadao) {
+        cidadaoSelecionado.cpf = cidadao.cpf;
+        cidadaoSelecionado.nome = cidadao.nome;
+        $location.path("/atendimentos/novo");  
     };
 });
 

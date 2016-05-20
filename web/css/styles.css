@@ -53,6 +53,13 @@ button.list-group-item:focus {
 .glyphicon-pencil:hover {
     color: #2196F3;
 }
+.glyphicon-export {
+    color: #333333;
+    font-size: 1.3em;
+}
+.glyphicon-export:hover {
+    color: #2196F3;
+}
 .navbar-default .navbar-brand:hover {
     color: #2196F3;
 }

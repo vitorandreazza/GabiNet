@@ -63,7 +63,15 @@ app.controller("atendimentosCtrl", function ($scope, atendimentoAPI, atendimento
     };
 });
 
-app.controller("novoAtendimentoCtrl", function ($scope, atendimentoAPI, $location, config, $http) {
+app.controller("novoAtendimentoCtrl", function ($scope, atendimentoAPI, $location, config, $http, cidadaoSelecionado)
+{
+    $scope.inicia = function () {
+        $scope.atendimento = {};
+        $scope.atendimento.cidadao = {};
+        $scope.atendimento.cidadao = cidadaoSelecionado;
+    };
+    
+    
     $scope.buscaCidadao = function (cpf) {
         var cpfr = cpf.replace(".", "").replace(".", "").replace("-", "");
         cpf = cpfr;
