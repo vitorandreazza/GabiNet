@@ -1,34 +1,33 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h5 class="text-capitalize">Últimos Atendimentos</h5>
             <hr>
-            <ul class="list-group">
-                <a href="#/atendimentos/{{atendimento.id}}" class="list-group-item" ng-repeat="atendimento in atendimentos">
+            <div class="list-group" ng-repeat="atendimento in atendimentos | limitTo: 5">
+                <a href="#/atendimentos/{{atendimento.id}}" class="list-group-item">
                    <h5 class="list-group-item-heading" style="display: inline;">Atendimento {{atendimento.id}} - <small>{{atendimento.dataAtendimento | date: "dd/MM/yyyy"}}</small></h5>
                  <h6 class="list-group-item-heading">{{atendimento.cidadao.nome}}</h6>
                     <p class="list-group-item-text"><span class="list-group-item-heading"><strong>Solicitação - </strong></span>{{atendimento.solicitacao}}</p>
                 </a>
-            </ul>
+            </div>
             <a href="#/atendimentos" class="pull-right">Ver Mais</a>
         </div>
-        <div class="col-md-8">    
-            <h5 class="text-capitalize">últimas Atividades</h5>
+        <div class="col-md-6">    
+            <h5 class="text-capitalize">últimas atividades</h5>
             <hr>
-        <div class="col-md-6">
-            <ul class="list-group">
-                <a href="#/atividades/{{atividade.id}}" class="list-group-item" ng-repeat="atividade in atividades">
+            <div class="list-group" ng-repeat="atividade in atividades | limitTo: 5">
+                <a href="#/atividades/{{atividade.id}}" class="list-group-item">
                     <h5 class="list-group-item-heading" style="display: inline;">Atividade {{atividade.id}} - <small>{{atividade.dataAtividade| date: "dd/MM/yyyy"}}</small></h5>
                     <h6 class="list-group-item-heading">{{atividade.tipo}} - {{atividade.tipoMocao}}</h6>
                     <p class="list-group-item-text"><span class="list-group-item-heading"><strong>Ementa - </strong></span>{{atividade.ementa}}</p>
                 </a>
-            </ul>
+            </div>
             <a href="#/atividades" class="pull-right">Ver Mais</a>
         </div>
-        <div class="col-md-6"> 
+        <div class="col-md-12"> 
             <h5>Atividades mais frequentes</h5><br>
-            <canvas class="chart chart-bar" chart-data="data" chart-labels="labels" style="width: 100%"></canvas>
+            <canvas class="chart chart-bar" chart-data="data" chart-labels="labels" style="width: 100%; height: 500px; margin-bottom: 50px"></canvas>
         </div>
-        </div>
+        
     </div>
 </div>
