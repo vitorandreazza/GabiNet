@@ -20,7 +20,7 @@
                 <a href="#/atividades/alterar/{{atividade.id}}" class="pull-right overlay-button"><span class="glyphicon glyphicon-pencil"></span></a>
                 <a href="#/atividades/{{atividade.id}}" class="list-group-item" ng-click="getAtividade(atividade)">
                     <h5 class="list-group-item-heading" style="display: inline;">Atividade {{atividade.id}} - <small>{{atividade.dataAtividade | date: "dd/MM/yyyy"}}</small></h5>
-                    <h6 class="list-group-item-heading">{{atividade.tipo}} - {{atividade.tipoMocao}}</h6>
+                    <h6 class="list-group-item-heading">{{atividade.tipo}} <span ng-if="atividade.tipoMocao">-</span> {{atividade.tipoMocao}}</h6>
                     <p class="list-group-item-text"><span class="list-group-item-heading"><strong>Ementa - </strong></span>{{atividade.ementa}}</p>
                 </a>
             </div>

@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "Atendimentos")
@@ -15,11 +16,14 @@ public class Atendimento implements Serializable {
     @Column(updatable = false)
     @Temporal(TemporalType.DATE)
     private Date dataAtendimento;
-    @Column(nullable = true, length = 200)
+    @Type(type="text")
+    @Column(nullable = true)
     private String solicitacao;
-    @Column(nullable = true, length = 200)
+    @Type(type="text")
+    @Column(nullable = true)
     private String providencia;
-    @Column(nullable = true, length = 200)
+    @Type(type="text")
+    @Column(nullable = true)
     private String retorno;
     @ManyToOne
     @JoinColumn(nullable = false, name = "idUsuario")

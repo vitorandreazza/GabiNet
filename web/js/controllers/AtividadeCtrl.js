@@ -27,7 +27,7 @@ app.controller("novaAtividadeCtrl", function ($scope, atividadeAPI, $location) {
 
 app.controller("atividadeCtrl", function ($scope, atividade, atividadeAPI, $location) {
     $scope.atividade = atividade.data;
-
+    console.log($scope.atividade);
     $scope.alterarAtividade = function (atividade) {
         atividadeAPI.setAtividade(atividade)
                 .success(function () {

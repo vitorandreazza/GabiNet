@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Copyright © 1981-2001 Microsoft Corporation -->
-<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
-    <noInheritable/>
-    <assemblyIdentity type="win32" name="Microsoft.VC80.MFCLOC" version="8.0.50727.6229" processorArchitecture="x86" publicKeyToken="1fc8b3b9a1e18e3b"/>
-    <file name="mfc80CHS.dll" hash="9614ad61ddadd6f02c9176710d53414d0b01ebfb" hashalg="SHA1"/>
-    <file name="mfc80CHT.dll" hash="c85fb5556a53246373976c3875a9e19b55a70dcb" hashalg="SHA1"/>
-    <file name="mfc80DEU.dll" hash="3284d5839d3ff674e2b315b8c818c33f1ec2a0d4" hashalg="SHA1"/>
-    <file name="mfc80ENU.dll" hash="30d987af7148be54e3f28586cbcea00ea6f6117c" ha
