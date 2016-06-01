@@ -21,9 +21,10 @@ public class Usuario implements Serializable {
 
     public Usuario() {}
     
-    public Usuario(String login, String senha) {
+    public Usuario(String login, String senha) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         this.login = login;
-        this.senha = senha;
+        String senhaCriptografada = new util.Util().criptografa(senha);
+        this.senha = senhaCriptografada;
     }
     
     public long getId() {

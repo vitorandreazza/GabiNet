@@ -69,13 +69,7 @@ public class CidadaoService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Cidadao cidadao) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        Usuario u = new Usuario("mmss", "hue");
-        cidadao.setUsuario(u);
         try {
-            bd.getTransaction().begin();
-            bd.persist(u);
-            bd.getTransaction().commit();
-
             bd.getTransaction().begin();
             bd.persist(cidadao);
             bd.getTransaction().commit();

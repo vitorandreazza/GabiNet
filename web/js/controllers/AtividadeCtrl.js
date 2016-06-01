@@ -64,8 +64,10 @@ app.controller("atividadesCtrl", function ($scope, atividadeAPI, atividades, $ro
     };
 });
 
-app.controller("novaAtividadeCtrl", function ($scope, atividadeAPI, $location) {
+app.controller("novaAtividadeCtrl", function ($scope, atividadeAPI, $location, usuarioLogado) {
     $scope.novaAtividade = function (atividade) {
+        atividade.usuario = {};
+        atividade.usuario.id = usuarioLogado.id;
         atividadeAPI.novaAtividade(atividade)
                 .success(function () {
                     delete $scope.atividade;

@@ -88,13 +88,7 @@ public class AtividadeService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Atividade atividade) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        Usuario u = new Usuario("atv", "hue");
-        atividade.setUsuario(u);
         try {
-            bd.getTransaction().begin();
-            bd.persist(u);
-            bd.getTransaction().commit();
-            
             bd.getTransaction().begin();
             bd.persist(atividade); 
             bd.getTransaction().commit();

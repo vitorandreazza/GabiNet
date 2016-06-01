@@ -50,14 +50,16 @@ app.controller("cidadaosCtrl", function ($scope, cidadaoAPI, cidadaos, $route, $
     };
 });
 
-app.controller("novoCidadaoCtrl", function ($scope, cidadaoAPI, $location) {
+app.controller("novoCidadaoCtrl", function ($scope, cidadaoAPI, $location, usuarioLogado) {
     $scope.novoCidadao = function (cidadao) {
         replaceCidadao(cidadao);
+        cidadao.usuario = {};
+        cidadao.usuario.id = usuarioLogado.id;
         cidadaoAPI.novoCidadao(cidadao)
                 .success(function () {
                     delete $scope.cidadao;
                     $scope.cidadaoForm.$setPristine();
-                    $location.path("/atendimentos/novo");
+                    $location.path("/cidadaos");
                 });
     };
 });
