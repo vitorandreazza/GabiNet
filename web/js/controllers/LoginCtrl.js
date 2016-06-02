@@ -1,8 +1,8 @@
 var app = angular.module("gabiNet");
 
-app.controller("loginCtrl", function ($scope, loginAPI, $location, $rootScope, $cookies, usuarioLogado) {
+app.controller("loginCtrl", function ($scope, loginAPI, $location, $rootScope, $cookies) {
     $scope.logado = $cookies.get('usuarioLogado');
-    $scope.nome = usuarioLogado.nomeUsuario;
+    $scope.nome = $cookies.get('nomeUsuarioLogado');
     $scope.validarLogin = function (usuario) {
         loginAPI.getUsuario(usuario)
                 .success(function (data) {
@@ -14,10 +14,9 @@ app.controller("loginCtrl", function ($scope, loginAPI, $location, $rootScope, $
                         $cookies.put('nomeUsuarioLogado', nomeUsuario, {'expires': dataExpiracao});
                         $cookies.put('usuarioLogado', 'true', {'expires': dataExpiracao});
                         $rootScope.usuarioLogado = true;
-                        usuarioLogado.nomeUsuario = nomeUsuario;
                     loginAPI.getID(usuario.login)
                             .success(function (data) {
-                                usuarioLogado.id = data;
+                                $cookies.put('id', data, {'expires': dataExpiracao});
                             });
                     } else {
                         $rootScope.usuarioLogado = false;
@@ -30,8 +29,7 @@ app.controller("loginCtrl", function ($scope, loginAPI, $location, $rootScope, $
     $scope.logout = function () {
         $cookies.remove('nomeUsuarioLogado');
         $cookies.remove('usuarioLogado');
-        usuarioLogado.nomeUsuario = '';
-        usuarioLogado.id = '';
+        $cookies.remove('id');
         $rootScope.usuarioLogado = false;
         $location.path("/login");
     };

@@ -63,7 +63,7 @@ app.controller("atendimentosCtrl", function ($scope, atendimentoAPI, atendimento
     };
 });
 
-app.controller("novoAtendimentoCtrl", function ($scope, atendimentoAPI, $location, config, $http, cidadaoSelecionado, usuarioLogado)
+app.controller("novoAtendimentoCtrl", function ($scope, atendimentoAPI, $location, config, $http, cidadaoSelecionado, $cookies)
 {
     $scope.inicia = function () {
         $scope.atendimento = {};
@@ -89,7 +89,7 @@ app.controller("novoAtendimentoCtrl", function ($scope, atendimentoAPI, $locatio
     $scope.novoAtendimento = function (atendimento) {
         atendimento.cidadao.cpf = atendimento.cidadao.cpf.replace(".", "").replace(".", "").replace("-", "");
         atendimento.usuario = {};
-        atendimento.usuario.id = usuarioLogado.id;
+        atendimento.usuario.id = $cookies.get('id');
         atendimentoAPI.novoAtendimento(atendimento)
                 .success(function () {
                     delete $scope.atendimento;

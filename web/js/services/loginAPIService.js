@@ -6,7 +6,7 @@ angular.module("gabiNet").factory("loginAPI", function ($http, config) {
     var _getID = function (login) {
         return $http.get(config.baseUrl + "/login/" + login);
     };
-    
+
     return {
         getUsuario: _getUsuario,
         getID: _getID

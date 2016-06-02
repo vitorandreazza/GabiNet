@@ -50,11 +50,11 @@ app.controller("cidadaosCtrl", function ($scope, cidadaoAPI, cidadaos, $route, $
     };
 });
 
-app.controller("novoCidadaoCtrl", function ($scope, cidadaoAPI, $location, usuarioLogado) {
+app.controller("novoCidadaoCtrl", function ($scope, cidadaoAPI, $location, $cookies) {
     $scope.novoCidadao = function (cidadao) {
         replaceCidadao(cidadao);
         cidadao.usuario = {};
-        cidadao.usuario.id = usuarioLogado.id;
+        cidadao.usuario.id = $cookies.get('id');
         cidadaoAPI.novoCidadao(cidadao)
                 .success(function () {
                     delete $scope.cidadao;
@@ -66,7 +66,8 @@ app.controller("novoCidadaoCtrl", function ($scope, cidadaoAPI, $location, usuar
 
 app.controller("cidadaoCtrl", function ($scope, cidadao, cidadaoAPI, $location) {
     $scope.cidadao = cidadao.data;
-         
+    var data = new Date($scope.cidadao.nascimento);
+    $scope.cidadao.nascimento = data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear();
     $scope.alterarCidadao = function (cidadao) {
         replaceCidadao(cidadao);
         cidadaoAPI.setCidadao(cidadao)
@@ -79,15 +80,15 @@ app.controller("cidadaoCtrl", function ($scope, cidadao, cidadaoAPI, $location) 
 replaceCidadao = function (cidadao) {
         cidadao.cpf = cidadao.cpf.replace(".", "").replace(".", "").replace("-", "");
 
-        if (cidadao.cep !== undefined) 
+        if (cidadao.cep !== undefined && cidadao.cep !== null) 
             cidadao.cep = cidadao.cep.replace("-", "");
         
-        if (cidadao.telefone !== undefined) 
+        if (cidadao.telefone !== undefined && cidadao.telefone !== null) 
             cidadao.telefone = cidadao.telefone.replace("(", "").replace(")", "").replace("-", "");
         
-        if (cidadao.celular !== undefined) 
+        if (cidadao.celular !== undefined && cidadao.celular !== null) 
             cidadao.celular = cidadao.celular.replace("(", "").replace(")", "").replace("-", "");
         
-        if (cidadao.nascimento !== undefined && null) 
+        if (cidadao.nascimento !== undefined && cidadao.nascimento !== null) 
             cidadao.nascimento = new Date(cidadao.nascimento.replace(/(\d{2})[-/](\d{2})[-/](\d+)/, "$2/$1/$3"));
 };

@@ -7,8 +7,8 @@ angular.module("gabiNet").config(function ($routeProvider) {
                     return usuarioLogado;
                 },
                 resolve: {
-                    cidadaos: function (cidadaoAPI) {
-                        return cidadaoAPI.getCidadaos();
+                    cidadaos: function (cidadaoAPI, $cookies) {
+                        return cidadaoAPI.getCidadaos($cookies.get('id'));
                     }
                 }
             })
@@ -26,10 +26,10 @@ angular.module("gabiNet").config(function ($routeProvider) {
                     return usuarioLogado;
                 },
                 resolve: {
-                    cidadao: function (cidadaoAPI, $route) {
+                    cidadao: function (cidadaoAPI, $route, $cookies) {
                         var cpf = $route.current.params.id;
                         cpf = cpf.replace(".", "").replace(".", "").replace("-", "");
-                        return cidadaoAPI.getCidadao(cpf);
+                        return cidadaoAPI.getCidadao(cpf, $cookies.get('id'));
                     }
                 }
             })
@@ -40,10 +40,10 @@ angular.module("gabiNet").config(function ($routeProvider) {
                     return usuarioLogado;
                 },
                 resolve: {
-                    cidadao: function (cidadaoAPI, $route) {
+                    cidadao: function (cidadaoAPI, $route, $cookies) {
                         var cpf = $route.current.params.id;
                         cpf = cpf.replace(".", "").replace(".", "").replace("-", "");
-                        return cidadaoAPI.getCidadao(cpf);
+                        return cidadaoAPI.getCidadao(cpf, $cookies.get('id'));
                     }
                 }
             })
@@ -54,8 +54,8 @@ angular.module("gabiNet").config(function ($routeProvider) {
                     return usuarioLogado;
                 },
                 resolve: {
-                    atendimentos: function (atendimentoAPI) {
-                        return atendimentoAPI.getAtendimentos();
+                    atendimentos: function (atendimentoAPI, $cookies) {
+                        return atendimentoAPI.getAtendimentos($cookies.get('id'));
                     }
                 }
             })
@@ -73,8 +73,8 @@ angular.module("gabiNet").config(function ($routeProvider) {
                     return usuarioLogado;
                 },
                 resolve: {
-                    atendimento: function (atendimentoAPI, $route) {
-                        return atendimentoAPI.getAtendimento($route.current.params.id);
+                    atendimento: function (atendimentoAPI, $route, $cookies) {
+                        return atendimentoAPI.getAtendimento($route.current.params.id, $cookies.get('id'));
                     }
                 }
             })
@@ -85,8 +85,8 @@ angular.module("gabiNet").config(function ($routeProvider) {
                     return usuarioLogado;
                 },
                 resolve: {
-                    atendimento: function (atendimentoAPI, $route) {
-                        return atendimentoAPI.getAtendimento($route.current.params.id);
+                    atendimento: function (atendimentoAPI, $route, $cookies) {
+                        return atendimentoAPI.getAtendimento($route.current.params.id, $cookies.get('id'));
                     }
                 }
             })
@@ -97,8 +97,8 @@ angular.module("gabiNet").config(function ($routeProvider) {
                     return usuarioLogado;
                 },
                 resolve: {
-                    atividades: function (atividadeAPI) {
-                        return atividadeAPI.getAtividades();
+                    atividades: function (atividadeAPI, $cookies) {
+                        return atividadeAPI.getAtividades($cookies.get('id'));
                     }
                 }
             })
@@ -123,8 +123,8 @@ angular.module("gabiNet").config(function ($routeProvider) {
                     return usuarioLogado;
                 },
                 resolve: {
-                    atividade: function (atividadeAPI, $route) {
-                        return atividadeAPI.getAtividade($route.current.params.id);
+                    atividade: function (atividadeAPI, $cookies, $route) {
+                        return atividadeAPI.getAtividade($route.current.params.id, $cookies.get('id'));
                     }
                 }
             })
@@ -135,8 +135,8 @@ angular.module("gabiNet").config(function ($routeProvider) {
                     return usuarioLogado;
                 },
                 resolve: {
-                    atividade: function (atividadeAPI, $route) {
-                        return atividadeAPI.getAtividade($route.current.params.id);
+                    atividade: function (atividadeAPI, $route, $cookies) {
+                        return atividadeAPI.getAtividade($route.current.params.id, $cookies.get('id'));
                     }
                 }
             })
@@ -147,11 +147,11 @@ angular.module("gabiNet").config(function ($routeProvider) {
                     return usuarioLogado;
                 },
                 resolve: {
-                    atividades: function (atividadeAPI) {
-                        return atividadeAPI.getAtividades();
+                    atividades: function (atividadeAPI, $cookies) {
+                        return atividadeAPI.getAtividades($cookies.get('id'));
                     },
-                    atendimentos: function (atendimentoAPI) {
-                        return atendimentoAPI.getAtendimentos();
+                    atendimentos: function (atendimentoAPI, $cookies ) {
+                        return atendimentoAPI.getAtendimentos($cookies.get('id'));
                     }
                 }
             })

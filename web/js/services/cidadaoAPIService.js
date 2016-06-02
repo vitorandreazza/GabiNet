@@ -1,10 +1,10 @@
 angular.module("gabiNet").factory("cidadaoAPI", function ($http, config) {
-    var _getCidadaos = function () {
-        return $http.get(config.baseUrl + "/cidadaos");
+    var _getCidadaos = function (idUsuario) {
+        return $http.get(config.baseUrl + "/cidadaos", {params:{"idUsuario": idUsuario}});
     };
 
-    var _getCidadao = function (id) {
-        return $http.get(config.baseUrl + "/cidadaos/" + id);
+    var _getCidadao = function (id, idUsuario) {
+        return $http.get(config.baseUrl + "/cidadaos/" + id, {params:{"idUsuario": idUsuario}});
     };
 
     var _novoCidadao = function (cidadao) {

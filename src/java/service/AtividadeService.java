@@ -7,7 +7,6 @@ import javax.persistence.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import model.Atividade;
-import model.Usuario;
 
 @Path("/{parameter : atividades}")
 public class AtividadeService {
@@ -15,11 +14,12 @@ public class AtividadeService {
     /* Lista todas as Atividades */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Atividade> listaTodos() {
+    public List<Atividade> listaTodos(@QueryParam("idUsuario") Long idUsuario) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atividade> atividades;
-        String sql = "SELECT a FROM Atividade a";
+        String sql = "SELECT a FROM Atividade a WHERE idUsuario = :usuario";
         Query q = bd.createQuery(sql);
+        q.setParameter("usuario", idUsuario);
         atividades = (ArrayList<Atividade>) q.getResultList();
         bd.close();
         return atividades;
@@ -28,13 +28,14 @@ public class AtividadeService {
     @Path("/grafico")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Atividade> grafico(@QueryParam("de") Date de, @QueryParam("ate") Date ate) {
+    public List<Atividade> grafico(@QueryParam("de") Date de, @QueryParam("ate") Date ate, @QueryParam("idUsuario") long idUsuario) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atividade> atividades;
-        String sql = "SELECT a.tipo, count(a.tipo) FROM Atividade a WHERE a.dataAtividade BETWEEN :de AND :ate GROUP BY a.tipo";
+        String sql = "SELECT a.tipo, count(a.tipo) FROM Atividade a WHERE idUsuario = :usuario AND a.dataAtividade BETWEEN :de AND :ate GROUP BY a.tipo";
         Query q = bd.createQuery(sql);
         q.setParameter("de", de);
         q.setParameter("ate", ate);
+        q.setParameter("usuario", idUsuario);
         atividades = (ArrayList<Atividade>) q.getResultList();
         bd.close();
         System.out.println(de);
@@ -45,13 +46,14 @@ public class AtividadeService {
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Atividade listaPeloId(@PathParam("id") long id) {
+    public Atividade listaPeloId(@PathParam("id") long id, @QueryParam("idUsuario") Long idUsuario) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atividade> atividades;
         Atividade atividade = null;
-        String sql = "SELECT a FROM Atividade a WHERE a.id = :id";
+        String sql = "SELECT a FROM Atividade a WHERE a.id = :id AND idUsuario = :usuario";
         Query query = bd.createQuery(sql, Atividade.class);
         query.setParameter("id", id);
+        query.setParameter("usuario", idUsuario);
         atividades = (ArrayList<Atividade>) query.getResultList();
         //for (Atividade linha : atividades) {
             //atividade = new Atividade(linha.getEmenta(), linha.getTipo(), linha.getTipoMocao(), linha.getUsuario());

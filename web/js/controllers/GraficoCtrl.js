@@ -1,11 +1,11 @@
 var app = angular.module("gabiNet");
 
-app.controller("graficosCtrl", function ($scope, atividadeAPI) {
+app.controller("graficosCtrl", function ($scope, atividadeAPI, $cookies) {
 
     $scope.setData = function (datas) {
         dataString(datas);
         //console.log(datas);        
-        atividadeAPI.getGrafico(datas)
+        atividadeAPI.getGrafico(datas, $cookies.get('id'))
                 .success(function (dados) {
                     $scope.labels = [];
                     $scope.data = [];

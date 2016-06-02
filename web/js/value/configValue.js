@@ -6,8 +6,3 @@ angular.module("gabiNet").value("cidadaoSelecionado", {
     cpf: '',
     nome: ''
 });
-
-angular.module("gabiNet").value("usuarioLogado", {
-    id: '',
-    nomeUsuario: ''
-});

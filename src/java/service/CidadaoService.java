@@ -14,11 +14,12 @@ public class CidadaoService {
     /* Lista todas os cidadaos */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Cidadao> listaTodos() {
+    public List<Cidadao> listaTodos(@QueryParam("idUsuario") Long idUsuario) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Cidadao> cidadaos;
-        String sql = "SELECT c FROM Cidadao c";
+        String sql = "SELECT c FROM Cidadao c WHERE idUsuario = :usuario";
         Query q = bd.createQuery(sql);
+        q.setParameter("usuario", idUsuario);
         cidadaos = (ArrayList<Cidadao>) q.getResultList();
         bd.close();
         return cidadaos;
@@ -28,13 +29,14 @@ public class CidadaoService {
     @Path("{cpf}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Cidadao listaPeloId(@PathParam("cpf") String cpf) {
+    public Cidadao listaPeloId(@PathParam("cpf") String cpf, @QueryParam("idUsuario") Long idUsuario) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Cidadao> cidadaos;
         Cidadao cidadao = null;
-        String sql = "SELECT c FROM Cidadao c WHERE c.cpf = :cpf";
+        String sql = "SELECT c FROM Cidadao c WHERE c.cpf = :cpf AND idUsuario = :usuario";
         Query query = bd.createQuery(sql, Cidadao.class);
         query.setParameter("cpf", cpf);
+        query.setParameter("usuario", idUsuario);
         cidadaos = (ArrayList<Cidadao>) query.getResultList();
 //        for (Cidadao linha : cidadaos) {
 //            cidadao = new Cidadao(linha.getCpf(), linha.getNome(), linha.getEmail(), linha.getNascimento(), linha.getEndereco(), linha.getBairro(), linha.getComplemento(), linha.getCep(), linha.getTelefone(), linha.getCelular(), linha.getUsuario());

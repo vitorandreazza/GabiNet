@@ -6,7 +6,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.Atendimento;
-import model.Usuario;
 
 /**
  *
@@ -17,11 +16,12 @@ public class AtendimentoService {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Atendimento> listaTodos() {
+    public List<Atendimento> listaTodos(@QueryParam("id") Long idUsuario) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atendimento> atendimentos;
-        String sql = "SELECT at FROM Atendimento at";
+        String sql = "SELECT at FROM Atendimento at WHERE idUsuario = :id";
         Query q = bd.createQuery(sql);
+        q.setParameter("id", idUsuario);
         atendimentos = (ArrayList<Atendimento>) q.getResultList();
         bd.close();
         return atendimentos;
@@ -30,13 +30,14 @@ public class AtendimentoService {
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Atendimento listaPeloId(@PathParam("id") long id) {
+    public Atendimento listaPeloId(@PathParam("id") long id, @QueryParam("idUsuario") long idUsuario) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atendimento> atendimentos;
         Atendimento atendimento = null;
-        String sql = "SELECT a FROM Atendimento a WHERE a.id = :id";
+        String sql = "SELECT a FROM Atendimento a WHERE a.id = :id AND idUsuario = :usuario";
         Query query = bd.createQuery(sql, Atendimento.class);
         query.setParameter("id", id);
+        query.setParameter("usuario", idUsuario);
         atendimentos = (ArrayList<Atendimento>) query.getResultList();
 //        for (Atendimento linha : atendimentos) {
 //            atendimento = new Atendimento(linha.getSolicitacao(), linha.getProvidencia(), linha.getUsuario(), linha.getCidadao());
