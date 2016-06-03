@@ -33,7 +33,7 @@ public class AtendimentoService {
     public Atendimento listaPeloId(@PathParam("id") long id, @QueryParam("idUsuario") long idUsuario) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atendimento> atendimentos;
-        Atendimento atendimento = null;
+//        Atendimento atendimento = null;
         String sql = "SELECT a FROM Atendimento a WHERE a.id = :id AND idUsuario = :usuario";
         Query query = bd.createQuery(sql, Atendimento.class);
         query.setParameter("id", id);

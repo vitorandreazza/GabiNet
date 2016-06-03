@@ -135,8 +135,11 @@ app.controller("atividadeCtrl", function ($scope, atividade, atividadeAPI, $loca
         
         doc.setFontSize(11);
         doc.setFontType("normal");
-        y += 5;
-        doc.text(x, y, $scope.atividade.ementa);
+        var texto = doc.splitTextToSize($scope.atividade.ementa, 180);
+        for(var i=0; i< texto.length; i++) {
+            y += 5;
+            doc.text(x, y, texto[i]);
+        }
         
         
         doc.save('PDF.pdf');

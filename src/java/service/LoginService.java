@@ -2,12 +2,10 @@ package service;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import model.Usuario;
 import util.JpaUtil;
 
 @Path("/{parameter: login}")
@@ -33,7 +31,7 @@ public class LoginService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Long getID(@PathParam("login") String login) {
-        String sql = "SELECT u.id FROM Usuario u WHERE u.login = :login";
+        String sql = "SELECT u.idPai FROM Usuario u WHERE u.login = :login";
         Query query = bd.createQuery(sql);
         query.setParameter("login", login);
         Long idUsuario = (Long) query.getSingleResult();

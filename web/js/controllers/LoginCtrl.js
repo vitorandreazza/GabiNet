@@ -8,14 +8,12 @@ app.controller("loginCtrl", function ($scope, loginAPI, $location, $rootScope, $
                 .success(function (data) {
                     if (data === true) {
                         var nomeUsuario = usuario.login.toUpperCase();
-                        var dataExpiracao = new Date();
-                        dataExpiracao.setMinutes(dataExpiracao.getMinutes() + 30);
-                        $cookies.put('nomeUsuarioLogado', nomeUsuario, {'expires': dataExpiracao});
-                        $cookies.put('usuarioLogado', 'true', {'expires': dataExpiracao});
+                        $cookies.put('nomeUsuarioLogado', nomeUsuario);
+                        $cookies.put('usuarioLogado', 'true');
                         $rootScope.usuarioLogado = true;
                     loginAPI.getID(usuario.login)
                             .success(function (data) {
-                                $cookies.put('id', data, {'expires': dataExpiracao});
+                                $cookies.put('id', data);
                                 $location.path("/index");
                             });
                     } else {
