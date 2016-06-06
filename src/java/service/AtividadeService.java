@@ -11,15 +11,16 @@ import model.Atividade;
 @Path("/{parameter : atividades}")
 public class AtividadeService {
 
-    /* Lista todas as Atividades */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Atividade> listaTodos(@QueryParam("idUsuario") Long idUsuario) {
+    public List<Atividade> listaTodos(@QueryParam("idUsuario") Long idUsuario, @QueryParam("idPai")Long idPai) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atividade> atividades;
-        String sql = "SELECT a FROM Atividade a WHERE idUsuario = :usuario";
+        String sql = "SELECT a FROM Atividade a WHERE idUsuario = :usuario OR idUsuario in (SELECT u.id FROM Usuario u WHERE u.idPai.id = :idPai OR u.id = :idU)";
         Query q = bd.createQuery(sql);
         q.setParameter("usuario", idUsuario);
+        q.setParameter("idPai", idPai);
+        q.setParameter("idU", idPai);
         atividades = (ArrayList<Atividade>) q.getResultList();
         bd.close();
         return atividades;
@@ -28,51 +29,49 @@ public class AtividadeService {
     @Path("/grafico")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Atividade> grafico(@QueryParam("de") Date de, @QueryParam("ate") Date ate, @QueryParam("idUsuario") long idUsuario) {
+    public List<Atividade> grafico(@QueryParam("de") Date de, @QueryParam("ate") Date ate, @QueryParam("idUsuario") long idUsuario, @QueryParam("idPai")Long idPai) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atividade> atividades;
-        String sql = "SELECT a.tipo, count(a.tipo) FROM Atividade a WHERE idUsuario = :usuario AND a.dataAtividade BETWEEN :de AND :ate GROUP BY a.tipo";
+        String sql = "SELECT a.tipo, count(a.tipo) FROM Atividade a WHERE (idUsuario = :usuario OR idUsuario in (SELECT u.id FROM Usuario u WHERE u.idPai.id = :idPai OR u.id = :idU)) AND a.dataAtividade BETWEEN :de AND :ate GROUP BY a.tipo";
         Query q = bd.createQuery(sql);
         q.setParameter("de", de);
         q.setParameter("ate", ate);
         q.setParameter("usuario", idUsuario);
+        q.setParameter("idPai", idPai);
+        q.setParameter("idU", idPai);
         atividades = (ArrayList<Atividade>) q.getResultList();
         bd.close();
         System.out.println(de);
         return atividades;
     }
 
-    /* Lista Atividade por id */
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Atividade listaPeloId(@PathParam("id") long id, @QueryParam("idUsuario") Long idUsuario) {
+    public Atividade listaPeloId(@PathParam("id") long id, @QueryParam("idUsuario") Long idUsuario, @QueryParam("idPai")Long idPai) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atividade> atividades;
-        Atividade atividade = null;
-        String sql = "SELECT a FROM Atividade a WHERE a.id = :id AND idUsuario = :usuario";
+        String sql = "SELECT a FROM Atividade a WHERE a.id = :id AND (idUsuario = :usuario OR idUsuario in (SELECT u.id FROM Usuario u WHERE u.idPai.id = :idPai OR u.id = :idU))";
         Query query = bd.createQuery(sql, Atividade.class);
         query.setParameter("id", id);
         query.setParameter("usuario", idUsuario);
+        query.setParameter("idPai", idPai);
+        query.setParameter("idU", idPai);
         atividades = (ArrayList<Atividade>) query.getResultList();
-        //for (Atividade linha : atividades) {
-            //atividade = new Atividade(linha.getEmenta(), linha.getTipo(), linha.getTipoMocao(), linha.getUsuario());
-        //}
+
         bd.close();
         return atividades.get(0);
     }
 
-    /* Deleta Atividade */
     @Path("{id}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     public Response excluir(@PathParam("id") long id) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         try {
-            //localizando o registro a ser removido
             Atividade atividade = bd.find(Atividade.class, id);
             bd.getTransaction().begin();
-            bd.remove(atividade); //Hibernate efetua o delete
+            bd.remove(atividade);
             bd.getTransaction().commit();
             return Response.status(Response.Status.OK).
                     entity("true").build();
@@ -84,7 +83,6 @@ public class AtividadeService {
         }
     }
 
-    /* Insere nova Atividade */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -104,7 +102,6 @@ public class AtividadeService {
         }
     }
 
-    /* Altera Atividade */
     @Path("{id}")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -113,7 +110,7 @@ public class AtividadeService {
         EntityManager bd = util.JpaUtil.getEntityManager();
         try {
             bd.getTransaction().begin();
-            atividade = bd.merge(atividade); //Hibernate gera o update
+            atividade = bd.merge(atividade);
             bd.getTransaction().commit();
             return Response.status(Response.Status.OK)
                     .entity("true").build();

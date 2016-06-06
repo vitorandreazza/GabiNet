@@ -1,10 +1,10 @@
 angular.module("gabiNet").factory("atendimentoAPI", function ($http, config) {
-    var _getAtendimentos = function (id) {
-        return $http.get(config.baseUrl + "/atendimentos", {params:{"id": id}});
+    var _getAtendimentos = function (id, idPai) {
+        return $http.get(config.baseUrl + "/atendimentos", {params:{"id": id, "idPai" : idPai}});
     };
 
-    var _getAtendimento = function (id, idUsuario) {
-        return $http.get(config.baseUrl + "/atendimentos/" + id, {params:{ "idUsuario" : idUsuario}});
+    var _getAtendimento = function (id, idUsuario, idPai) {
+        return $http.get(config.baseUrl + "/atendimentos/" + id, {params:{ "idUsuario" : idUsuario, "idPai":idPai}});
     };
 
     var _novoAtendimento = function (atendimento) {

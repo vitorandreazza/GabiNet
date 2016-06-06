@@ -6,46 +6,42 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.Cidadao;
-import model.Usuario;
 
 @Path("/{parameter: cidadaos}")
 public class CidadaoService {
 
-    /* Lista todas os cidadaos */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Cidadao> listaTodos(@QueryParam("idUsuario") Long idUsuario) {
+    public List<Cidadao> listaTodos(@QueryParam("idUsuario") Long idUsuario, @QueryParam("idPai")Long idPai) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Cidadao> cidadaos;
-        String sql = "SELECT c FROM Cidadao c WHERE idUsuario = :usuario";
+        String sql = "SELECT c FROM Cidadao c WHERE idUsuario = :usuario OR idUsuario in (SELECT u.id FROM Usuario u WHERE u.idPai.id = :idPai OR u.id = :idU)";
         Query q = bd.createQuery(sql);
         q.setParameter("usuario", idUsuario);
+        q.setParameter("idPai", idPai);
+        q.setParameter("idU", idPai);
         cidadaos = (ArrayList<Cidadao>) q.getResultList();
         bd.close();
         return cidadaos;
     }
 
-    /* Lista cidadao por cpf */
     @Path("{cpf}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Cidadao listaPeloId(@PathParam("cpf") String cpf, @QueryParam("idUsuario") Long idUsuario) {
+    public Cidadao listaPeloId(@PathParam("cpf") String cpf, @QueryParam("idUsuario") Long idUsuario, @QueryParam("idPai")Long idPai) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Cidadao> cidadaos;
-        Cidadao cidadao = null;
-        String sql = "SELECT c FROM Cidadao c WHERE c.cpf = :cpf AND idUsuario = :usuario";
+        String sql = "SELECT c FROM Cidadao c WHERE c.cpf = :cpf AND (idUsuario = :usuario OR idUsuario in (SELECT u.id FROM Usuario u WHERE u.idPai.id = :idPai OR u.id = :idU))";
         Query query = bd.createQuery(sql, Cidadao.class);
         query.setParameter("cpf", cpf);
         query.setParameter("usuario", idUsuario);
+        query.setParameter("idPai", idPai);
+        query.setParameter("idU", idPai);
         cidadaos = (ArrayList<Cidadao>) query.getResultList();
-//        for (Cidadao linha : cidadaos) {
-//            cidadao = new Cidadao(linha.getCpf(), linha.getNome(), linha.getEmail(), linha.getNascimento(), linha.getEndereco(), linha.getBairro(), linha.getComplemento(), linha.getCep(), linha.getTelefone(), linha.getCelular(), linha.getUsuario());
-//        }
         bd.close();
         return cidadaos.get(0);
     }
 
-    /* Deleta cidadao */
     @Path("{cpf}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
@@ -85,7 +81,6 @@ public class CidadaoService {
         }
     }
 
-    /* Altera Cidadao */
     @Path("{id}")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)

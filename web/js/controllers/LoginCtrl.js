@@ -13,7 +13,11 @@ app.controller("loginCtrl", function ($scope, loginAPI, $location, $rootScope, $
                         $rootScope.usuarioLogado = true;
                     loginAPI.getID(usuario.login)
                             .success(function (data) {
-                                $cookies.put('id', data);
+                                $cookies.put('id', data.id);
+                                if(data.idPai === null)
+                                    $cookies.put('idPai', data.id);
+                                else
+                                $cookies.put('idPai', data.idPai.id);
                                 $location.path("/index");
                             });
                     } else {

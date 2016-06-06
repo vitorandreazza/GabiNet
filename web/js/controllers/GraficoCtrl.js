@@ -5,7 +5,7 @@ app.controller("graficosCtrl", function ($scope, atividadeAPI, $cookies) {
     $scope.setData = function (datas) {
         dataString(datas);
         //console.log(datas);        
-        atividadeAPI.getGrafico(datas, $cookies.get('id'))
+        atividadeAPI.getGrafico(datas, $cookies.get('id'), $cookies.get('idPai'))
                 .success(function (dados) {
                     $scope.labels = [];
                     $scope.data = [];

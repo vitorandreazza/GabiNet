@@ -18,9 +18,9 @@ public class Usuario implements Serializable {
     private String login;
     @Column(length = 70)
     private String nome;
-//    @ManyToOne
-//    @JoinColumn(name = "idPai")
-//    private Usuario idUsuarioPai;
+    @ManyToOne
+    @JoinColumn(name = "idPai")
+    private Usuario idPai;
     @JsonIgnore // nao gerar essa coluna no json
     private String senha;
     
@@ -61,11 +61,11 @@ public class Usuario implements Serializable {
         this.nome = nome;
     }
 
-//    public Usuario getIdUsuarioPai() {
-//        return idUsuarioPai;
-//    }
-//
-//    public void setIdUsuarioPai(Usuario idUsuarioPai) {
-//        this.idUsuarioPai = idUsuarioPai;
-//    }
+    public Usuario getIdPai() {
+        return idPai;
+    }
+
+    public void setIdPai(Usuario idPai) {
+        this.idPai = idPai;
+    }
 }

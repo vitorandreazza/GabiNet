@@ -16,12 +16,13 @@ public class TestaBd {
             Usuario user1 = new Usuario("user1", "1231");
             Usuario user2 = new Usuario("user2", "1231");
             Usuario user3 = new Usuario("user3", "1231");
+            Usuario user4 = new Usuario("user4", "1231");
             user1.setNome("Joaozinho da Silva");
             user2.setNome("Juca Pereira");
             user3.setNome("Benedito");
-//            user1.setIdUsuarioPai(null);
-//            user2.setIdUsuarioPai(user3);
-//            user3.setIdUsuarioPai(user3);
+            user1.setIdPai(null);
+            user2.setIdPai(user1);
+            user3.setIdPai(user1);
             Atividade atividade1 = new Atividade("Whey gratuito", "Projeto de Lei", null, user1);
             Atividade atividade2 = new Atividade("Trânsporte público gratuito para estudantes", "Projeto de Lei", null, user2);
             Atividade atividade3 = new Atividade("Cidadania Ituana para Joaquim Barbosa", "Moções", "Congrat", user3);
@@ -45,6 +46,7 @@ public class TestaBd {
             bd.persist(user1);
             bd.persist(user2);
             bd.persist(user3);
+            bd.persist(user4);
             bd.persist(cidadao1);
             bd.persist(cidadao2);
             bd.persist(cidadao3);
