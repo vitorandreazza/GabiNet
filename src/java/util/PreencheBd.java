@@ -4,7 +4,7 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 import model.*;
 
-public class TestaBd {
+public class PreencheBd {
 
     /**
      * @param args the command line arguments

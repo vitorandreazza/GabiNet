@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import model.Usuario;
 import util.JpaUtil;
 
@@ -41,4 +42,21 @@ public class LoginService {
         bd.close();
         return usuario.get(0);
     };
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response cadastrarLogin(Usuario user) {
+        try {
+            bd.getTransaction().begin();
+            bd.persist(user); 
+            bd.getTransaction().commit();
+            return Response.status(Response.Status.OK).
+                    entity("true").build();
+        } catch (Exception e) {
+            return Response.serverError().
+                    entity(e.getMessage()).build();
+        } finally {
+            bd.close();
+        }
+    }
 }

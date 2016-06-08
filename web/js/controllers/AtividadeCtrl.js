@@ -142,6 +142,6 @@ app.controller("atividadeCtrl", function ($scope, atividade, atividadeAPI, $loca
         }
         
         
-        doc.save('PDF.pdf');
+        doc.save('Atividade - '+$scope.atividade.id+'.pdf');
     };
 });

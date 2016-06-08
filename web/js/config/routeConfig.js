@@ -156,6 +156,10 @@ angular.module("gabiNet").config(function ($routeProvider) {
                     }
                 }
             })
+            .when("/assessor", {
+                templateUrl: 'partials/controlar_assessor.html',
+                controller: 'loginCtrl'
+            })
             .when("/login", {
                 templateUrl: 'partials/login.html',
                 controller: 'loginCtrl'
