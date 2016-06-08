@@ -1,10 +1,11 @@
 var app = angular.module("gabiNet");
+app.controller("principalCtrl", function ($scope, atividadeAPI, atendimentos, atividades, $cookies) {
+    $scope.atendimentos = atendimentos.data;
+    $scope.atividades = atividades.data;
 
-app.controller("graficosCtrl", function ($scope, atividadeAPI, $cookies) {
-
-    $scope.setData = function (datas) {
-        dataString(datas);
-        //console.log(datas);        
+    $scope.setData = function () {
+        datas = {};
+        dataString(datas);     
         atividadeAPI.getGrafico(datas, $cookies.get('id'), $cookies.get('idPai'))
                 .success(function (dados) {
                     $scope.labels = [];
@@ -16,18 +17,19 @@ app.controller("graficosCtrl", function ($scope, atividadeAPI, $cookies) {
                 }).error(function (data) {
             console.log(data);
         });
-        $scope.datas.de = "";
-        $scope.datas.ate = "";
+
     };
 
     dataString = function (datas) {
         var dataString;
-        datas.de = new Date(datas.de.replace(/(\d{2})[-/](\d{2})[-/](\d+)/, "$2/$1/$3"));
-        datas.ate = new Date(datas.ate.replace(/(\d{2})[-/](\d{2})[-/](\d+)/, "$2/$1/$3"));
+        datas.de = new Date();
+        datas.ate = new Date();
 
-        dataString = datas.de.getFullYear() + "-" + (datas.de.getMonth() + 1) + "-" + datas.de.getDate();
+        dataString = datas.de.getFullYear() + "-" + (datas.de.getMonth()) + "-" + datas.de.getDate();
         datas.de = dataString;
         dataString = datas.ate.getFullYear() + "-" + (datas.ate.getMonth() + 1) + "-" + datas.ate.getDate();
         datas.ate = dataString;
     };
+ 
 });
+

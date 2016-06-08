@@ -16,14 +16,20 @@ public class Usuario implements Serializable {
     
     @Column(nullable = false, length = 20, unique = true)
     private String login;
+    @Column(length = 70)
+    private String nome;
+    @ManyToOne
+    @JoinColumn(name = "idPai")
+    private Usuario idPai;
     @JsonIgnore // nao gerar essa coluna no json
     private String senha;
-
+    
     public Usuario() {}
     
-    public Usuario(String login, String senha) {
+    public Usuario(String login, String senha) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         this.login = login;
-        this.senha = senha;
+        String senhaCriptografada = new util.Util().criptografa(senha);
+        this.senha = senhaCriptografada;
     }
     
     public long getId() {
@@ -45,5 +51,21 @@ public class Usuario implements Serializable {
     public void setSenha(String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         String senhaCriptografada = new util.Util().criptografa(senha);
         this.senha = senhaCriptografada;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Usuario getIdPai() {
+        return idPai;
+    }
+
+    public void setIdPai(Usuario idPai) {
+        this.idPai = idPai;
     }
 }

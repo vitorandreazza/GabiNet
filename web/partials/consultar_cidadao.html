@@ -1,3 +1,4 @@
+<div class="row" ng-include="'partials/menu.html'"></div>
 <div class="container-fluid">
     <form method="get" class="form-horizontal" role="form" name="formCidadao">
         <fieldset>
@@ -11,7 +12,7 @@
                     </div>
                     <div class="col-lg-5">
                         <label class="control-label" for="dataNascimento">Data de Nascimento</label>
-                        <input type="text" class="form-control" id="dataNascimento" ng-model="cidadao.nascimento | date: 'dd/MM/yyyy'" mask="99/99/9999" readonly>
+                        <input type="text" class="form-control" id="dataNascimento" ng-model="cidadao.nascimento" mask="99/99/9999" readonly>
                     </div>
                     <div class="col-lg-7">
                         <label class="control-label" for="cpf">CPF</label>

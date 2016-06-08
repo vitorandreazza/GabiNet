@@ -4,51 +4,14 @@
         <title>Gabinet</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/ico" href="libs/icons/brasao.ico"/>
         <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="libs/chart/angular-chart.css">
         <link rel="stylesheet" href="css/menu-styles.css"> 
         <link rel="stylesheet" href="css/styles.css"/>
+        <link rel="stylesheet" href="css/login.css"/>
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand teste" href="#/index" >Gabinet</a>
-                </div>
-                <div class="collapse navbar-collapse" id="cssmenu">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">Cidadaos <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#/cidadaos/novo">Cadastrar</a></li>
-                                <li><a href="#/cidadaos">Consultar</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">Atividades <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#/atividades/novo">Cadastrar</a></li>
-                                <li><a href="#/atividades">Consultar</a></li>
-                                <li><a href="#/atividades/grafico">Grafico</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown">Atendimentos <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#/atendimentos/novo">Cadastrar</a></li>
-                                <li><a href="#/atendimentos">Consultar</a></li>
-                            </ul>
-                        </li>                        
-                    </ul>
-                </div>
-            </div>
-        </nav>
         <div class="col-md-12">
                 <ng-view></ng-view>                
         </div>
@@ -61,6 +24,7 @@
         <script src="libs/chart/chart.min.js"></script>
         <script src="libs/chart/angular-chart.min.js"></script>
         <script src="http://parall.ax/parallax/js/jspdf.js?1391533408"></script>
+        <script src="libs/angular/angular-cookies.min.js"></script>
         
         <script src="js/app.js"></script>
         <script src="js/config/routeConfig.js"></script>
@@ -70,8 +34,10 @@
         <script src="js/controllers/AtividadeCtrl.js"></script>
         <script src="js/controllers/AtendimentoCtrl.js"></script>
         <script src="js/controllers/PrincipalCtrl.js"></script>
+        <script src="js/controllers/LoginCtrl.js"></script>
         <script src="js/services/cidadaoAPIService.js"></script>
         <script src="js/services/atividadeAPIService.js"></script>
         <script src="js/services/atendimentoAPIService.js"></script>
+        <script src="js/services/loginAPIService.js"></script>
     </body>
 </html>
