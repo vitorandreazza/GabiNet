@@ -1,4 +1,5 @@
-<div class="container-fluid" ng-init="setData()">
+<div class="row" ng-include="'partials/menu.html'"></div>
+<div class="container" ng-init="setData()">
     <div class="row">
         <div class="col-md-6">
             <h5 class="text-capitalize">Últimos Atendimentos</h5>
@@ -18,16 +19,15 @@
             <div class="list-group" ng-repeat="atividade in atividades | limitTo: 5">
                 <a href="#/atividades/{{atividade.id}}" class="list-group-item">
                     <h5 class="list-group-item-heading" style="display: inline;">Atividade {{atividade.id}} - <small>{{atividade.dataAtividade| date: "dd/MM/yyyy"}}</small></h5>
-                    <h6 class="list-group-item-heading">{{atividade.tipo}} - {{atividade.tipoMocao}}</h6>
-                    <p class="list-group-item-text"><span class="list-group-item-heading"><strong>Ementa - </strong></span>{{atividade.ementa}}</p>
+                    <h6 class="list-group-item-heading">{{atividade.tipo}}<span ng-show="atividade.tipoMocao"> - </span> {{atividade.tipoMocao}}</h6>
+                    <p class="list-group-item-text"><span class="list-group-item-heading"><strong>Ementa - </strong></span>{{atividade.ementa | limitTo: 420}}<span ng-show="atividade.ementa.length > 420">...</span></p>
                 </a>
             </div>
             <a href="#/atividades" class="pull-right">Ver Mais</a>
+        </div><br>
+        <div class="col-md-12" ng-init="setData()"> 
+            <h5 class="text-center">Atividades mais frequentes</h5><br>
+            <canvas class="chart chart-pie" chart-data="data" chart-labels="labels" style="width: 100%; height: 400px; margin-bottom: 50px"></canvas>
         </div>
-        <div class="col-md-12"> 
-            <h5>Atividades mais frequentes</h5><br>
-            <canvas class="chart chart-pie" chart-data="data" chart-labels="labels" style="width: 100%; height: 500px; margin-bottom: 50px"></canvas>
-        </div>
-        
     </div>
 </div>

@@ -6,22 +6,20 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.Atendimento;
-import model.Usuario;
 
-/**
- *
- * @author Vitor Ferrari <vitorandreazza@hotmail.com>
- */
 @Path("/{parameter: atendimentos}")
 public class AtendimentoService {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Atendimento> listaTodos() {
+    public List<Atendimento> listaTodos(@QueryParam("id") Long idUsuario, @QueryParam("idPai")Long idPai) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atendimento> atendimentos;
-        String sql = "SELECT at FROM Atendimento at";
+        String sql = "SELECT at FROM Atendimento at WHERE idUsuario = :id OR idUsuario in (SELECT u.id FROM Usuario u WHERE u.idPai.id = :idPai OR u.id = :idU)";
         Query q = bd.createQuery(sql);
+        q.setParameter("id", idUsuario);
+        q.setParameter("idPai", idPai);
+        q.setParameter("idU", idPai);
         atendimentos = (ArrayList<Atendimento>) q.getResultList();
         bd.close();
         return atendimentos;
@@ -30,17 +28,17 @@ public class AtendimentoService {
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Atendimento listaPeloId(@PathParam("id") long id) {
+    public Atendimento listaPeloId(@PathParam("id") long id, @QueryParam("idUsuario") long idUsuario, @QueryParam("idPai") long idPai) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         ArrayList<Atendimento> atendimentos;
-        Atendimento atendimento = null;
-        String sql = "SELECT a FROM Atendimento a WHERE a.id = :id";
+        String sql = "SELECT a FROM Atendimento a WHERE a.id = :id AND (idUsuario = :usuario OR idUsuario in (SELECT u.id FROM Usuario u WHERE u.idPai.id = :idPai OR u.id = :idU))";
         Query query = bd.createQuery(sql, Atendimento.class);
         query.setParameter("id", id);
+        query.setParameter("usuario", idUsuario);
+        query.setParameter("idPai", idPai);
+        query.setParameter("idU", idPai);
         atendimentos = (ArrayList<Atendimento>) query.getResultList();
-//        for (Atendimento linha : atendimentos) {
-//            atendimento = new Atendimento(linha.getSolicitacao(), linha.getProvidencia(), linha.getUsuario(), linha.getCidadao());
-//        }
+
         bd.close();
         return atendimentos.get(0);
     }
@@ -50,19 +48,7 @@ public class AtendimentoService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Atendimento atendimento) {
         EntityManager bd = util.JpaUtil.getEntityManager();
-        Usuario u = new Usuario("ddd", "hue");
-        atendimento.setUsuario(u);
-//        Cidadao c = new Cidadao();
-//        c.setCpf("41278912387");
-//        c.setEmail("dasda");
-        //c.setUsuario(u);
-        //atendimento.setCidadao(c);
         try {
-            bd.getTransaction().begin();
-            bd.persist(u);
-            //bd.persist(c);
-            bd.getTransaction().commit();
-
             bd.getTransaction().begin();
             bd.persist(atendimento);
             bd.getTransaction().commit();
@@ -84,7 +70,7 @@ public class AtendimentoService {
         EntityManager bd = util.JpaUtil.getEntityManager();
         try {
             bd.getTransaction().begin();
-            atendimento = bd.merge(atendimento); //Hibernate gera o update
+            atendimento = bd.merge(atendimento);
             bd.getTransaction().commit();
             return Response.status(Response.Status.OK)
                     .entity("true").build();
@@ -102,10 +88,9 @@ public class AtendimentoService {
     public Response excluir(@PathParam("id") long id) {
         EntityManager bd = util.JpaUtil.getEntityManager();
         try {
-            //localizando o registro a ser removido
             Atendimento atendimento = bd.find(Atendimento.class, id);
             bd.getTransaction().begin();
-            bd.remove(atendimento); //Hibernate efetua o delete
+            bd.remove(atendimento);
             bd.getTransaction().commit();
             return Response.status(Response.Status.OK).
                     entity("true").build();
