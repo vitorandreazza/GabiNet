@@ -10,7 +10,9 @@ public class Cidadao implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(nullable = false, length = 11, unique = true)
+    @GeneratedValue
+    private long id;
+    @Column(nullable = true, length = 11, unique = true)
     private String cpf;
     @Column(nullable = true, length = 50)
     private String nome;
@@ -160,5 +162,9 @@ public class Cidadao implements Serializable {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public long getId() {
+        return id;
     }
 }

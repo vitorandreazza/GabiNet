@@ -3,6 +3,6 @@ angular.module("gabiNet").value("config", {
 });
 
 angular.module("gabiNet").value("cidadaoSelecionado", {
-    cpf: '',
+    id: '',
     nome: ''
 });

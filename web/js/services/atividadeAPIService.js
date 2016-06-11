@@ -1,10 +1,10 @@
 angular.module("gabiNet").factory("atividadeAPI", function ($http, config) {
-    var _getAtividades = function (idUsuario, idPai) {
-        return $http.get(config.baseUrl + "/atividades",{params:{"idUsuario": idUsuario, "idPai":idPai}} );
+    var _getAtividades = function (idPai) {
+        return $http.get(config.baseUrl + "/atividades",{params:{"idPai":idPai}} );
     };
 
-    var _getAtividade = function (id, idUsuario, idPai) {
-        return $http.get(config.baseUrl + "/atividades/" + id, {params:{"idUsuario" : idUsuario, "idPai":idPai}});
+    var _getAtividade = function (id, idPai) {
+        return $http.get(config.baseUrl + "/atividades/" + id, {params:{"idPai":idPai}});
     };
 
     var _novaAtividade = function (atividade) {
@@ -19,8 +19,8 @@ angular.module("gabiNet").factory("atividadeAPI", function ($http, config) {
         return $http.delete(config.baseUrl + "/atividades/" + id);
     };
     
-    var _getGrafico = function (datas, idUsuario, idPai) {
-        return $http.get(config.baseUrl + "/atividades/grafico",{params:{"de": datas.de, "ate": datas.ate, "idUsuario": idUsuario, "idPai": idPai}});
+    var _getGrafico = function (datas, idPai) {
+        return $http.get(config.baseUrl + "/atividades/grafico",{params:{"de": datas.de, "ate": datas.ate, "idPai": idPai}});
     };
 
     return {

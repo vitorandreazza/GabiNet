@@ -3,6 +3,7 @@ package service;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.ws.rs.*;
@@ -42,16 +43,79 @@ public class LoginService {
         bd.close();
         return usuario.get(0);
     };
+
+    @Path("/nome")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getNome(@QueryParam("idPai") Long idPai) {
+        String usuario;
+        String sql = "SELECT u.nome FROM Usuario u WHERE u.id = :idPai";
+        Query query = bd.createQuery(sql);
+        query.setParameter("idPai", idPai);
+        usuario = (String) query.getSingleResult();
+        bd.close();
+        return usuario;
+    };
     
     @POST
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response cadastrarLogin(Usuario user) {
+    public Response cadastrarLogin(Usuario user, @QueryParam("senha") String senha) {
         try {
+            user.setSenha(senha);
             bd.getTransaction().begin();
             bd.persist(user); 
             bd.getTransaction().commit();
             return Response.status(Response.Status.OK).
                     entity("true").build();
+        } catch (Exception e) {
+            return Response.serverError().
+                    entity(e.getMessage()).build();
+        } finally {
+            bd.close();
+        }
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Usuario> listaTodos(@QueryParam("idPai")Long idPai) {
+        ArrayList<Usuario> usuarios;
+        String sql = "SELECT u FROM Usuario u WHERE idPai.id = :id";
+        Query q = bd.createQuery(sql);
+        q.setParameter("id", idPai);
+        usuarios = (ArrayList<Usuario>) q.getResultList();
+        bd.close();
+        return usuarios;
+    }
+    
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response excluir(@QueryParam("id") Long id) {
+        try {
+            Usuario usuario = bd.find(Usuario.class, id);
+            bd.getTransaction().begin();
+            bd.remove(usuario);
+            bd.getTransaction().commit();
+            return Response.status(Response.Status.OK).
+                    entity("true").build();
+        } catch (Exception e) {
+            return Response.serverError().entity(e.getMessage()).
+                    build();
+        } finally {
+            bd.close();
+        }
+    }
+    @Path("{id}")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response alterar(Usuario usuario) {
+        try {
+            bd.getTransaction().begin();
+            usuario = bd.merge(usuario);
+            bd.getTransaction().commit();
+            return Response.status(Response.Status.OK)
+                    .entity("true").build();
         } catch (Exception e) {
             return Response.serverError().
                     entity(e.getMessage()).build();

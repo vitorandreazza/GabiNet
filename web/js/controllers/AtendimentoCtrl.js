@@ -76,28 +76,27 @@ app.controller("novoAtendimentoCtrl", function ($scope, atendimentoAPI, $locatio
         var cpfr = cpf.replace(".", "").replace(".", "").replace("-", "");
         cpf = cpfr;
         $http.get(config.baseUrl + "/cidadaos/" + cpf)
-                .success(function (data) {
-                    $scope.atendimento.cidadao = {};
-                    $scope.atendimento.cidadao = data;
-                    console.log($scope.atendimento);
-                })
-                .error(function () {
-                    console.log('Erro ao obter os dados do cidadao');
-                });
+            .success(function (data) {
+                $scope.atendimento.cidadao = {};
+                $scope.atendimento.cidadao = data;
+                console.log($scope.atendimento);
+            })
+            .error(function () {
+                console.log('Erro ao obter os dados do cidadao');
+            });
     };
     
     $scope.novoAtendimento = function (atendimento) {
-        atendimento.cidadao.cpf = atendimento.cidadao.cpf.replace(".", "").replace(".", "").replace("-", "");
         atendimento.usuario = {};
-        atendimento.usuario.id = $cookies.get('id');
+        atendimento.usuario.id = $cookies.get('idPai');
         atendimentoAPI.novoAtendimento(atendimento)
-                .success(function () {
-                    delete $scope.atendimento;
-                    $scope.atendimentoForm.$setPristine();
-                    $location.path("/atendimentos");
-                }).error(function(data){
-                    console.log(data);
-                });
+            .success(function () {
+                delete $scope.atendimento;
+                $scope.atendimentoForm.$setPristine();
+                $location.path("/atendimentos");
+            }).error(function(data){
+                console.log(data);
+            });
     };
 });
 
@@ -106,9 +105,9 @@ app.controller("atendimentoCtrl", function ($scope, atendimento, atendimentoAPI,
          
     $scope.alterarAtendimento = function (atendimento) {
         atendimentoAPI.setAtendimento(atendimento)
-                .success(function () {
-                    $location.path("/atendimentos");
-                });
+            .success(function () {
+                $location.path("/atendimentos");
+            });
     };
 });
 

@@ -30,10 +30,9 @@ app.controller("cidadaosCtrl", function ($scope, cidadaoAPI, cidadaos, $route, $
         }
     };
     
-    $scope.excluiCidadao = function (cpf) {
-        cpf = cpf.replace(".", "").replace(".", "").replace("-", "");
+    $scope.excluiCidadao = function (id) {
         if (confirm("Confirma a exclusão do cidadão?")) {
-            cidadaoAPI.deleteCidadao(cpf)
+            cidadaoAPI.deleteCidadao(id)
             .success(function () {
                 $route.reload();
             })
@@ -44,7 +43,7 @@ app.controller("cidadaosCtrl", function ($scope, cidadaoAPI, cidadaos, $route, $
     };
     
     $scope.redirecionaCidadao = function (cidadao) {
-        cidadaoSelecionado.cpf = cidadao.cpf;
+        cidadaoSelecionado.id = cidadao.id;
         cidadaoSelecionado.nome = cidadao.nome;
         $location.path("/atendimentos/novo");  
     };
@@ -54,13 +53,13 @@ app.controller("novoCidadaoCtrl", function ($scope, cidadaoAPI, $location, $cook
     $scope.novoCidadao = function (cidadao) {
         replaceCidadao(cidadao);
         cidadao.usuario = {};
-        cidadao.usuario.id = $cookies.get('id');
+        cidadao.usuario.id = $cookies.get('idPai');
         cidadaoAPI.novoCidadao(cidadao)
-                .success(function () {
-                    delete $scope.cidadao;
-                    $scope.cidadaoForm.$setPristine();
-                    $location.path("/cidadaos");
-                });
+            .success(function () {
+                delete $scope.cidadao;
+                $scope.cidadaoForm.$setPristine();
+                $location.path("/cidadaos");
+            });
     };
 });
 
@@ -71,24 +70,26 @@ app.controller("cidadaoCtrl", function ($scope, cidadao, cidadaoAPI, $location) 
     $scope.alterarCidadao = function (cidadao) {
         replaceCidadao(cidadao);
         cidadaoAPI.setCidadao(cidadao)
-                .success(function () {
-                    $location.path("/cidadaos");
-                });
+            .success(function () {
+                $location.path("/cidadaos");
+            });
     };
+            
 });
 
 replaceCidadao = function (cidadao) {
+    if (cidadao.cpf !== undefined && cidadao.cpf !== null)
         cidadao.cpf = cidadao.cpf.replace(".", "").replace(".", "").replace("-", "");
 
-        if (cidadao.cep !== undefined && cidadao.cep !== null) 
-            cidadao.cep = cidadao.cep.replace("-", "");
-        
-        if (cidadao.telefone !== undefined && cidadao.telefone !== null) 
-            cidadao.telefone = cidadao.telefone.replace("(", "").replace(")", "").replace("-", "");
-        
-        if (cidadao.celular !== undefined && cidadao.celular !== null) 
-            cidadao.celular = cidadao.celular.replace("(", "").replace(")", "").replace("-", "");
-        
-        if (cidadao.nascimento !== undefined && cidadao.nascimento !== null) 
-            cidadao.nascimento = new Date(cidadao.nascimento.replace(/(\d{2})[-/](\d{2})[-/](\d+)/, "$2/$1/$3"));
+    if (cidadao.cep !== undefined && cidadao.cep !== null) 
+        cidadao.cep = cidadao.cep.replace("-", "");
+
+    if (cidadao.telefone !== undefined && cidadao.telefone !== null) 
+        cidadao.telefone = cidadao.telefone.replace("(", "").replace(")", "").replace("-", "");
+
+    if (cidadao.celular !== undefined && cidadao.celular !== null) 
+        cidadao.celular = cidadao.celular.replace("(", "").replace(")", "").replace("-", "");
+
+    if (cidadao.nascimento !== undefined && cidadao.nascimento !== null) 
+        cidadao.nascimento = new Date(cidadao.nascimento.replace(/(\d{2})[-/](\d{2})[-/](\d+)/, "$2/$1/$3"));
 };

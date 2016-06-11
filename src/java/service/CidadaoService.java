@@ -1,6 +1,8 @@
 package service;
 
-import java.util.*;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -9,46 +11,40 @@ import model.Cidadao;
 
 @Path("/{parameter: cidadaos}")
 public class CidadaoService {
+    EntityManager bd = util.JpaUtil.getEntityManager();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Cidadao> listaTodos(@QueryParam("idUsuario") Long idUsuario, @QueryParam("idPai")Long idPai) {
-        EntityManager bd = util.JpaUtil.getEntityManager();
+    public List<Cidadao> listaTodos(@QueryParam("idPai")Long idPai) {
         ArrayList<Cidadao> cidadaos;
-        String sql = "SELECT c FROM Cidadao c WHERE idUsuario = :usuario OR idUsuario in (SELECT u.id FROM Usuario u WHERE u.idPai.id = :idPai OR u.id = :idU)";
+        String sql = "SELECT c FROM Cidadao c WHERE idUsuario = :idPai";
         Query q = bd.createQuery(sql);
-        q.setParameter("usuario", idUsuario);
         q.setParameter("idPai", idPai);
-        q.setParameter("idU", idPai);
         cidadaos = (ArrayList<Cidadao>) q.getResultList();
         bd.close();
         return cidadaos;
     }
 
-    @Path("{cpf}")
+    @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Cidadao listaPeloId(@PathParam("cpf") String cpf, @QueryParam("idUsuario") Long idUsuario, @QueryParam("idPai")Long idPai) {
-        EntityManager bd = util.JpaUtil.getEntityManager();
+    public Cidadao listaPeloId(@PathParam("id") Long id, @QueryParam("idPai")Long idPai) {
         ArrayList<Cidadao> cidadaos;
-        String sql = "SELECT c FROM Cidadao c WHERE c.cpf = :cpf AND (idUsuario = :usuario OR idUsuario in (SELECT u.id FROM Usuario u WHERE u.idPai.id = :idPai OR u.id = :idU))";
+        String sql = "SELECT c FROM Cidadao c WHERE c.id = :id AND idUsuario = :idPai";
         Query query = bd.createQuery(sql, Cidadao.class);
-        query.setParameter("cpf", cpf);
-        query.setParameter("usuario", idUsuario);
+        query.setParameter("id", id);
         query.setParameter("idPai", idPai);
-        query.setParameter("idU", idPai);
         cidadaos = (ArrayList<Cidadao>) query.getResultList();
         bd.close();
         return cidadaos.get(0);
     }
 
-    @Path("{cpf}")
+    @Path("{id}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Response excluir(@PathParam("cpf") String cpf) {
-        EntityManager bd = util.JpaUtil.getEntityManager();
+    public Response excluir(@PathParam("id") Long id) {
         try {
-            Cidadao cidadao = bd.find(Cidadao.class, cpf);
+            Cidadao cidadao = bd.find(Cidadao.class, id);
             bd.getTransaction().begin();
             bd.remove(cidadao);
             bd.getTransaction().commit();
@@ -66,7 +62,6 @@ public class CidadaoService {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response incluir(Cidadao cidadao) {
-        EntityManager bd = util.JpaUtil.getEntityManager();
         try {
             bd.getTransaction().begin();
             bd.persist(cidadao);
@@ -86,7 +81,6 @@ public class CidadaoService {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response alterar(Cidadao cidadao) {
-        EntityManager bd = util.JpaUtil.getEntityManager();
         try {
             bd.getTransaction().begin();
             cidadao = bd.merge(cidadao);
@@ -99,5 +93,20 @@ public class CidadaoService {
         } finally {
             bd.close();
         }
+    }
+    
+    @Path("/aniversarios")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Cidadao> getAniversario(@QueryParam("de") Date de, @QueryParam("ate") Date ate, @QueryParam("idPai")Long idPai) {
+        ArrayList<Cidadao> cidadaos;
+        String sql = "SELECT c FROM Cidadao c WHERE idUsuario = :idPai AND (c.nascimento BETWEEN :de AND :ate)";
+        Query query = bd.createQuery(sql, Cidadao.class);
+        query.setParameter("idPai", idPai);
+        query.setParameter("de", de);
+        query.setParameter("ate", ate);
+        cidadaos = (ArrayList<Cidadao>) query.getResultList();
+        bd.close();
+        return cidadaos;
     }
 }

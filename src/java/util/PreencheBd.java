@@ -24,23 +24,23 @@ public class PreencheBd {
             user2.setIdPai(user1);
             user3.setIdPai(user1);
             Atividade atividade1 = new Atividade("Whey gratuito", "Projeto de Lei", null, user1);
-            Atividade atividade2 = new Atividade("Trânsporte público gratuito para estudantes", "Projeto de Lei", null, user2);
-            Atividade atividade3 = new Atividade("Cidadania Ituana para Joaquim Barbosa", "Moções", "Congrat", user3);
+            Atividade atividade2 = new Atividade("Trânsporte público gratuito para estudantes", "Projeto de Lei", null, user1);
+            Atividade atividade3 = new Atividade("Cidadania Ituana para Joaquim Barbosa", "Moções", "Congrat", user1);
             Atividade atividade4 = new Atividade("Estudante paga meia no cinema", "Projeto de Lei", null, user1);
-            Atividade atividade5 = new Atividade("Estudantes isentos de taxas", "Projeto de Lei", null, user2);
+            Atividade atividade5 = new Atividade("Estudantes isentos de taxas", "Projeto de Lei", null, user4);
             Date d = new Date("10/10/1992");
             Cidadao cidadao1 = new Cidadao("11111111112", "João Ruy Barbosa", "joao@hotmail.com", d, "Rua das flores, nº20", "Vila Verde", "Casa", "13309010", "1140244222", "11999015898", user1);
-            Cidadao cidadao2 = new Cidadao("11111111113", "Janaina da Silva", "jana@hotmail.com", d, "Rua das folhas, nº10", "Centro", "Casa", "13309012", "1140259322", "11999015897", user2);
-            Cidadao cidadao3 = new Cidadao("11111111114", "Gustavo Oliveira", "gu.oliveira@gmail.com", d, "Rua Benedito, nº14", "Jardim das Rosas", "Casa", "13309013", "1140259323", "11999015898", user3);
+            Cidadao cidadao2 = new Cidadao("11111111113", "Janaina da Silva", "jana@hotmail.com", d, "Rua das folhas, nº10", "Centro", "Casa", "13309012", "1140259322", "11999015897", user1);
+            Cidadao cidadao3 = new Cidadao("11111111114", "Gustavo Oliveira", "gu.oliveira@gmail.com", d, "Rua Benedito, nº14", "Jardim das Rosas", "Casa", "13309013", "1140259323", "11999015898", user1);
             Cidadao cidadao4 = new Cidadao("11111111115", "Mariana Gonçalves da Silva", "mari@hotmail.com", d, "Rua 31 de Abril, nº100", "Centro", "Casa", "13309015", "1140259324", "11999015899", user1);
-            Cidadao cidadao5 = new Cidadao("11111111116", "Gilberto Gomes da Costa", "gil.gomes@hotmail.com", d, "Avenida Galileu, nº105", "Centro", "Casa", "13309012", "1140259322", "11999015892", user2);
+            Cidadao cidadao5 = new Cidadao("11111111116", "Gilberto Gomes da Costa", "gil.gomes@hotmail.com", d, "Avenida Galileu, nº105", "Centro", "Casa", "13309012", "1140259322", "11999015892", user4);
 
 
             Atendimento atendimento1 = new Atendimento("Trocar lâmpadas da rua das flores", "Acionar cpfl", user1, cidadao1);
-            Atendimento atendimento2 = new Atendimento("Arrumar encanamento da rua das folhas", "Acionar Águas de Itu", user2, cidadao2);
-            Atendimento atendimento3 = new Atendimento("Falta de remedios nos postos de saúde", "Verificar com àrea da saúde", user3, cidadao3);
+            Atendimento atendimento2 = new Atendimento("Arrumar encanamento da rua das folhas", "Acionar Águas de Itu", user1, cidadao2);
+            Atendimento atendimento3 = new Atendimento("Falta de remedios nos postos de saúde", "Verificar com àrea da saúde", user1, cidadao3);
             Atendimento atendimento4 = new Atendimento("Asfaltar pedaço rua 31 de abril", "Verificar", user1, cidadao4);
-            Atendimento atendimento5 = new Atendimento("Retirar lixo da Avenida Galileu", "Acionar Cidade Limpa", user2, cidadao5);
+            Atendimento atendimento5 = new Atendimento("Retirar lixo da Avenida Galileu", "Acionar Cidade Limpa", user4, cidadao5);
             
             bd.getTransaction().begin();
             bd.persist(user1);

@@ -29,7 +29,7 @@ public class Atendimento implements Serializable {
     @JoinColumn(nullable = false, name = "idUsuario")
     private Usuario usuario;
     @ManyToOne
-    @JoinColumn(nullable = false, name = "cpfCidadao")
+    @JoinColumn(nullable = false, name = "idCidadao")
     private Cidadao cidadao;
     @Temporal(TemporalType.DATE)
     private Date dataAlteracao;

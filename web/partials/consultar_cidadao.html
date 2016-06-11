@@ -3,7 +3,7 @@
     <form method="get" class="form-horizontal" role="form" name="formCidadao">
         <fieldset>
             <legend>Cidadão</legend>
-            <div>
+            <div id="oi">
                 <div class="form-group">
                     <h4 class="container-fluid">Dados Pessoais</h4>
                     <div class="col-lg-12">
@@ -52,12 +52,6 @@
                         <label class="control-label" for="celular">Celular</label>
                         <input type="text" class="form-control" id="celular" mask="(99)99999-9999" ng-model="cidadao.celular" readonly>
                     </div>
-                </div>
-            </div>
-            <div class="form-group" ng-show="alterar">
-                <div class="col-lg-4 col-lg-offset-10">
-                    <button type="submit" class="btn btn-primary">Alterar</button>
-
                 </div>
             </div>
         </fieldset>

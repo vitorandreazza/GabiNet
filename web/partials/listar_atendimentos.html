@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-12">
             <div class="list-group" ng-repeat="atendimento in atendimentos | filter: combo.opcaoSelecionada.procura">
-                <a ng-click="excluiAtendimento(atendimento.id)" class="pull-right overlay-button"><span class="glyphicon glyphicon-trash"></span></a>
+                <a href="" ng-click="excluiAtendimento(atendimento.id)" class="pull-right overlay-button"><span class="glyphicon glyphicon-trash"></span></a>
                 <a href="#/atendimentos/alterar/{{atendimento.id}}" class="pull-right overlay-button"><span class="glyphicon glyphicon-pencil"></span></a>
                 <a href="#/atendimentos/{{atendimento.id}}" class="list-group-item">
                     <h5 class="list-group-item-heading" style="display: inline;">Atendimento {{atendimento.id}} - <small>{{atendimento.dataAtendimento | date: "dd/MM/yyyy"}}</small></h5>

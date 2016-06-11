@@ -17,10 +17,10 @@
         </div>
         <div class="col-md-12">
             <div class="list-group" ng-repeat="cidadao in cidadaos | filter: combo.opcaoSelecionada.procura">
-                <a href="" ng-click="excluiCidadao(cidadao.cpf)" class="pull-right overlay-button"><span class="glyphicon glyphicon-trash"></span></a>
-                <a href="#/cidadaos/alterar/{{cidadao.cpf}}" class="pull-right overlay-button"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a href="" ng-click="excluiCidadao(cidadao.id)" class="pull-right overlay-button"><span class="glyphicon glyphicon-trash"></span></a>
+                <a href="#/cidadaos/alterar/{{cidadao.id}}" class="pull-right overlay-button"><span class="glyphicon glyphicon-pencil"></span></a>
                 <a href="" ng-click="redirecionaCidadao(cidadao)" class="pull-right overlay-button"><span class="glyphicon glyphicon-export"></span></a>
-                <a href="#/cidadaos/{{cidadao.cpf}}" class="list-group-item">
+                <a href="#/cidadaos/{{cidadao.id}}" class="list-group-item">
                     <h5 class="list-group-item-heading" style="display: inline;">{{cidadao.nome}} - <small ng-model="cidadao.cpf" mask="999.999.999-99">{{cidadao.cpf}}</small></h5>
                     <h6 class="list-group-item-heading">{{cidadao.endereco}}</h6>
                     <p class="list-group-item-text"><span class="list-group-item-heading"><strong>Contato - </strong></span>{{cidadao.telefone}} / {{cidadao.celular}}</p>

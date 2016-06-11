@@ -18,6 +18,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#/cidadaos/novo">Cadastrar</a></li>
                             <li><a href="#/cidadaos">Consultar</a></li>
+                            <li><a style="cursor: pointer" data-toggle="modal" data-target="#myModal">Aniversáriantes</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -50,4 +51,36 @@
             </div>
         </div>
     </nav>
+</div>
+<!--Modal Aniversariantes-->
+<!--<div class="form-group">
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Open Modal</button>
+</div>-->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        Relatório de Aniversáriantes
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Relatório de Aniversáriantes</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="col-lg-6">
+                            <label class="control-label" for="de">De</label>
+                            <input type="text" class="form-control" id="de" ng-model="datas.de" mask="99/99/9999">
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="control-label" for="ate">Ate</label>
+                            <input type="text" class="form-control" id="ate" ng-model="datas.ate" mask="99/99/9999">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer" ng-controller="loginCtrl">
+                <button type="button" class="btn btn-primary" ng-click="gerarPdf(datas)" data-dismiss="modal">Gerar PDF</button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -6,9 +6,9 @@ app.controller("atividadesCtrl", function ($scope, atividadeAPI, atividades, $ro
     $scope.excluiAtividade = function (id) {
         if (confirm("Confirma a exclusão da Atividade?")) {
             atividadeAPI.deleteAtividade(id)
-                    .success(function () {
-                        $route.reload();
-                    });
+                .success(function () {
+                    $route.reload();
+                });
         }
     };
     
@@ -67,13 +67,13 @@ app.controller("atividadesCtrl", function ($scope, atividadeAPI, atividades, $ro
 app.controller("novaAtividadeCtrl", function ($scope, atividadeAPI, $location, $cookies) {
     $scope.novaAtividade = function (atividade) {
         atividade.usuario = {};
-        atividade.usuario.id = $cookies.get('id');
+        atividade.usuario.id = $cookies.get('idPai');
         atividadeAPI.novaAtividade(atividade)
-                .success(function () {
-                    delete $scope.atividade;
-                    $scope.AtividadeForm.$setPristine();
-                    $location.path("/atividades");
-                });
+            .success(function () {
+                delete $scope.atividade;
+                $scope.AtividadeForm.$setPristine();
+                $location.path("/atividades");
+            });
     };
 });
 
@@ -81,9 +81,9 @@ app.controller("atividadeCtrl", function ($scope, atividade, atividadeAPI, $loca
     $scope.atividade = atividade.data;
     $scope.alterarAtividade = function (atividade) {
         atividadeAPI.setAtividade(atividade)
-                .success(function () {
-                    $location.path("/atividades");
-                });
+            .success(function () {
+                $location.path("/atividades");
+            });
     };
 
     $scope.gerarPdf = function () {
@@ -140,7 +140,6 @@ app.controller("atividadeCtrl", function ($scope, atividade, atividadeAPI, $loca
             y += 5;
             doc.text(x, y, texto[i]);
         }
-        
         
         doc.save('Atividade - '+$scope.atividade.id+'.pdf');
     };

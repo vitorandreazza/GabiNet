@@ -1,21 +1,17 @@
 var app = angular.module("gabiNet");
 
 app.controller("graficosCtrl", function ($scope, atividadeAPI, $cookies) {
-
     $scope.setData = function (datas) {
         dataString(datas);
-        //console.log(datas);        
-        atividadeAPI.getGrafico(datas, $cookies.get('id'), $cookies.get('idPai'))
-                .success(function (dados) {
-                    $scope.labels = [];
-                    $scope.data = [];
-                    for (var i = 0; i < dados.length; i++) {
-                        $scope.labels.push(dados[i][0]);
-                        $scope.data.push(dados[i][1]);
-                    }
-                }).error(function (data) {
-            console.log(data);
-        });
+        atividadeAPI.getGrafico(datas, $cookies.get('idPai'))
+            .success(function (dados) {
+                $scope.labels = [];
+                $scope.data = [];
+                for (var i = 0; i < dados.length; i++) {
+                    $scope.labels.push(dados[i][0]);
+                    $scope.data.push(dados[i][1]);
+                }
+            });
         $scope.datas.de = "";
         $scope.datas.ate = "";
     };

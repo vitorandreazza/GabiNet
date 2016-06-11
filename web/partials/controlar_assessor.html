@@ -1,32 +1,48 @@
 <div ng-include="'partials/menu.html'"></div>
-<div class="container-fluid">
+<div class="container-fluid" ng-init="listaAssessor()">
+    <div class="row" style="margin-top: 5px" ng-show="erro">
+        <div class="col-lg-12">
+            <div class="alert alert-dismissible alert-danger" >
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Senha e confirmar senha não conferem.</strong>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 5px" ng-show="sucesso">
+        <div class="col-lg-12">
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Assessor Cadastrado.</strong>
+            </div>
+        </div>
+    </div>
     <form method="POST" class="form-horizontal" >
         <fieldset>
             <legend>Cadastrar Assessor</legend>
             <div class="form-group col-md-5">
                 <label class="control-label">Usuário</label>
-                <input type="text" class="form-control">        
+                <input type="text" class="form-control" ng-model="usuario.login" required>        
             </div>
             <div class="col-lg-1"></div>
             <div class="form-group col-md-6">
                 <label class="control-label">Nome</label>
-                <input type="text" class="form-control">        
+                <input type="text" class="form-control" ng-model="usuario.nome" required>        
             </div>
             <div class="form-group col-md-5">
                 <label class="control-label">Senha</label>
-                <input type="text" class="form-control">        
+                <input type="password" class="form-control" ng-model="usuario.senha" required>        
             </div>
             <div class="col-lg-1"></div>
             <div class="form-group col-md-6">
                 <label class="control-label">Confirmar Senha</label>
-                <input type="text" class="form-control">        
+                <input type="password" class="form-control" ng-model="usuario.confirmaSenha" required>        
             </div>
             <div class="">
-                <button class="btn btn-primary">Cadastrar</button>
+                <button class="btn btn-primary" ng-click="novoAssessor(usuario)">Cadastrar</button>
             </div>
         </fieldset>
     </form>
-    <table class="table table-hover">
+    <table class="table table-responsive table-striped">
         <thead>
             <tr>
                 <th>Usuário</th>
@@ -35,10 +51,47 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>User1</td>
-                <td>nome</td>
+            <tr ng-repeat="user in usuarios">
+                <td ng-model="usuario.login">{{user.login}}</td>
+                <td ng-model="usuario.nome">{{user.nome}}</td>
+                <td>
+                    <!--<a style="cursor: pointer" data-toggle="modal" data-target="#alteraModal" class="overlay-button"><span class="glyphicon glyphicon-pencil"></span></a>-->
+                    <a href="" ng-click="excluiAssessor(user.id)" class="overlay-button"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
+<!--<div id="alteraModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Alterar Assessor</h4>
+                <hr>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" >
+                    <fieldset>
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Nome</label>
+                            <input type="text" class="form-control" ng-model="usuario.nome">{{usuario.nome}}        
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label class="control-label">Senha</label>
+                            <input type="password" class="form-control" ng-model="usuario.senha" required>        
+                        </div>
+                        <div class="col-lg-2"></div>
+                        <div class="form-group col-md-5">
+                            <label class="control-label">Confirmar Senha</label>
+                            <input type="password" class="form-control" ng-model="usuario.confirmaSenha" required>        
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>-->
