@@ -47,14 +47,14 @@ public class LoginService {
     @Path("/nome")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getNome(@QueryParam("idPai") Long idPai) {
-        String usuario;
-        String sql = "SELECT u.nome FROM Usuario u WHERE u.id = :idPai";
+    public Usuario getNome(@QueryParam("idPai") Long idPai) {
+        ArrayList<Usuario> usuario;
+        String sql = "SELECT u FROM Usuario u WHERE u.id = :idPai";
         Query query = bd.createQuery(sql);
         query.setParameter("idPai", idPai);
-        usuario = (String) query.getSingleResult();
+        usuario = (ArrayList<Usuario>) query.getResultList();
         bd.close();
-        return usuario;
+        return usuario.get(0);
     };
     
     @POST

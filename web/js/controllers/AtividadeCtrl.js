@@ -77,7 +77,7 @@ app.controller("novaAtividadeCtrl", function ($scope, atividadeAPI, $location, $
     };
 });
 
-app.controller("atividadeCtrl", function ($scope, atividade, atividadeAPI, $location) {
+app.controller("atividadeCtrl", function ($scope, atividade, atividadeAPI, $location, loginAPI, $cookies) {
     $scope.atividade = atividade.data;
     $scope.alterarAtividade = function (atividade) {
         atividadeAPI.setAtividade(atividade)
@@ -87,6 +87,12 @@ app.controller("atividadeCtrl", function ($scope, atividade, atividadeAPI, $loca
     };
 
     $scope.gerarPdf = function () {
+        loginAPI.getNome($cookies.get('idPai'))
+            .success(function (n) {
+                $scope.vai = '';
+                $scope.vai = n.nome.toUpperCase();
+                console.log($scope.vai);
+        });
         var doc = new jsPDF();
         var x = 20, y = 0;
         var dataATV = new Date($scope.atividade.dataAtividade);
@@ -101,7 +107,7 @@ app.controller("atividadeCtrl", function ($scope, atividade, atividadeAPI, $loca
         //y += 20;
 
         doc.text(x+35, y+20, 'CÂMARA DE VEREADORES DA ESTÂNCIA TURÍSTICA DE ITU');
-        doc.text(x+35, y+30, 'VEREADOR PROF. JOÃO CARLOS DE CAMPOS FEITAL');
+        doc.text(x+35, y+30, $scope.vai);
         doc.text(x+85, y+35, 'PDT');
         doc.text(x, y+50, 'ATIVIDADE Nº '+$scope.atividade.id+ ' - DATA: '+$scope.atividade.dataAtividade);
         

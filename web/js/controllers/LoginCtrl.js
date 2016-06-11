@@ -74,7 +74,6 @@ app.controller("loginCtrl", function ($scope, loginAPI, cidadaoAPI, $location, $
     
     $scope.gerarPdf = function (datas) {
         var doc = new jsPDF();
-        var nome = 'VEREADOR PROF. JOÃO CARLOS DE CAMPOS FEITAL';
         var x = 20, y = 0;
         dataString(datas);
         cidadaoAPI.getAniversariantes(datas, $cookies.get('idPai'))
@@ -88,11 +87,13 @@ app.controller("loginCtrl", function ($scope, loginAPI, cidadaoAPI, $location, $
                 //y += 20;
 
                 doc.text(x+35, y+20, 'CÂMARA DE VEREADORES DA ESTÂNCIA TURÍSTICA DE ITU');
-//                loginAPI.getNome($cookies.get('idPai'))
-//                    .success(function (data) {
-//                       nome = data;     
-//                });
-                doc.text(x+35, y+30, nome);
+                loginAPI.getNome($cookies.get('idPai'))
+                    .success(function (n) {
+                        $scope.vai = '';
+                        $scope.vai = n.nome.toUpperCase();
+                        console.log($scope.vai);
+                });
+                doc.text(x+35, y+30, $scope.vai);
                 doc.text(x+85, y+35, 'PDT');
                 doc.text(x, y+50, 'RELATÓRIO DE ANIVERSÁRIANTES');
                 y += 60;
@@ -129,6 +130,9 @@ app.controller("loginCtrl", function ($scope, loginAPI, cidadaoAPI, $location, $
     
     dataString = function (datas) {
         var dataString;
+        var hoje = new Date();
+        datas.de = datas.de +'/1900';
+        datas.ate = datas.ate + '/'+hoje.getFullYear();
         datas.de = new Date(datas.de.replace(/(\d{2})[-/](\d{2})[-/](\d+)/, "$2/$1/$3"));
         datas.ate = new Date(datas.ate.replace(/(\d{2})[-/](\d{2})[-/](\d+)/, "$2/$1/$3"));
 
