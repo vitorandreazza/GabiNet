@@ -1,24 +1,25 @@
 <div ng-include="'partials/menu.html'"></div>
 <div class="container-fluid">
-    <form method="post" class="form-horizontal" name="AtividadeForm" ng-submit="novaAtividade(atividade)">
+    <form name="AtividadeForm" method="post" class="form-horizontal" ng-submit="novaAtividade(atividade)">
         <fieldset>
                 <legend>Nova Atividade</legend>
                 <div class="form-group">
                     <div class="col-lg-12">
-                        <label for="select">Tipo</label>
-                        <select class="form-control" id="select" ng-model="atividade.tipo" value="{{atividade.tipo}}">
-                            <option>Projeto de Lei</option>
-                            <option>Indicações</option>
-                            <option>Requerimento</option>
-                            <option>Oficios</option>
-                            <option>Moções</option>
+                        <label for="selectTipo">Tipo</label>
+                        <select class="form-control" id="selectTipo" ng-model="atividade.tipo" value="{{atividade.tipo}}" required>
+                            <option value="Projeto de Lei">Projeto de Lei</option>
+                            <option value="Indicações">Indicações</option>
+                            <option value="Requerimento">Requerimento</option>
+                            <option value="Oficios">Oficios</option>
+                            <option value="Moções">Moções</option>
                         </select>
+                        <!--<span ng-show="AtividadeForm.selectTipo.$dirty && AtividadeForm.selectTipo.$invalid">Select service</span>-->
                     </div>
                 </div>
                 <div class="form-group" ng-if="atividade.tipo==='Moções'">
                     <div class="col-lg-12">
-                        <label for="select">Tipo de moções</label>
-                        <select class="form-control" id="mocoes" ng-model="atividade.tipoMocao">
+                        <label for="tipoMocoes">Tipo de moções</label>
+                        <select class="form-control" id="tipoMocoes" ng-model="atividade.tipoMocao">
                             <option>Protesto</option>
                             <option>Repúdio</option>
                             <option>Apoio</option>
@@ -30,7 +31,7 @@
                 <div class="form-group">
                     <label for="ementa" class="col-lg-1">Ementa</label>
                     <div class="col-lg-12">
-                        <textarea class="form-control" rows="10" id="ementa" ng-model="atividade.ementa"></textarea>
+                        <textarea class="form-control" rows="10" id="ementa" ng-model="atividade.ementa" required></textarea>
                         <span class="help-block"></span>
                     </div>
                 </div>

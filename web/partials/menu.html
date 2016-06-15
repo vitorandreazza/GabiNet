@@ -29,12 +29,12 @@
                             <li><a href="#/atividades/grafico">Grafico</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">Atendimentos <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#/atendimentos/novo">Cadastrar</a></li>
+                    <li>
+                        <a href="#/atendimentos" style="cursor: pointer" data-toggle="dropdown">Atendimentos</a>
+                        <!--<ul class="dropdown-menu" role="menu">-->
+<!--                            <li><a href="#/atendimentos/novo">Cadastrar</a></li>
                             <li><a href="#/atendimentos">Consultar</a></li>
-                        </ul>
+                        </ul>-->
                     </li>
                 </ul>
                 <ul class="pull-right">
@@ -69,11 +69,11 @@
                     <fieldset>
                         <div class="col-lg-6">
                             <label class="control-label" for="de">De</label>
-                            <input type="text" class="form-control" id="de" ng-model="datas.de" mask="99/99">
+                            <input type="text" class="form-control" id="de" ng-model="datas.de" mask="99/99" pattern="[0-9]{2}\/[0-9]{2}$" maxlength="10">
                         </div>
                         <div class="col-lg-6">
                             <label class="control-label" for="ate">Ate</label>
-                            <input type="text" class="form-control" id="ate" ng-model="datas.ate" mask="99/99">
+                            <input type="text" class="form-control" id="ate" ng-model="datas.ate" mask="99/99" pattern="[0-9]{2}\/[0-9]{2}" maxlength="10">
                         </div>
                     </fieldset>
                 </form>

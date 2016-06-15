@@ -1,1 +1,1 @@
-angular.module("gabiNet", ['ngRoute', 'ngMask', 'chart.js', 'ngCookies']);
+angular.module("gabiNet", ['ngRoute', 'ngMask', 'chart.js', 'ngCookies', 'ngMessages']);

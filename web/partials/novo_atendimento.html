@@ -1,7 +1,7 @@
 <div ng-include="'partials/menu.html'"></div>
 <div class="container-fluid" ng-init="inicia()">
     <div class="row">
-        <form method="get" class="form-horizontal">
+<!--        <form method="get" class="form-horizontal">
             <fieldset class="container-fluid">
                 <legend>Novo Atendimento</legend>
                 <div class="form-group">
@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </fieldset>
-        </form>
+        </form>-->
         <div class="form-group" ng-show="atendimento.cidadao.nome">
             <label for="nome" class="col-lg-1">Nome</label>
             <div class="col-lg-12">
@@ -30,7 +30,7 @@
                 <div class="form-group">
                     <label for="solicitacao" class="col-lg-1">Solicitação</label>
                     <div class="col-lg-12">
-                        <textarea class="form-control" rows="5" id="solicitacao" ng-model="atendimento.solicitacao"></textarea>
+                        <textarea class="form-control" rows="5" id="solicitacao" ng-model="atendimento.solicitacao" required></textarea>
                         <span class="help-block"></span>
                     </div>
                 </div>

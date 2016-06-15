@@ -4,11 +4,11 @@
         <div>
             <div class="col-lg-5">
                 <label class="control-label" for="de">De</label>
-                <input type="text" class="form-control" id="de" ng-model="datas.de" mask="99/99/9999">
+                <input type="text" class="form-control" id="de" ng-model="datas.de" mask="99/99/9999" maxlength="10" pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$">
             </div>
             <div class="col-lg-5">
                 <label class="control-label" for="ate">Ate</label>
-                <input type="text" class="form-control" id="ate" ng-model="datas.ate" mask="99/99/9999">
+                <input type="text" class="form-control" id="ate" ng-model="datas.ate" mask="99/99/9999" maxlength="10" pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$">
             </div>
             <div class="col-lg-2">
                 <br><button class="btn btn-primary" type="submit">Exibir</button>
