@@ -73,7 +73,7 @@ app.controller("novoCidadaoCtrl", function ($scope, cidadaoAPI, $location, $cook
 app.controller("cidadaoCtrl", function ($scope, cidadao, cidadaoAPI, $location) {
     $scope.cidadao = cidadao.data;
     var data = new Date($scope.cidadao.nascimento);
-    $scope.cidadao.nascimento = data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear();
+    $scope.cidadao.nascimento = data.getDate()+1 + "/" + (data.getMonth() + 1) + "/" + data.getFullYear();
     $scope.alterarCidadao = function (cidadao) {
         replaceCidadao(cidadao);
         cidadaoAPI.setCidadao(cidadao)

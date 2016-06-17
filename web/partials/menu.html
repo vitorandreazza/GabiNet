@@ -62,24 +62,32 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Relatório de Aniversáriantes</h4>
+                <h4 class="modal-title">Relatório de Aniversáriantes</h4><hr>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
                     <fieldset>
-                        <div class="col-lg-6">
-                            <label class="control-label" for="de">De</label>
-                            <input type="text" class="form-control" id="de" ng-model="datas.de" mask="99/99" pattern="[0-9]{2}\/[0-9]{2}$" maxlength="10">
-                        </div>
-                        <div class="col-lg-6">
-                            <label class="control-label" for="ate">Ate</label>
-                            <input type="text" class="form-control" id="ate" ng-model="datas.ate" mask="99/99" pattern="[0-9]{2}\/[0-9]{2}" maxlength="10">
+                        <div class="col-lg-12">
+                            <select class="form-control" ng-model="mes">
+                                <option value="1">JANEIRO</option>
+                                <option value="2">FEVEREIRO</option>
+                                <option value="3">MARÇO</option>
+                                <option value="4">ABRIL</option>
+                                <option value="5">MAIO</option>
+                                <option value="6">JUNHO</option>
+                                <option value="7">JULHO</option>
+                                <option value="8">AGOSTO</option>
+                                <option value="9">SETEMBRO</option>
+                                <option value="10">OUTUBRO</option>
+                                <option value="11">NOVEMBRO</option>
+                                <option value="12">DEZEMBRO</option>
+                            </select>
                         </div>
                     </fieldset>
                 </form>
             </div>
             <div class="modal-footer" ng-controller="loginCtrl">
-                <button type="button" class="btn btn-primary" ng-click="gerarPdf(datas)" data-dismiss="modal">Gerar PDF</button>
+                <button type="button" class="btn btn-primary" ng-click="gerarPdf(mes)" data-dismiss="modal">Gerar PDF</button>
             </div>
         </div>
     </div>
