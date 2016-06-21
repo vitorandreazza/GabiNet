@@ -24,6 +24,11 @@ app.controller("loginCtrl", function ($scope, loginAPI, cidadaoAPI, $location, $
                                 var nome = n.nome.toUpperCase();
                                 $cookies.put('Vereador', nome);
                             });
+                        
+                        if($cookies.get('idPai') === $cookies.get('id')) {
+                            $rootScope.assessor = true;
+                        }
+                            
                         $location.path("/index");
                     });
                 } else {
@@ -114,18 +119,18 @@ app.controller("loginCtrl", function ($scope, loginAPI, cidadaoAPI, $location, $
 
                     doc.setFontSize(11);
                     doc.setFontType("normal");
-                    y += 5;
-                    doc.text(x, y, dados[i].nome);
+//                    y += 5;
+                    doc.text(x + 14, y, dados[i].nome);
                     y += 5;
                     doc.setFontSize(11);
                     doc.setFontType("bold");
                     doc.text(x, y, 'ANIVERSÁRIO:');
-                    y += 5;
+//                    y += 5;
 
                     doc.setFontSize(11);
                     doc.setFontType("normal");
-                    doc.text(x, y, dados[i].nascimento);
-                    y +=5;
+                    doc.text(x + 28, y, dados[i].nascimento);
+                    y +=10;
                 }
                 doc.save('Aniversáriantes - Mês: ' + mes);
             }).error(function (dados) {
@@ -139,6 +144,7 @@ app.controller("loginCtrl", function ($scope, loginAPI, cidadaoAPI, $location, $
         $cookies.remove('id');
         $cookies.remove('idPai');
         $cookies.remove('Vereador');
+        $scope.assessor = false;
         $rootScope.usuarioLogado = false;
         $location.path("/login");
     };

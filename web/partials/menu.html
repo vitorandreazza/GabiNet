@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="#/index"><img src="./libs/icons/brasao.ico" class="pull-left"></a>
-                <!--<a class="navbar-brand teste" href="#/index" >Gabinet</a>-->
+                <a class="navbar-brand teste" href="#/index">Gabinet</a>
             </div>
             <div class="collapse navbar-collapse" id="cssmenu">
                 <ul class="nav navbar-nav">
@@ -31,8 +31,8 @@
                     </li>
                     <li>
                         <a href="#/atendimentos" style="cursor: pointer" data-toggle="dropdown">Atendimentos</a>
-                        <!--<ul class="dropdown-menu" role="menu">-->
-<!--                            <li><a href="#/atendimentos/novo">Cadastrar</a></li>
+<!--                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#/atendimentos/novo">Cadastrar</a></li>
                             <li><a href="#/atendimentos">Consultar</a></li>
                         </ul>-->
                     </li>
@@ -43,7 +43,7 @@
                             <span class="glyphicon glyphicon-user">&nbsp;{{nome}}</span>
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#/assessor">Assessor</a></li>
+                            <li ng-if='assessor === true'><a href="#/assessor">Assessor</a></li>
                             <li><a href="#/logout" ng-click="logout()">Logout</a></li>
                         </ul>
                     </li>
@@ -68,7 +68,7 @@
                 <form class="form-horizontal">
                     <fieldset>
                         <div class="col-lg-12">
-                            <select class="form-control" ng-model="mes">
+                            <select class="form-control" ng-model="mes" required>
                                 <option value="1">JANEIRO</option>
                                 <option value="2">FEVEREIRO</option>
                                 <option value="3">MARÇO</option>
