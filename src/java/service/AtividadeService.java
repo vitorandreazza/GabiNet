@@ -16,7 +16,7 @@ public class AtividadeService {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Atividade> listaTodos(@QueryParam("idPai")Long idPai) {
         ArrayList<Atividade> atividades;
-        String sql = "SELECT a FROM Atividade a WHERE idUsuario = :idPai";
+        String sql = "SELECT a FROM Atividade a WHERE idUsuario = :idPai ORDER BY a.id DESC";
         Query q = bd.createQuery(sql);
         q.setParameter("idPai", idPai);
         atividades = (ArrayList<Atividade>) q.getResultList();

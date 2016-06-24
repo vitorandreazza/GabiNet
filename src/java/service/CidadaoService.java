@@ -16,7 +16,7 @@ public class CidadaoService {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Cidadao> listaTodos(@QueryParam("idPai")Long idPai) {
         ArrayList<Cidadao> cidadaos;
-        String sql = "SELECT c FROM Cidadao c WHERE idUsuario = :idPai";
+        String sql = "SELECT c FROM Cidadao c WHERE idUsuario = :idPai ORDER BY c.dataCriacao DESC";
         Query q = bd.createQuery(sql);
         q.setParameter("idPai", idPai);
         cidadaos = (ArrayList<Cidadao>) q.getResultList();

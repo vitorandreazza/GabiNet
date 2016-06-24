@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="#/index"><img src="./libs/icons/brasao.ico" class="pull-left"></a>
-                <a class="navbar-brand teste" href="#/index">Gabinet</a>
+                <!--<a class="navbar-brand teste" href="#/index">Gabinet</a>-->
             </div>
             <div class="collapse navbar-collapse" id="cssmenu">
                 <ul class="nav navbar-nav">
@@ -43,7 +43,7 @@
                             <span class="glyphicon glyphicon-user">&nbsp;{{nome}}</span>
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li ng-if='assessor === true'><a href="#/assessor">Assessor</a></li>
+                            <li ng-if="assessor === true"><a href="#/assessor">Assessor</a></li>
                             <li><a href="#/logout" ng-click="logout()">Logout</a></li>
                         </ul>
                     </li>

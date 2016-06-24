@@ -25,6 +25,7 @@ app.controller("loginCtrl", function ($scope, loginAPI, cidadaoAPI, $location, $
                                 $cookies.put('Vereador', nome);
                             });
                         
+                        $rootScope.assessor = false;
                         if($cookies.get('idPai') === $cookies.get('id')) {
                             $rootScope.assessor = true;
                         }

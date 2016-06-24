@@ -6,7 +6,7 @@ app.controller("principalCtrl", function ($scope, atividadeAPI, atendimentos, at
     $scope.setData = function () {
         datas = {};
         dataString(datas);     
-        atividadeAPI.getGrafico(datas, $cookies.get('id'), $cookies.get('idPai'))
+        atividadeAPI.getGrafico(datas, $cookies.get('idPai'))
                 .success(function (dados) {
                     $scope.labels = [];
                     $scope.data = [];
