@@ -15,7 +15,7 @@ public class AtendimentoService {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Atendimento> listaTodos(@QueryParam("idPai")Long idPai) {
         ArrayList<Atendimento> atendimentos;
-        String sql = "SELECT at FROM Atendimento at WHERE idUsuario = :idPai";
+        String sql = "SELECT at FROM Atendimento at WHERE idUsuario = :idPai ORDER BY at.id DESC";
         Query q = bd.createQuery(sql);
         q.setParameter("idPai", idPai);
         atendimentos = (ArrayList<Atendimento>) q.getResultList();

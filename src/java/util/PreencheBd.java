@@ -13,13 +13,14 @@ public class PreencheBd {
         EntityManager bd = JpaUtil.getEntityManager();
         
         try {
-            Usuario user1 = new Usuario("user1", "1231");
+            Usuario user1 = new Usuario("feital", "1231");
             Usuario user2 = new Usuario("user2", "1231");
             Usuario user3 = new Usuario("user3", "1231");
             Usuario user4 = new Usuario("user4", "1231");
-            user1.setNome("Joaozinho da Silva");
+            user1.setNome("João Carlos de Campos Feital");
             user2.setNome("Juca Pereira");
             user3.setNome("Benedito");
+            user4.setNome("Benedito");
             user1.setIdPai(null);
             user2.setIdPai(user1);
             user3.setIdPai(user1);
@@ -29,11 +30,14 @@ public class PreencheBd {
             Atividade atividade4 = new Atividade("Estudante paga meia no cinema", "Projeto de Lei", null, user1);
             Atividade atividade5 = new Atividade("Estudantes isentos de taxas", "Projeto de Lei", null, user4);
             Date d = new Date("10/10/1992");
+            Date d2 = new Date("01/01/1992");
+            Date d3 = new Date("01/02/1992");
+            Date d4 = new Date("02/03/1992");
             Cidadao cidadao1 = new Cidadao("11111111112", "João Ruy Barbosa", "joao@hotmail.com", d, "Rua das flores, nº20", "Vila Verde", "Casa", "13309010", "1140244222", "11999015898", user1);
             Cidadao cidadao2 = new Cidadao("11111111113", "Janaina da Silva", "jana@hotmail.com", d, "Rua das folhas, nº10", "Centro", "Casa", "13309012", "1140259322", "11999015897", user1);
-            Cidadao cidadao3 = new Cidadao("11111111114", "Gustavo Oliveira", "gu.oliveira@gmail.com", d, "Rua Benedito, nº14", "Jardim das Rosas", "Casa", "13309013", "1140259323", "11999015898", user1);
-            Cidadao cidadao4 = new Cidadao("11111111115", "Mariana Gonçalves da Silva", "mari@hotmail.com", d, "Rua 31 de Abril, nº100", "Centro", "Casa", "13309015", "1140259324", "11999015899", user1);
-            Cidadao cidadao5 = new Cidadao("11111111116", "Gilberto Gomes da Costa", "gil.gomes@hotmail.com", d, "Avenida Galileu, nº105", "Centro", "Casa", "13309012", "1140259322", "11999015892", user4);
+            Cidadao cidadao3 = new Cidadao("11111111114", "Gustavo Oliveira", "gu.oliveira@gmail.com", d2, "Rua Benedito, nº14", "Jardim das Rosas", "Casa", "13309013", "1140259323", "11999015898", user1);
+            Cidadao cidadao4 = new Cidadao("11111111115", "Mariana Gonçalves da Silva", "mari@hotmail.com", d3, "Rua 31 de Abril, nº100", "Centro", "Casa", "13309015", "1140259324", "11999015899", user1);
+            Cidadao cidadao5 = new Cidadao("11111111116", "Gilberto Gomes da Costa", "gil.gomes@hotmail.com", d4, "Avenida Galileu, nº105", "Centro", "Casa", "13309012", "1140259322", "11999015892", user4);
 
 
             Atendimento atendimento1 = new Atendimento("Trocar lâmpadas da rua das flores", "Acionar cpfl", user1, cidadao1);

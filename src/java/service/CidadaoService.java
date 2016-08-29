@@ -1,6 +1,5 @@
 package service;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -17,7 +16,7 @@ public class CidadaoService {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Cidadao> listaTodos(@QueryParam("idPai")Long idPai) {
         ArrayList<Cidadao> cidadaos;
-        String sql = "SELECT c FROM Cidadao c WHERE idUsuario = :idPai";
+        String sql = "SELECT c FROM Cidadao c WHERE idUsuario = :idPai ORDER BY c.dataCriacao DESC";
         Query q = bd.createQuery(sql);
         q.setParameter("idPai", idPai);
         cidadaos = (ArrayList<Cidadao>) q.getResultList();
@@ -98,13 +97,12 @@ public class CidadaoService {
     @Path("/aniversarios")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Cidadao> getAniversario(@QueryParam("de") Date de, @QueryParam("ate") Date ate, @QueryParam("idPai")Long idPai) {
+    public List<Cidadao> getAniversario(@QueryParam("mes") int mes, @QueryParam("idPai")Long idPai) {
         ArrayList<Cidadao> cidadaos;
-        String sql = "SELECT c FROM Cidadao c WHERE idUsuario = :idPai AND (c.nascimento BETWEEN :de AND :ate)";
+        String sql = "SELECT c FROM Cidadao c WHERE idUsuario = :idPai AND MONTH(c.nascimento) = :mes";
         Query query = bd.createQuery(sql, Cidadao.class);
         query.setParameter("idPai", idPai);
-        query.setParameter("de", de);
-        query.setParameter("ate", ate);
+        query.setParameter("mes", mes);
         cidadaos = (ArrayList<Cidadao>) query.getResultList();
         bd.close();
         return cidadaos;

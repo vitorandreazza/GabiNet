@@ -19,8 +19,8 @@ angular.module("gabiNet").factory("cidadaoAPI", function ($http, config) {
         return $http.delete(config.baseUrl + "/cidadaos/" + id);
     };
     
-    var _getAniversariantes = function (datas, idPai) {
-        return $http.get(config.baseUrl + "/cidadaos/aniversarios", {params:{"de": datas.de, "ate": datas.ate, "idPai": idPai}});
+    var _getAniversariantes = function (mes, idPai) {
+        return $http.get(config.baseUrl + "/cidadaos/aniversarios", {params:{"mes": mes, "idPai": idPai}});
     };
 
     return {
